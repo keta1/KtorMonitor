@@ -31,6 +31,8 @@ import ro.cosminmihu.ktor.monitor.library.ui.detail.DetailUiState.Request
 import ro.cosminmihu.ktor.monitor.library.ui.detail.DetailUiState.Response
 import kotlin.time.Duration.Companion.seconds
 
+private const val NO_DATA = "-"
+
 class DetailViewModel(
     id: String,
     getCallUseCase: GetCallUseCase,
@@ -44,14 +46,15 @@ class DetailViewModel(
                 summary = DetailUiState.Summary(
                     url = call.url,
                     method = call.method,
-                    protocol = call.protocol ?: "",
+                    protocol = call.protocol ?: NO_DATA,
                     requestTime = call.requestDateTimeAsText,
-                    responseCode = call.responseCode?.toString() ?: "",
-                    responseTime = call.responseDateTimeAsText ?: "",
-                    duration = call.durationAsText ?: "",
+                    responseCode = call.responseCode?.toString() ?: NO_DATA,
+                    responseTime = call.responseDateTimeAsText ?: NO_DATA,
+                    duration = call.durationAsText ?: NO_DATA,
                     requestSize = call.requestSize.sizeAsText(),
-                    responseSize = call.responseSize?.sizeAsText() ?: "",
-                    totalSize = call.totalSizeAsText ?: ""
+                    responseSize = call.responseSize?.sizeAsText() ?: NO_DATA,
+                    totalSize = call.totalSizeAsText ?: NO_DATA,
+                    isError = call.error != null,
                 ),
                 call = Call(
                     id = call.id,

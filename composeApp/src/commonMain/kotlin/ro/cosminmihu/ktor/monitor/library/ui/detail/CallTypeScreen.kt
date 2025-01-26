@@ -48,7 +48,7 @@ fun CallTypeScreen(
     modifier: Modifier = Modifier,
 ) {
     Column(
-        modifier = modifier.padding(16.dp),
+        modifier = modifier.padding(vertical = 8.dp, horizontal = 16.dp),
     ) {
 
         if (isLoading) {
@@ -64,7 +64,8 @@ fun CallTypeScreen(
                     }
                     append(": ")
                     append(it.value.joinToString(", "))
-                }
+                },
+                style = MaterialTheme.typography.bodyMedium,
             )
         }
 
