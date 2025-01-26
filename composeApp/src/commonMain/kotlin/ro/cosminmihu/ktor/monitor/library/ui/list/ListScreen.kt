@@ -32,6 +32,7 @@ import ro.cosminmihu.ktor.monitor.composeapp.generated.resources.filter
 import ro.cosminmihu.ktor.monitor.composeapp.generated.resources.library_name
 import ro.cosminmihu.ktor.monitor.composeapp.generated.resources.list_empty
 import ro.cosminmihu.ktor.monitor.library.ui.components.CallItem
+import ro.cosminmihu.ktor.monitor.library.ui.components.Loading
 import ro.cosminmihu.ktor.monitor.library.ui.components.SearchField
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -85,6 +86,12 @@ internal fun ListScreen(
             }
 
             when {
+                uiState.isLoading -> {
+                    Loading.Medium(
+                        modifier = Modifier.align(Alignment.CenterHorizontally)
+                    )
+                }
+
                 uiState.isEmpty -> {
                     Text(
                         text = stringResource(Res.string.list_empty),
@@ -92,7 +99,7 @@ internal fun ListScreen(
                     )
                 }
 
-                else -> {
+                uiState.calls != null -> {
                     LazyColumn(
                         modifier = Modifier.weight(1f).fillMaxWidth()
                     ) {

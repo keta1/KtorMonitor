@@ -2,13 +2,11 @@ package ro.cosminmihu.ktor.monitor.library.ui.detail
 
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.HourglassTop
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -21,7 +19,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -33,16 +30,13 @@ import coil3.compose.AsyncImage
 import org.jetbrains.compose.resources.stringResource
 import ro.cosminmihu.ktor.monitor.composeapp.generated.resources.Res
 import ro.cosminmihu.ktor.monitor.composeapp.generated.resources.error
-import ro.cosminmihu.ktor.monitor.composeapp.generated.resources.in_progress
 import ro.cosminmihu.ktor.monitor.composeapp.generated.resources.no_body
 import ro.cosminmihu.ktor.monitor.composeapp.generated.resources.response_view_binary
 import ro.cosminmihu.ktor.monitor.composeapp.generated.resources.response_view_code
 import ro.cosminmihu.ktor.monitor.composeapp.generated.resources.response_view_html
 import ro.cosminmihu.ktor.monitor.composeapp.generated.resources.response_view_image
 import ro.cosminmihu.ktor.monitor.composeapp.generated.resources.response_view_raw
-import ro.cosminmihu.ktor.monitor.library.ui.components.RotatingImage
-
-private const val SHOW_TYPE_COUNT = 5
+import ro.cosminmihu.ktor.monitor.library.ui.components.Loading
 
 private const val SHOW_TYPE_HTML = 0
 private const val SHOW_TIME_IMAGE = 1
@@ -64,7 +58,7 @@ fun CallDetailsScreen(
     ) {
 
         if (isLoading) {
-            Loading()
+            Loading.Medium()
             return
         }
 
@@ -192,26 +186,6 @@ private fun Body(body: DetailUiState.Body, modifier: Modifier = Modifier) {
             SelectionContainer {
                 Text(text = body.bytes, modifier = Modifier.horizontalScroll(rememberScrollState()))
             }
-    }
-}
-
-@Composable
-private fun Loading() {
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-    ) {
-        RotatingImage(
-            imageVector = Icons.Filled.HourglassTop,
-            tint = MaterialTheme.colorScheme.tertiary,
-            contentDescription = stringResource(Res.string.in_progress),
-            imageRotation = true,
-        )
-        Text(
-            text = stringResource(Res.string.in_progress),
-            style = MaterialTheme.typography.bodyMedium,
-            fontStyle = FontStyle.Italic,
-            modifier = Modifier.padding(start = 8.dp),
-        )
     }
 }
 

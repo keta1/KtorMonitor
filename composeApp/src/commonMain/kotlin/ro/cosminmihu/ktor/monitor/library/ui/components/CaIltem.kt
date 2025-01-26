@@ -52,12 +52,7 @@ internal fun CallItem(
                     tint = MaterialTheme.colorScheme.error,
                 )
 
-                call.isLoading -> RotatingImage(
-                    imageVector = Icons.Filled.HourglassTop,
-                    tint = MaterialTheme.colorScheme.tertiary,
-                    contentDescription = stringResource(Res.string.in_progress),
-                    imageRotation = true,
-                )
+                call.isLoading -> Loading.Small()
 
                 else -> {
                     Text(

@@ -10,17 +10,14 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Downloading
 import androidx.compose.material.icons.filled.HourglassTop
 import androidx.compose.material.icons.filled.Warning
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
@@ -28,8 +25,7 @@ import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.stringResource
 import ro.cosminmihu.ktor.monitor.composeapp.generated.resources.Res
 import ro.cosminmihu.ktor.monitor.composeapp.generated.resources.error
-import ro.cosminmihu.ktor.monitor.composeapp.generated.resources.in_progress
-import ro.cosminmihu.ktor.monitor.library.ui.components.RotatingImage
+import ro.cosminmihu.ktor.monitor.library.ui.components.Loading
 
 @Composable
 fun SummaryScreen(summary: DetailUiState.Summary, modifier: Modifier = Modifier) {
@@ -123,12 +119,7 @@ private fun KeyValue(
             style = MaterialTheme.typography.bodyMedium,
         )
         Box(modifier = Modifier.weight(0.7f)) {
-            RotatingImage(
-                imageVector = imageVector,
-                contentDescription = contentDescription,
-                tint = imageTint,
-                imageRotation = imageRotation,
-            )
+            Loading.Small()
         }
     }
 }

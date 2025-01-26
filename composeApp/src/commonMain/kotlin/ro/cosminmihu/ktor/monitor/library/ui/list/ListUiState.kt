@@ -3,7 +3,7 @@ package ro.cosminmihu.ktor.monitor.library.ui.list
 import ro.cosminmihu.ktor.monitor.library.domain.model.ContentType
 
 data class ListUiState(
-    val calls: List<Call> = emptyList(),
+    val calls: List<Call>? = null,
     val searchQuery: String = "",
 ) {
     data class Call(
@@ -29,8 +29,11 @@ data class ListUiState(
     )
 }
 
+val ListUiState.isLoading
+    get() = calls == null
+
 val ListUiState.isEmpty
-    get() = calls.isEmpty()
+    get() = calls.isNullOrEmpty()
 
 val ListUiState.Call.isLoading
     get() = response.responseCode.isBlank() && response.error.isBlank()
