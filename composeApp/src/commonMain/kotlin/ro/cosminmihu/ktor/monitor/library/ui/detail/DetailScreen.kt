@@ -21,11 +21,15 @@ import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringResource
 import ro.cosminmihu.ktor.monitor.composeapp.generated.resources.Res
-import ro.cosminmihu.ktor.monitor.composeapp.generated.resources.summary
 import ro.cosminmihu.ktor.monitor.composeapp.generated.resources.request
 import ro.cosminmihu.ktor.monitor.composeapp.generated.resources.response
+import ro.cosminmihu.ktor.monitor.composeapp.generated.resources.summary
 
 private const val PAGE_COUNT = 3
+
+private const val PAGE_INDEX_SUMMARY = 0
+private const val PAGE_INDEX_REQUEST = 1
+private const val PAGE_INDEX_RESPONSE = 2
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -38,7 +42,7 @@ fun DetailScreen(
 
     Scaffold(
         modifier = modifier,
-        contentWindowInsets = WindowInsets(0) // TODO remove after jetbrains fix
+        contentWindowInsets = WindowInsets(PAGE_INDEX_SUMMARY) // TODO remove after jetbrains fix
     ) {
         Column(
             modifier = Modifier.padding(it).fillMaxWidth()
@@ -50,8 +54,12 @@ fun DetailScreen(
 
             PrimaryTabRow(selectedTabIndex = pagerState.currentPage) {
                 Tab(
-                    selected = pagerState.currentPage == 0,
-                    onClick = { coroutineScope.launch { pagerState.animateScrollToPage(0) } },
+                    selected = pagerState.currentPage == PAGE_INDEX_SUMMARY,
+                    onClick = {
+                        coroutineScope.launch {
+                            pagerState.animateScrollToPage(PAGE_INDEX_SUMMARY)
+                        }
+                    },
                 ) {
                     Text(
                         text = stringResource(Res.string.summary),
@@ -59,8 +67,12 @@ fun DetailScreen(
                     )
                 }
                 Tab(
-                    selected = pagerState.currentPage == 1,
-                    onClick = { coroutineScope.launch { pagerState.animateScrollToPage(1) } },
+                    selected = pagerState.currentPage == PAGE_INDEX_REQUEST,
+                    onClick = {
+                        coroutineScope.launch {
+                            pagerState.animateScrollToPage(PAGE_INDEX_REQUEST)
+                        }
+                    },
                 ) {
                     Text(
                         text = stringResource(Res.string.request),
@@ -68,8 +80,12 @@ fun DetailScreen(
                     )
                 }
                 Tab(
-                    selected = pagerState.currentPage == 2,
-                    onClick = { coroutineScope.launch { pagerState.animateScrollToPage(2) } },
+                    selected = pagerState.currentPage == PAGE_INDEX_RESPONSE,
+                    onClick = {
+                        coroutineScope.launch {
+                            pagerState.animateScrollToPage(PAGE_INDEX_RESPONSE)
+                        }
+                    },
                 ) {
                     Text(
                         text = stringResource(Res.string.response),
@@ -83,17 +99,17 @@ fun DetailScreen(
                 modifier = Modifier.weight(1f)
             ) { page ->
                 when (page) {
-                    0 -> SummaryScreen(
+                    PAGE_INDEX_SUMMARY -> SummaryScreen(
                         summary = uiState.summary,
                         modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())
                     )
 
-                    1 -> RequestScreen(
+                    PAGE_INDEX_REQUEST -> RequestScreen(
                         request = uiState.call.request,
                         modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())
                     )
 
-                    2 -> ResponseScreen(
+                    PAGE_INDEX_RESPONSE -> ResponseScreen(
                         response = uiState.call.response,
                         modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())
                     )

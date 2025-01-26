@@ -5,7 +5,7 @@ import androidx.compose.ui.Modifier
 
 @Composable
 fun RequestScreen(request: DetailUiState.Request, modifier: Modifier = Modifier) {
-    CallTypeScreen(
+    CallDetailsScreen(
         isLoading = false,
         isError = false,
         headers = request.headers,

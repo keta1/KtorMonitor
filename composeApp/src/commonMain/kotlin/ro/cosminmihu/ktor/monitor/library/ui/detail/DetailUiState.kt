@@ -62,3 +62,6 @@ val DetailUiState.Response.isLoading
 
 val DetailUiState.Response.isError
     get() = responseCode.isBlank() && error.isNotBlank()
+
+val DetailUiState.Body?.noBody
+    get() = this == null || bytes == null || bytes.isEmpty() == true

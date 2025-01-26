@@ -1,6 +1,7 @@
 package ro.cosminmihu.ktor.monitor.library.ui.detail
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.selection.SelectionContainer
@@ -22,6 +23,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
@@ -38,8 +40,16 @@ import ro.cosminmihu.ktor.monitor.composeapp.generated.resources.response_view_i
 import ro.cosminmihu.ktor.monitor.composeapp.generated.resources.response_view_raw
 import ro.cosminmihu.ktor.monitor.library.ui.components.RotatingImage
 
+private const val SHOW_TYPE_COUNT = 5
+
+private const val SHOW_TYPE_HTML = 0
+private const val SHOW_TIME_IMAGE = 1
+private const val SHOW_TYPE_CODE = 2
+private const val SHOW_TYPE_RAW = 3
+private const val SHOW_TYPE_BYTES = 4
+
 @Composable
-fun CallTypeScreen(
+fun CallDetailsScreen(
     isLoading: Boolean,
     isError: Boolean,
     headers: Map<String, List<String>>,
@@ -52,148 +62,199 @@ fun CallTypeScreen(
     ) {
 
         if (isLoading) {
-            RotatingImage(
-                imageVector = Icons.Filled.HourglassTop,
-                tint = MaterialTheme.colorScheme.tertiary,
-                contentDescription = stringResource(Res.string.in_progress),
-                imageRotation = true,
-            )
+            Loading()
             return
         }
 
-        headers.forEach {
-            Text(
-                text = buildAnnotatedString {
-                    withStyle(SpanStyle(fontWeight = FontWeight.Bold)) {
-                        append(it.key)
-                    }
-                    append(": ")
-                    append(it.value.joinToString(", "))
-                },
-                style = MaterialTheme.typography.bodyMedium,
-            )
+        Headers(headers)
+
+        if (isError) {
+            Error(error)
+            return
+        }
+
+        if (body.noBody) {
+            Spacer(modifier = Modifier.padding(8.dp))
+            NoBody()
+            return
         }
 
         Spacer(modifier = Modifier.padding(8.dp))
+        body?.let { Body(body = it) }
+    }
+}
 
-        if (isError) {
-            Icon(
-                imageVector = Icons.Filled.Warning,
-                contentDescription = stringResource(Res.string.error),
-                tint = MaterialTheme.colorScheme.error,
-            )
-            SelectionContainer {
-                Text(
-                    text = error,
-                    color = MaterialTheme.colorScheme.error,
-                    style = MaterialTheme.typography.bodySmall,
-                    modifier = Modifier.padding(top = 8.dp),
-                )
+@Composable
+private fun Body(body: DetailUiState.Body, modifier: Modifier = Modifier) {
+    var selectedDisplayMode by remember(body) {
+        mutableIntStateOf(
+            when {
+                body.html != null -> SHOW_TYPE_HTML
+                body.image != null -> SHOW_TIME_IMAGE
+                body.code != null -> SHOW_TYPE_CODE
+                body.raw != null -> SHOW_TYPE_RAW
+                else -> SHOW_TYPE_BYTES
             }
-            return
+        )
+    }
+    SingleChoiceSegmentedButtonRow(
+        modifier = modifier
+    ) {
+        if (body.html != null) {
+            SegmentedButton(
+                selected = selectedDisplayMode == SHOW_TYPE_HTML,
+                onClick = { selectedDisplayMode = SHOW_TYPE_HTML },
+                shape = SegmentedButtonDefaults.itemShape(
+                    index = SHOW_TYPE_HTML,
+                    count = SHOW_TYPE_COUNT
+                ),
+            ) {
+                Text(text = stringResource(Res.string.response_view_html))
+            }
         }
 
-        if (body == null || body.bytes == null || body.bytes.isEmpty() == true) {
-            Text(text = stringResource(Res.string.no_body))
-            return
+        if (body.image != null) {
+            SegmentedButton(
+                selected = selectedDisplayMode == SHOW_TIME_IMAGE,
+                onClick = { selectedDisplayMode = SHOW_TIME_IMAGE },
+                shape = SegmentedButtonDefaults.itemShape(
+                    index = SHOW_TIME_IMAGE,
+                    count = SHOW_TYPE_COUNT
+                ),
+            ) {
+                Text(text = stringResource(Res.string.response_view_image))
+            }
         }
 
-        var selectedDisplayMode by remember(body) {
-            mutableIntStateOf(
-                when {
-                    body.html != null -> 0
-                    body.image != null -> 1
-                    body.code != null -> 2
-                    body.raw != null -> 3
-                    else -> 4
+        if (body.code != null) {
+            SegmentedButton(
+                selected = selectedDisplayMode == SHOW_TYPE_CODE,
+                onClick = { selectedDisplayMode = SHOW_TYPE_CODE },
+                shape = SegmentedButtonDefaults.itemShape(
+                    index = SHOW_TYPE_CODE,
+                    count = SHOW_TYPE_COUNT
+                ),
+            ) {
+                Text(text = stringResource(Res.string.response_view_code))
+            }
+        }
+
+        if (body.raw != null) {
+            SegmentedButton(
+                selected = selectedDisplayMode == SHOW_TYPE_RAW,
+                onClick = { selectedDisplayMode = SHOW_TYPE_RAW },
+                shape = SegmentedButtonDefaults.itemShape(
+                    index = SHOW_TYPE_RAW,
+                    count = SHOW_TYPE_COUNT
+                ),
+            ) {
+                Text(text = stringResource(Res.string.response_view_raw))
+            }
+        }
+        if (body.bytes != null && body.bytes.isNotEmpty()) {
+            SegmentedButton(
+                selected = selectedDisplayMode == SHOW_TYPE_BYTES,
+                onClick = { selectedDisplayMode = SHOW_TYPE_BYTES },
+                shape = SegmentedButtonDefaults.itemShape(
+                    index = SHOW_TYPE_BYTES,
+                    count = SHOW_TYPE_COUNT
+                ),
+            ) {
+                Text(text = stringResource(Res.string.response_view_binary))
+            }
+        }
+    }
+
+    if (body.html != null && selectedDisplayMode == SHOW_TYPE_HTML) {
+        SelectionContainer {
+            Text(text = body.html)
+        }
+    }
+
+    if (body.image != null && selectedDisplayMode == SHOW_TIME_IMAGE) {
+        AsyncImage(
+            model = body.image,
+            contentDescription = null,
+            modifier = Modifier.padding(top = 8.dp),
+        )
+    }
+
+    if (body.code != null && selectedDisplayMode == SHOW_TYPE_CODE) {
+        SelectionContainer {
+            Text(text = body.code)
+        }
+    }
+
+    if (body.raw != null && selectedDisplayMode == SHOW_TYPE_RAW) {
+        SelectionContainer {
+            Text(text = body.raw)
+        }
+    }
+
+    if (body.bytes != null && body.bytes.isNotEmpty() && selectedDisplayMode == SHOW_TYPE_BYTES) {
+        Text(text = body.bytes)
+    }
+}
+
+@Composable
+private fun Loading() {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        RotatingImage(
+            imageVector = Icons.Filled.HourglassTop,
+            tint = MaterialTheme.colorScheme.tertiary,
+            contentDescription = stringResource(Res.string.in_progress),
+            imageRotation = true,
+        )
+        Text(
+            text = stringResource(Res.string.in_progress),
+            style = MaterialTheme.typography.bodyMedium,
+            fontStyle = FontStyle.Italic,
+            modifier = Modifier.padding(start = 8.dp),
+        )
+    }
+}
+
+@Composable
+private fun Headers(headers: Map<String, List<String>>) {
+    headers.forEach {
+        Text(
+            text = buildAnnotatedString {
+                withStyle(SpanStyle(fontWeight = FontWeight.Bold)) {
+                    append(it.key)
                 }
-            )
-        }
-        SingleChoiceSegmentedButtonRow(
-            modifier = Modifier.align(Alignment.End)
-        ) {
-            if (body.html != null) {
-                SegmentedButton(
-                    modifier = Modifier.padding(start = 8.dp),
-                    selected = selectedDisplayMode == 0,
-                    onClick = { selectedDisplayMode = 0 },
-                    shape = SegmentedButtonDefaults.baseShape,
-                ) {
-                    Text(text = stringResource(Res.string.response_view_html))
-                }
-            }
+                append(": ")
+                append(it.value.joinToString(", "))
+            },
+            style = MaterialTheme.typography.bodyMedium,
+        )
+    }
+}
 
-            if (body.image != null) {
-                SegmentedButton(
-                    modifier = Modifier.padding(start = 8.dp),
-                    selected = selectedDisplayMode == 1,
-                    onClick = { selectedDisplayMode = 1 },
-                    shape = SegmentedButtonDefaults.baseShape,
-                ) {
-                    Text(text = stringResource(Res.string.response_view_image))
-                }
-            }
+@Composable
+private fun NoBody() {
+    Text(
+        text = stringResource(Res.string.no_body),
+        fontStyle = FontStyle.Italic,
+        style = MaterialTheme.typography.bodyMedium,
+    )
+    return
+}
 
-            if (body.code != null) {
-                SegmentedButton(
-                    modifier = Modifier.padding(start = 8.dp),
-                    selected = selectedDisplayMode == 2,
-                    onClick = { selectedDisplayMode = 2 },
-                    shape = SegmentedButtonDefaults.baseShape,
-                ) {
-                    Text(text = stringResource(Res.string.response_view_code))
-                }
-            }
-
-            if (body.raw != null) {
-                SegmentedButton(
-                    modifier = Modifier.padding(start = 8.dp),
-                    selected = selectedDisplayMode == 3,
-                    onClick = { selectedDisplayMode = 3 },
-                    shape = SegmentedButtonDefaults.baseShape,
-                ) {
-                    Text(text = stringResource(Res.string.response_view_raw))
-                }
-            }
-            if (body.bytes.isNotEmpty()) {
-                SegmentedButton(
-                    modifier = Modifier.padding(start = 8.dp),
-                    selected = selectedDisplayMode == 4,
-                    onClick = { selectedDisplayMode = 4 },
-                    shape = SegmentedButtonDefaults.baseShape,
-                ) {
-                    Text(text = stringResource(Res.string.response_view_binary))
-                }
-            }
-        }
-        if (body.html != null && selectedDisplayMode == 0) {
-            SelectionContainer {
-                Text(text = body.html)
-            }
-        }
-
-        if (body.image != null && selectedDisplayMode == 1) {
-            AsyncImage(
-                model = body.image,
-                contentDescription = null,
-                modifier = Modifier.padding(top = 8.dp),
-            )
-        }
-
-        if (body.code != null && selectedDisplayMode == 2) {
-            SelectionContainer {
-                Text(text = body.code)
-            }
-        }
-
-        if (body.raw != null && selectedDisplayMode == 3) {
-            SelectionContainer {
-                Text(text = body.raw)
-            }
-        }
-
-        if (body.bytes.isNotEmpty() && selectedDisplayMode == 4) {
-            Text(text = body.bytes)
-        }
+@Composable
+private fun Error(error: String) {
+    Icon(
+        imageVector = Icons.Filled.Warning,
+        contentDescription = stringResource(Res.string.error),
+        tint = MaterialTheme.colorScheme.error,
+    )
+    SelectionContainer {
+        Text(
+            text = error,
+            color = MaterialTheme.colorScheme.error,
+            style = MaterialTheme.typography.bodySmall,
+            modifier = Modifier.padding(top = 8.dp),
+        )
     }
 }
