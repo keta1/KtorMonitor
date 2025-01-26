@@ -97,102 +97,97 @@ private fun Body(body: DetailUiState.Body, modifier: Modifier = Modifier) {
             }
         )
     }
+
+    val segmentedButtons = buildList {
+        if (body.html != null) {
+            add(
+                BodyShowTypeSegment(
+                    text = stringResource(Res.string.response_view_html),
+                    selected = selectedDisplayMode == SHOW_TYPE_HTML,
+                    onClick = { selectedDisplayMode = SHOW_TYPE_HTML },
+                )
+            )
+        }
+        if (body.image != null) {
+            add(
+                BodyShowTypeSegment(
+                    text = stringResource(Res.string.response_view_image),
+                    selected = selectedDisplayMode == SHOW_TIME_IMAGE,
+                    onClick = { selectedDisplayMode = SHOW_TIME_IMAGE },
+                )
+            )
+        }
+        if (body.code != null) {
+            add(
+                BodyShowTypeSegment(
+                    text = stringResource(Res.string.response_view_code),
+                    selected = selectedDisplayMode == SHOW_TYPE_CODE,
+                    onClick = { selectedDisplayMode = SHOW_TYPE_CODE },
+                )
+            )
+        }
+        if (body.raw != null) {
+            add(
+                BodyShowTypeSegment(
+                    text = stringResource(Res.string.response_view_raw),
+                    selected = selectedDisplayMode == SHOW_TYPE_RAW,
+                    onClick = { selectedDisplayMode = SHOW_TYPE_RAW },
+                )
+            )
+        }
+        if (body.bytes != null && body.bytes.isNotEmpty()) {
+            add(
+                BodyShowTypeSegment(
+                    text = stringResource(Res.string.response_view_binary),
+                    selected = selectedDisplayMode == SHOW_TYPE_BYTES,
+                    onClick = { selectedDisplayMode = SHOW_TYPE_BYTES },
+                )
+            )
+        }
+    }
+
     SingleChoiceSegmentedButtonRow(
         modifier = modifier
     ) {
-        if (body.html != null) {
+        segmentedButtons.forEachIndexed { index, item ->
             SegmentedButton(
-                selected = selectedDisplayMode == SHOW_TYPE_HTML,
-                onClick = { selectedDisplayMode = SHOW_TYPE_HTML },
+                selected = item.selected,
+                onClick = item.onClick,
                 shape = SegmentedButtonDefaults.itemShape(
-                    index = SHOW_TYPE_HTML,
-                    count = SHOW_TYPE_COUNT
-                ),
+                    index = index,
+                    count = segmentedButtons.size
+                )
             ) {
-                Text(text = stringResource(Res.string.response_view_html))
-            }
-        }
-
-        if (body.image != null) {
-            SegmentedButton(
-                selected = selectedDisplayMode == SHOW_TIME_IMAGE,
-                onClick = { selectedDisplayMode = SHOW_TIME_IMAGE },
-                shape = SegmentedButtonDefaults.itemShape(
-                    index = SHOW_TIME_IMAGE,
-                    count = SHOW_TYPE_COUNT
-                ),
-            ) {
-                Text(text = stringResource(Res.string.response_view_image))
-            }
-        }
-
-        if (body.code != null) {
-            SegmentedButton(
-                selected = selectedDisplayMode == SHOW_TYPE_CODE,
-                onClick = { selectedDisplayMode = SHOW_TYPE_CODE },
-                shape = SegmentedButtonDefaults.itemShape(
-                    index = SHOW_TYPE_CODE,
-                    count = SHOW_TYPE_COUNT
-                ),
-            ) {
-                Text(text = stringResource(Res.string.response_view_code))
-            }
-        }
-
-        if (body.raw != null) {
-            SegmentedButton(
-                selected = selectedDisplayMode == SHOW_TYPE_RAW,
-                onClick = { selectedDisplayMode = SHOW_TYPE_RAW },
-                shape = SegmentedButtonDefaults.itemShape(
-                    index = SHOW_TYPE_RAW,
-                    count = SHOW_TYPE_COUNT
-                ),
-            ) {
-                Text(text = stringResource(Res.string.response_view_raw))
-            }
-        }
-        if (body.bytes != null && body.bytes.isNotEmpty()) {
-            SegmentedButton(
-                selected = selectedDisplayMode == SHOW_TYPE_BYTES,
-                onClick = { selectedDisplayMode = SHOW_TYPE_BYTES },
-                shape = SegmentedButtonDefaults.itemShape(
-                    index = SHOW_TYPE_BYTES,
-                    count = SHOW_TYPE_COUNT
-                ),
-            ) {
-                Text(text = stringResource(Res.string.response_view_binary))
+                Text(text = item.text)
             }
         }
     }
 
-    if (body.html != null && selectedDisplayMode == SHOW_TYPE_HTML) {
-        SelectionContainer {
-            Text(text = body.html)
-        }
-    }
+    when {
+        body.image != null && selectedDisplayMode == SHOW_TIME_IMAGE ->
+            AsyncImage(
+                model = body.image,
+                contentDescription = null,
+                modifier = Modifier.padding(top = 8.dp),
+            )
 
-    if (body.image != null && selectedDisplayMode == SHOW_TIME_IMAGE) {
-        AsyncImage(
-            model = body.image,
-            contentDescription = null,
-            modifier = Modifier.padding(top = 8.dp),
-        )
-    }
+        body.html != null && selectedDisplayMode == SHOW_TYPE_HTML ->
+            SelectionContainer {
+                Text(text = body.html)
+            }
 
-    if (body.code != null && selectedDisplayMode == SHOW_TYPE_CODE) {
-        SelectionContainer {
-            Text(text = body.code)
-        }
-    }
+        body.code != null && selectedDisplayMode == SHOW_TYPE_CODE ->
+            SelectionContainer {
+                Text(text = body.code)
+            }
 
-    if (body.raw != null && selectedDisplayMode == SHOW_TYPE_RAW) {
-        SelectionContainer {
-            Text(text = body.raw)
-        }
-    }
+        body.raw != null && selectedDisplayMode == SHOW_TYPE_RAW ->
+            SelectionContainer {
+                Text(text = body.raw)
+            }
 
-    if (body.bytes != null && body.bytes.isNotEmpty() && selectedDisplayMode == SHOW_TYPE_BYTES) {
-        Text(text = body.bytes)
+        body.bytes != null && body.bytes.isNotEmpty() && selectedDisplayMode == SHOW_TYPE_BYTES ->
+            Text(text = body.bytes)
     }
 }
 
@@ -258,3 +253,9 @@ private fun Error(error: String) {
         )
     }
 }
+
+private data class BodyShowTypeSegment(
+    val text: String,
+    val selected: Boolean,
+    val onClick: () -> Unit,
+)
