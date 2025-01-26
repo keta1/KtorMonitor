@@ -48,7 +48,10 @@ fun App() {
 
     MaterialTheme {
         Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-            KtorMonitorUI(modifier = Modifier.weight(1f))
+            KtorMonitorUI(
+                modifier = Modifier.weight(1f),
+                useLibraryTheme = false
+            )
         }
     }
 }

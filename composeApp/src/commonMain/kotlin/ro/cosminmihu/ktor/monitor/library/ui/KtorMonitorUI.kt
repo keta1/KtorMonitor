@@ -10,11 +10,16 @@ import ro.cosminmihu.ktor.monitor.library.di.LibraryKoinContext
 @Composable
 fun KtorMonitorUI(
     modifier: Modifier = Modifier,
+    useLibraryTheme: Boolean = true,
 ) {
-    LibraryTheme {
-        KoinIsolatedContext(
-            context = LibraryKoinContext.koinApp
-        ) {
+    KoinIsolatedContext(
+        context = LibraryKoinContext.koinApp
+    ) {
+        if (useLibraryTheme) {
+            LibraryTheme {
+                LibraryScreen(modifier = modifier)
+            }
+        } else {
             LibraryScreen(modifier = modifier)
         }
     }

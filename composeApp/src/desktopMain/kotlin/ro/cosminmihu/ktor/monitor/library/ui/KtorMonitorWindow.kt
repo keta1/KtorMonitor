@@ -10,8 +10,8 @@ import ro.cosminmihu.ktor.monitor.composeapp.generated.resources.library_name
 
 @Composable
 fun KtorMonitorWindow(
-    onCloseRequest: () -> Unit = {},
     show: Boolean,
+    onCloseRequest: () -> Unit = {},
 ) {
     if (!show) return
 
