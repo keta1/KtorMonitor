@@ -1,6 +1,8 @@
 package ro.cosminmihu.ktor.monitor.library.ui
 
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.Surface
 import androidx.compose.material3.adaptive.ExperimentalMaterial3AdaptiveApi
 import androidx.compose.material3.adaptive.layout.AnimatedPane
 import androidx.compose.material3.adaptive.layout.ListDetailPaneScaffold
@@ -26,36 +28,37 @@ internal fun LibraryScreen(
 
     // TODO add https://github.com/JetBrains/compose-multiplatform-core/pull/1771/files https://youtrack.jetbrains.com/issue/CMP-4419
 
-    ListDetailPaneScaffold(
-        modifier = modifier,
-        directive = navigator.scaffoldDirective,
-        value = navigator.scaffoldValue,
-        listPane = {
-            AnimatedPane {
-                ListRoute { id ->
-                    coroutineScope.launch {
-                        navigator.navigateTo(ListDetailPaneScaffoldRole.Detail, id)
+    Surface(modifier = modifier) {
+        ListDetailPaneScaffold(
+            modifier = Modifier.fillMaxSize(),
+            directive = navigator.scaffoldDirective,
+            value = navigator.scaffoldValue,
+            listPane = {
+                AnimatedPane {
+                    ListRoute { id ->
+                        coroutineScope.launch {
+                            navigator.navigateTo(ListDetailPaneScaffoldRole.Detail, id)
+                        }
                     }
                 }
-            }
-        },
-        detailPane = {
-            val id = navigator.currentDestination?.contentKey
-            AnimatedPane {
-                DetailRoute(id)
-            }
-        },
-        paneExpansionDragHandle = {
-            val paneExpansionState = rememberPaneExpansionState(
-                keyProvider = navigator.scaffoldValue,
-                anchors = listOf(
-                    PaneExpansionAnchor.Proportion(0.3f),
-                    PaneExpansionAnchor.Proportion(0.7f),
+            },
+            detailPane = {
+                val id = navigator.currentDestination?.contentKey
+                AnimatedPane {
+                    DetailRoute(id)
+                }
+            },
+            paneExpansionDragHandle = {
+                val paneExpansionState = rememberPaneExpansionState(
+                    keyProvider = navigator.scaffoldValue,
+                    anchors = listOf(
+                        PaneExpansionAnchor.Proportion(0.3f),
+                        PaneExpansionAnchor.Proportion(0.7f),
+                    )
                 )
-            )
-            val interactionSource = remember { MutableInteractionSource() }
+                val interactionSource = remember { MutableInteractionSource() }
 
-            // TODO enable when include in jetbrains
+                // TODO enable when include in jetbrains
 //            VerticalDragHandle(
 //                modifier = Modifier.paneExpansionDraggable(
 //                    state,
@@ -64,6 +67,7 @@ internal fun LibraryScreen(
 //                ),
 //                interactionSource = interactionSource
 //            )
-        }
-    )
+            }
+        )
+    }
 }

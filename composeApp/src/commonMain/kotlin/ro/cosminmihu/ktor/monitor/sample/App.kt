@@ -2,7 +2,6 @@ package ro.cosminmihu.ktor.monitor.sample
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
@@ -12,6 +11,7 @@ import io.ktor.client.request.forms.submitFormWithBinaryData
 import kotlinx.coroutines.delay
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import ro.cosminmihu.ktor.monitor.library.ui.KtorMonitorUI
+import ro.cosminmihu.ktor.monitor.sample.theme.SampleTheme
 import kotlin.time.Duration.Companion.seconds
 
 @Composable
@@ -46,7 +46,7 @@ fun App() {
         }
     }
 
-    MaterialTheme {
+    SampleTheme {
         Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
             KtorMonitorUI(
                 modifier = Modifier.weight(1f),
