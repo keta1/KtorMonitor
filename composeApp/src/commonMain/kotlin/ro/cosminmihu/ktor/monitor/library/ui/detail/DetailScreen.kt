@@ -1,6 +1,7 @@
 package ro.cosminmihu.ktor.monitor.library.ui.detail
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -10,6 +11,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.PrimaryTabRow
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Tab
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -34,62 +36,68 @@ fun DetailScreen(
     val coroutineScope = rememberCoroutineScope()
     val pagerState = rememberPagerState { PAGE_COUNT }
 
-    Column(
-        modifier = modifier.fillMaxWidth()
+    Scaffold(
+        modifier = modifier,
+        contentWindowInsets = WindowInsets(0) // TODO remove after jetbrains fix
     ) {
+        Column(
+            modifier = Modifier.padding(it).fillMaxWidth()
+        ) {
 
-        if (uiState.call == null || uiState.summary == null) {
-            return@Column
-        }
-
-        PrimaryTabRow(selectedTabIndex = pagerState.currentPage) {
-            Tab(
-                selected = pagerState.currentPage == 0,
-                onClick = { coroutineScope.launch { pagerState.animateScrollToPage(0) } },
-            ) {
-                Text(
-                    text = stringResource(Res.string.summary),
-                    modifier = Modifier.padding(vertical = 16.dp)
-                )
+            if (uiState.call == null || uiState.summary == null) {
+                return@Column
             }
-            Tab(
-                selected = pagerState.currentPage == 1,
-                onClick = { coroutineScope.launch { pagerState.animateScrollToPage(1) } },
-            ) {
-                Text(
-                    text = stringResource(Res.string.request),
-                    modifier = Modifier.padding(vertical = 16.dp)
-                )
-            }
-            Tab(
-                selected = pagerState.currentPage == 2,
-                onClick = { coroutineScope.launch { pagerState.animateScrollToPage(2) } },
-            ) {
-                Text(
-                    text = stringResource(Res.string.response),
-                    modifier = Modifier.padding(vertical = 16.dp)
-                )
-            }
-        }
 
-        HorizontalPager(
-            state = pagerState,
-            modifier = Modifier.weight(1f)
-        ) { page ->
-            when (page) {
-                0 -> SummaryScreen(
-                    summary = uiState.summary,
-                    modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())
-                )
-                1 -> RequestScreen(
-                    request = uiState.call.request,
-                    modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())
-                )
+            PrimaryTabRow(selectedTabIndex = pagerState.currentPage) {
+                Tab(
+                    selected = pagerState.currentPage == 0,
+                    onClick = { coroutineScope.launch { pagerState.animateScrollToPage(0) } },
+                ) {
+                    Text(
+                        text = stringResource(Res.string.summary),
+                        modifier = Modifier.padding(vertical = 16.dp)
+                    )
+                }
+                Tab(
+                    selected = pagerState.currentPage == 1,
+                    onClick = { coroutineScope.launch { pagerState.animateScrollToPage(1) } },
+                ) {
+                    Text(
+                        text = stringResource(Res.string.request),
+                        modifier = Modifier.padding(vertical = 16.dp)
+                    )
+                }
+                Tab(
+                    selected = pagerState.currentPage == 2,
+                    onClick = { coroutineScope.launch { pagerState.animateScrollToPage(2) } },
+                ) {
+                    Text(
+                        text = stringResource(Res.string.response),
+                        modifier = Modifier.padding(vertical = 16.dp)
+                    )
+                }
+            }
 
-                2 -> ResponseScreen(
-                    response = uiState.call.response,
-                    modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())
-                )
+            HorizontalPager(
+                state = pagerState,
+                modifier = Modifier.weight(1f)
+            ) { page ->
+                when (page) {
+                    0 -> SummaryScreen(
+                        summary = uiState.summary,
+                        modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())
+                    )
+
+                    1 -> RequestScreen(
+                        request = uiState.call.request,
+                        modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())
+                    )
+
+                    2 -> ResponseScreen(
+                        response = uiState.call.response,
+                        modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())
+                    )
+                }
             }
         }
     }

@@ -1,5 +1,6 @@
 package ro.cosminmihu.ktor.monitor.library.ui.detail
 
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
@@ -144,10 +145,8 @@ private fun formatXml(xml: String): AnnotatedString = buildAnnotatedString {
                 }
 
                 else -> {
-                    // Text content outside tags: Style them with black color
-                    withStyle(style = SpanStyle(color = Color.Black)) {
-                        append(part)
-                    }
+                    // Text content outside tags.
+                    append(part)
                 }
             }
         }
