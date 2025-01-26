@@ -1,9 +1,11 @@
 package ro.cosminmihu.ktor.monitor.library.ui.detail
 
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.HourglassTop
@@ -147,7 +149,7 @@ private fun Body(body: DetailUiState.Body, modifier: Modifier = Modifier) {
     }
 
     SingleChoiceSegmentedButtonRow(
-        modifier = modifier
+        modifier = modifier.horizontalScroll(rememberScrollState()),
     ) {
         segmentedButtons.forEachIndexed { index, item ->
             SegmentedButton(
@@ -168,26 +170,28 @@ private fun Body(body: DetailUiState.Body, modifier: Modifier = Modifier) {
             AsyncImage(
                 model = body.image,
                 contentDescription = null,
-                modifier = Modifier.padding(top = 8.dp),
+                modifier = Modifier.horizontalScroll(rememberScrollState()).padding(top = 8.dp),
             )
 
         body.html != null && selectedDisplayMode == SHOW_TYPE_HTML ->
             SelectionContainer {
-                Text(text = body.html)
+                Text(text = body.html, modifier = Modifier.horizontalScroll(rememberScrollState()))
             }
 
         body.code != null && selectedDisplayMode == SHOW_TYPE_CODE ->
             SelectionContainer {
-                Text(text = body.code)
+                Text(text = body.code, modifier = Modifier.horizontalScroll(rememberScrollState()))
             }
 
         body.raw != null && selectedDisplayMode == SHOW_TYPE_RAW ->
             SelectionContainer {
-                Text(text = body.raw)
+                Text(text = body.raw, modifier = Modifier.horizontalScroll(rememberScrollState()))
             }
 
         body.bytes != null && body.bytes.isNotEmpty() && selectedDisplayMode == SHOW_TYPE_BYTES ->
-            Text(text = body.bytes)
+            SelectionContainer {
+                Text(text = body.bytes, modifier = Modifier.horizontalScroll(rememberScrollState()))
+            }
     }
 }
 
@@ -249,7 +253,7 @@ private fun Error(error: String) {
             text = error,
             color = MaterialTheme.colorScheme.error,
             style = MaterialTheme.typography.bodySmall,
-            modifier = Modifier.padding(top = 8.dp),
+            modifier = Modifier.horizontalScroll(rememberScrollState()).padding(top = 8.dp),
         )
     }
 }
