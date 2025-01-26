@@ -1,0 +1,23 @@
+<resources>
+    <string name="library_name">Ktor Monitor</string>
+
+    <string name="filter">Filter</string>
+    <string name="clean">Clean</string>
+
+    <string name="summary">Summary</string>
+    <string name="request">Request</string>
+    <string name="response">Response</string>
+
+    <string name="list_empty">No items.</string>
+
+    <string name="no_body">(body is empty)</string>
+
+    <string name="error">Error</string>
+    <string name="in_progress">In Progress...</string>
+
+    <string name="response_view_html">html</string>
+    <string name="response_view_image">image</string>
+    <string name="response_view_code">pretty</string>
+    <string name="response_view_raw">raw</string>
+    <string name="response_view_binary">binary</string>
+</resources>

@@ -1,0 +1,43 @@
+import kotlin.String;
+import kotlin.collections.List;
+import kotlin.collections.Map;
+
+CREATE TABLE IF NOT EXISTS call(
+  id TEXT PRIMARY KEY NOT NULL,
+  method TEXT NOT NULL,
+  url TEXT NOT NULL,
+  protocol TEXT DEFAULT NULL,
+  responseCode INTEGER DEFAULT NULL,
+  requestTime INTEGER NOT NULL,
+  requestSize INTEGER NOT NULL,
+  requestHeaders TEXT AS Map<String, List<String>> NOT NULL,
+  requestContentType TEXT DEFAULT NULL,
+  requestBody BLOB DEFAULT NULL,
+  responseTime INTEGER DEFAULT NULL,
+  responseSize INTEGER DEFAULT NULL,
+  responseContentType TEXT DEFAULT NULL,
+  responseHeaders TEXT AS Map<String, List<String>> DEFAULT NULL,
+  responseBody BLOB DEFAULT NULL,
+  error TEXT DEFAULT NULL
+);
+
+saveRequest:
+INSERT INTO call (id, method, url, requestTime, requestSize, requestHeaders, requestContentType, requestBody) VALUES (?, ?, ?, ?, ?, ?, ?, ?);
+
+saveResponse:
+UPDATE call SET responseCode = ?, requestTime = ?, responseTime = ?, responseSize = ?, responseContentType = ?, responseHeaders = ?, responseBody = ?, protocol = ? WHERE id = ?;
+
+saveError:
+UPDATE call SET error = ? WHERE id = ?;
+
+selectCalls:
+SELECT id, method, url, responseCode, requestTime, responseTime, responseSize, responseContentType, error FROM call ORDER BY requestTime DESC;
+
+selectCallsWithLimit:
+SELECT id, method, url, responseCode, requestTime, responseTime, responseSize, responseContentType, error FROM call ORDER BY requestTime DESC LIMIT ?;
+
+selectCall:
+SELECT id, method, url, protocol, responseCode, requestTime, requestSize, requestHeaders, requestContentType, requestBody, responseTime, responseSize, responseContentType, responseHeaders, responseBody, error FROM call WHERE id = ?;
+
+deleteCalls:
+DELETE FROM call;
