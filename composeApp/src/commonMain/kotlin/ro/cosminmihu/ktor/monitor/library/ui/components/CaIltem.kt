@@ -8,8 +8,8 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.HourglassTop
 import androidx.compose.material.icons.filled.Warning
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -52,7 +52,13 @@ internal fun CallItem(
                     tint = MaterialTheme.colorScheme.error,
                 )
 
-                call.isLoading -> CircularProgressIndicator()
+                call.isLoading -> RotatingImage(
+                    imageVector = Icons.Filled.HourglassTop,
+                    tint = MaterialTheme.colorScheme.tertiary,
+                    contentDescription = stringResource(Res.string.in_progress),
+                    imageRotation = true,
+                )
+
                 else -> {
                     Text(
                         modifier = Modifier.padding(horizontal = 8.dp),

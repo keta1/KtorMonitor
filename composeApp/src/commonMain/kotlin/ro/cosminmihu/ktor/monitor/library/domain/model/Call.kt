@@ -42,6 +42,12 @@ val SelectCalls.encodedPathAndQuery
     get() = URLBuilder(url).build().encodedPathAndQuery
 
 
+val Call.isInProgress
+    get() = responseCode == null && error == null
+
+val Call.isError
+    get() = !error.isNullOrBlank()
+
 val Call.requestTimeAsText
     get() = requestTime.formatTime()
 

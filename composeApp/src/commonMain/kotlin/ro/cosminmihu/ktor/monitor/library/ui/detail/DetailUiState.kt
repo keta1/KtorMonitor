@@ -25,6 +25,7 @@ data class DetailUiState(
         val requestSize: String,
         val responseSize: String,
         val totalSize: String,
+        val isLoading: Boolean,
         val isError: Boolean,
     )
 

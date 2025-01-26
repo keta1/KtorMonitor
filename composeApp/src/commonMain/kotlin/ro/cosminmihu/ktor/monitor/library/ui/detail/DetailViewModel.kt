@@ -20,6 +20,8 @@ import ro.cosminmihu.ktor.monitor.library.domain.model.contentType
 import ro.cosminmihu.ktor.monitor.library.domain.model.durationAsText
 import ro.cosminmihu.ktor.monitor.library.domain.model.encodedPathAndQuery
 import ro.cosminmihu.ktor.monitor.library.domain.model.host
+import ro.cosminmihu.ktor.monitor.library.domain.model.isError
+import ro.cosminmihu.ktor.monitor.library.domain.model.isInProgress
 import ro.cosminmihu.ktor.monitor.library.domain.model.isSecure
 import ro.cosminmihu.ktor.monitor.library.domain.model.requestDateTimeAsText
 import ro.cosminmihu.ktor.monitor.library.domain.model.requestTimeAsText
@@ -54,7 +56,8 @@ class DetailViewModel(
                     requestSize = call.requestSize.sizeAsText(),
                     responseSize = call.responseSize?.sizeAsText() ?: NO_DATA,
                     totalSize = call.totalSizeAsText ?: NO_DATA,
-                    isError = call.error != null,
+                    isLoading = call.isInProgress,
+                    isError = call.isError,
                 ),
                 call = Call(
                     id = call.id,

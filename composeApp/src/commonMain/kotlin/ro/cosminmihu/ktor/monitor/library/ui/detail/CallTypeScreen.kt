@@ -1,14 +1,12 @@
 package ro.cosminmihu.ktor.monitor.library.ui.detail
 
-import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.HourglassTop
 import androidx.compose.material.icons.filled.Warning
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SegmentedButton
@@ -31,12 +29,14 @@ import coil3.compose.AsyncImage
 import org.jetbrains.compose.resources.stringResource
 import ro.cosminmihu.ktor.monitor.composeapp.generated.resources.Res
 import ro.cosminmihu.ktor.monitor.composeapp.generated.resources.error
+import ro.cosminmihu.ktor.monitor.composeapp.generated.resources.in_progress
 import ro.cosminmihu.ktor.monitor.composeapp.generated.resources.no_body
 import ro.cosminmihu.ktor.monitor.composeapp.generated.resources.response_view_binary
 import ro.cosminmihu.ktor.monitor.composeapp.generated.resources.response_view_code
 import ro.cosminmihu.ktor.monitor.composeapp.generated.resources.response_view_html
 import ro.cosminmihu.ktor.monitor.composeapp.generated.resources.response_view_image
 import ro.cosminmihu.ktor.monitor.composeapp.generated.resources.response_view_raw
+import ro.cosminmihu.ktor.monitor.library.ui.components.RotatingImage
 
 @Composable
 fun CallTypeScreen(
@@ -52,7 +52,12 @@ fun CallTypeScreen(
     ) {
 
         if (isLoading) {
-            CircularProgressIndicator()
+            RotatingImage(
+                imageVector = Icons.Filled.HourglassTop,
+                tint = MaterialTheme.colorScheme.tertiary,
+                contentDescription = stringResource(Res.string.in_progress),
+                imageRotation = true,
+            )
             return
         }
 
@@ -77,12 +82,14 @@ fun CallTypeScreen(
                 contentDescription = stringResource(Res.string.error),
                 tint = MaterialTheme.colorScheme.error,
             )
-            Text(
-                text = error,
-                color = MaterialTheme.colorScheme.error,
-                style = MaterialTheme.typography.bodySmall,
-                modifier = Modifier.padding(top = 8.dp),
-            )
+            SelectionContainer {
+                Text(
+                    text = error,
+                    color = MaterialTheme.colorScheme.error,
+                    style = MaterialTheme.typography.bodySmall,
+                    modifier = Modifier.padding(top = 8.dp),
+                )
+            }
             return
         }
 
