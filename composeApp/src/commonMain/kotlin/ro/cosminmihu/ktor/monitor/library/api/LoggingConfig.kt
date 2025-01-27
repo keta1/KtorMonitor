@@ -3,7 +3,9 @@ package ro.cosminmihu.ktor.monitor.library.api
 
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.utils.io.KtorDsl
-import ro.cosminmihu.ktor.monitor.library.api.util.SanitizedHeader
+import kotlin.time.Duration
+import kotlin.time.Duration.Companion.days
+import kotlin.time.Duration.Companion.hours
 
 /**
  * A configuration for the [LoggingPlugin] plugin.
@@ -12,7 +14,6 @@ import ro.cosminmihu.ktor.monitor.library.api.util.SanitizedHeader
 class LoggingConfig {
     internal val filters = mutableListOf<(HttpRequestBuilder) -> Boolean>()
     internal val sanitizedHeaders = mutableListOf<SanitizedHeader>()
-    internal var isActive = true
 
     /**
      * Allows you to filter log messages for calls matching a [predicate].
@@ -35,9 +36,34 @@ class LoggingConfig {
     /**
      * Allows to disable the logging of requests and responses.
      */
-    var active: Boolean
-        get() = isActive
-        set(value) {
-            isActive = value
-        }
+    var isActive: Boolean = true
+
+    /**
+     * Keep track of latest requests and responses into notification.
+     * Android only.
+     */
+    var showNotification: Boolean = true
+
+    /**
+     * The retention period for the logs.
+     */
+    var retentionPeriod = RetentionPeriod.OneHour
+}
+
+/**
+ * Configuration for a sanitized header.
+ */
+class SanitizedHeader(
+    val placeholder: String,
+    val predicate: (String) -> Boolean,
+)
+
+/**
+ * The retention period for the logs.
+ */
+object RetentionPeriod {
+    val OneHour = 1.hours
+    val OneDay = 1.days
+    val OneWeek = OneDay * 7
+    val Forever = Duration.INFINITE
 }

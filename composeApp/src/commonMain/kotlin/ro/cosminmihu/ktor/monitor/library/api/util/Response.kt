@@ -3,6 +3,7 @@ package ro.cosminmihu.ktor.monitor.library.api.util
 import io.ktor.client.statement.HttpResponse
 import io.ktor.client.statement.readRawBytes
 import io.ktor.http.contentType
+import ro.cosminmihu.ktor.monitor.library.api.SanitizedHeader
 import ro.cosminmihu.ktor.monitor.library.db.LibraryDao
 
 internal fun logResponseException(
@@ -22,18 +23,17 @@ internal fun logResponse(
     response: HttpResponse,
     sanitizedHeaders: List<SanitizedHeader>,
 ) {
-    val responseStatus = response.status.value
     val headers = response.headers.sanitizedHeaders(sanitizedHeaders)
 
     // Save response.
     dao.saveResponse(
         id = id,
-        responseCode = responseStatus,
-        requestTime = response.requestTime.timestamp,
-        responseTime = response.responseTime.timestamp,
+        protocol = response.version.toString(),
+        requestTimestamp = response.requestTime.timestamp,
+        responseCode = response.status.value,
+        responseTimestamp = response.responseTime.timestamp,
         responseContentType = response.contentType()?.toString(),
         responseHeaders = headers,
-        protocol = response.version.toString(),
     )
 }
 
@@ -42,11 +42,12 @@ internal suspend fun logResponseBody(
     id: String,
     response: HttpResponse,
 ) {
-    // Save response body.
     val responseBody = response.readRawBytes()
+
+    // Save response body.
     dao.saveResponseBody(
         id = id,
-        responseSize = responseBody.size.toLong(),
+        responseContentLength = responseBody.size.toLong(),
         responseBody = responseBody,
     )
 }

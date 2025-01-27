@@ -18,13 +18,25 @@ import ro.cosminmihu.ktor.monitor.library.ui.KtorMonitorActivity
 private const val NOTIFICATION_CHANNEL_ID = "KtorMonitorNotificationChannel"
 private const val NOTIFICATION_CHANNEL_NAME = "Ktor Monitor Notification Channel"
 private const val NOTIFICATION_CHANNEL_DESCRIPTION = "Ktor Monitor Notification Channel"
-private const val NOTIFICATION_ID = 1_000_0000 // TODO check chucker
+private const val NOTIFICATION_ID = 2_7101_992
 
 actual class NotificationManager : LibraryKoinComponent {
 
     private val context: Context by inject()
 
+    actual fun clear() {
+        val notificationManager = ContextCompat
+            .getSystemService<NotificationManager>(context, NotificationManager::class.java)
+            ?: return
+        notificationManager.cancel(NOTIFICATION_ID)
+    }
+
     actual fun notify(messages: List<String>) {
+        if (messages.isEmpty()) {
+            clear()
+            return
+        }
+
         if (!isNotificationPermissionGranted(context)) {
             return
         }
@@ -40,9 +52,9 @@ actual class NotificationManager : LibraryKoinComponent {
             .setLocalOnly(true)
             .setAutoCancel(true)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-            .setSmallIcon(R.drawable.ic_launcher_foreground) // TODO icon
+            .setSmallIcon(R.drawable.ic_notification)
             .setContentIntent(createPendingIntent())
-//            .addAction(createClearAction()) TODO clean
+            .addAction(createClearAction())
             .setStyle(NotificationCompat.InboxStyle().also { style ->
                 messages.forEach { style.addLine(it) }
             })
@@ -71,6 +83,23 @@ actual class NotificationManager : LibraryKoinComponent {
             0,
             intent,
             PendingIntent.FLAG_IMMUTABLE
+        )
+    }
+
+    private fun createClearAction(): NotificationCompat.Action {
+        val clearTitle = context.getString(R.string.clear)
+        val clearTransactionsBroadcastIntent = Intent(context, ClearBroadcastReceiver::class.java)
+        val pendingBroadcastIntent =
+            PendingIntent.getBroadcast(
+                context,
+                0,
+                clearTransactionsBroadcastIntent,
+                PendingIntent.FLAG_ONE_SHOT or PendingIntent.FLAG_IMMUTABLE,
+            )
+        return NotificationCompat.Action(
+            null,
+            clearTitle,
+            pendingBroadcastIntent,
         )
     }
 

@@ -18,7 +18,7 @@ val SelectCallsWithLimit.encodedPathAndQuery
 
 
 val SelectCalls.durationAsText
-    get() = responseTime?.minus(requestTime)?.milliseconds?.toComponents { hours, minutes, seconds, nanoseconds ->
+    get() = responseTimestamp?.minus(requestTimestamp)?.milliseconds?.toComponents { hours, minutes, seconds, nanoseconds ->
         val milliseconds = nanoseconds / 1_000_000
         when {
             hours > 0 -> "$hours:$minutes:$seconds $milliseconds ms"
@@ -30,7 +30,7 @@ val SelectCalls.durationAsText
     }
 
 val SelectCalls.requestTimeAsText
-    get() = requestTime.formatTime()
+    get() = requestTimestamp.formatTime()
 
 val SelectCalls.isSecure
     get() = URLBuilder(url).build().protocol.isSecure()
@@ -49,16 +49,16 @@ val Call.isError
     get() = !error.isNullOrBlank()
 
 val Call.requestTimeAsText
-    get() = requestTime.formatTime()
+    get() = requestTimestamp.formatTime()
 
 val Call.responseTimeAsText
-    get() = responseTime?.formatTime()
+    get() = responseTimestamp?.formatTime()
 
 val Call.responseDateTimeAsText
-    get() = responseTime?.formatDateTimeTime()
+    get() = responseTimestamp?.formatDateTimeTime()
 
 val Call.requestDateTimeAsText
-    get() = requestTime.formatDateTimeTime()
+    get() = requestTimestamp.formatDateTimeTime()
 
 val Call.isSecure
     get() = URLBuilder(url).build().protocol.isSecure()
@@ -70,7 +70,7 @@ val Call.encodedPathAndQuery
     get() = URLBuilder(url).build().encodedPathAndQuery
 
 val Call.durationAsText
-    get() = responseTime?.minus(requestTime)?.milliseconds?.toComponents { hours, minutes, seconds, nanoseconds ->
+    get() = responseTimestamp?.minus(requestTimestamp)?.milliseconds?.toComponents { hours, minutes, seconds, nanoseconds ->
         val milliseconds = nanoseconds / 1_000_000
         when {
             hours > 0 -> "$hours:$minutes:$seconds $milliseconds ms"
@@ -83,7 +83,7 @@ val Call.durationAsText
 
 val Call.totalSizeAsText: String?
     get() {
-        responseSize ?: return null
-        return (requestSize + responseSize).sizeAsText()
+        responseContentLength ?: return null
+        return (requestContentLength + responseContentLength).sizeAsText()
     }
 

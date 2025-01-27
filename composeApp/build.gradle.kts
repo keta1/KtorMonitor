@@ -8,8 +8,8 @@ plugins {
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.kotlinxSerialization)
     alias(libs.plugins.sqldelight)
+    alias(libs.plugins.kotlinx.atomicfu)
     id("maven-publish")
-    id("org.jetbrains.kotlinx.atomicfu") version "0.27.0"
 }
 
 group = "ro.cosminmihu.ktor.monitor"
@@ -92,6 +92,7 @@ kotlin {
             implementation(libs.kotlinx.datetime)
             implementation(libs.coil.compose)
             implementation(libs.coil.network.ktor)
+            implementation(libs.kotlinx.atomicfu)
             implementation("org.jetbrains.compose.material3.adaptive:adaptive:1.1.0-alpha02") // TODO
             implementation("org.jetbrains.compose.material3.adaptive:adaptive-layout:1.1.0-alpha02") // TODO
             implementation("org.jetbrains.compose.material3.adaptive:adaptive-navigation:1.1.0-alpha02") // TODO

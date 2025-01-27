@@ -2,11 +2,8 @@ package ro.cosminmihu.ktor.monitor.library.api.util
 
 import io.ktor.http.Headers
 import io.ktor.http.HeadersBuilder
+import ro.cosminmihu.ktor.monitor.library.api.SanitizedHeader
 
-internal class SanitizedHeader(
-    val placeholder: String,
-    val predicate: (String) -> Boolean,
-)
 
 internal fun HeadersBuilder.sanitizedHeaders(
     sanitizedHeaders: List<SanitizedHeader>,

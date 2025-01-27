@@ -6,6 +6,8 @@ import org.koin.core.module.Module
 import org.koin.core.parameter.ParametersHolder
 import org.koin.core.qualifier.Qualifier
 import org.koin.dsl.koinApplication
+import org.koin.dsl.module
+import ro.cosminmihu.ktor.monitor.library.api.LoggingConfig
 
 internal interface LibraryKoinComponent : KoinComponent {
 
@@ -25,6 +27,13 @@ internal object LibraryKoinContext {
         if (module != null) {
             koin.loadModules(listOf(module))
         }
+    }
+
+    internal fun init(config: LoggingConfig) {
+        koin.loadModules(
+            modules = listOf(module { factory { config } }),
+            allowOverride = true
+        )
     }
 }
 

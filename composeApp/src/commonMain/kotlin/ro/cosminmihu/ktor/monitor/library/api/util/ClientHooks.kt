@@ -29,25 +29,6 @@ object ResponseHook :
     }
 }
 
-object ResponseAfterEncodingHook :
-    ClientHook<suspend ResponseAfterEncodingHook.Context.(response: HttpResponse) -> Unit> {
-
-    class Context(private val context: PipelineContext<HttpResponse, Unit>) {
-        suspend fun proceedWith(response: HttpResponse) = context.proceedWith(response)
-    }
-
-    override fun install(
-        client: HttpClient,
-        handler: suspend Context.(response: HttpResponse) -> Unit,
-    ) {
-        val afterState = PipelinePhase("AfterState")
-        client.receivePipeline.insertPhaseAfter(HttpReceivePipeline.State, afterState)
-        client.receivePipeline.intercept(afterState) {
-            handler(Context(this), subject)
-        }
-    }
-}
-
 object SendHook :
     ClientHook<suspend SendHook.Context.(response: HttpRequestBuilder) -> Unit> {
 

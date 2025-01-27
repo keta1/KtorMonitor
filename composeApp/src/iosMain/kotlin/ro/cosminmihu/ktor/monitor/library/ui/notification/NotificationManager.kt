@@ -9,6 +9,10 @@ private const val NOTIFICATION_ID = 1_000_0000 // TODO check chucker
 
 actual class NotificationManager {
 
+    actual fun clear() {
+
+    }
+
     actual fun notify(messages: List<String>) {
         val body = messages.joinToString("\n") { it }
 

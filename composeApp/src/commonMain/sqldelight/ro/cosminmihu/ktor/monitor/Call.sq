@@ -7,40 +7,43 @@ CREATE TABLE IF NOT EXISTS call(
   method TEXT NOT NULL,
   url TEXT NOT NULL,
   protocol TEXT DEFAULT NULL,
-  responseCode INTEGER DEFAULT NULL,
-  requestTime INTEGER NOT NULL,
-  requestSize INTEGER NOT NULL,
+  requestTimestamp INTEGER NOT NULL,
   requestHeaders TEXT AS Map<String, List<String>> NOT NULL,
   requestContentType TEXT DEFAULT NULL,
+  requestContentLength INTEGER NOT NULL,
   requestBody BLOB DEFAULT NULL,
-  responseTime INTEGER DEFAULT NULL,
-  responseSize INTEGER DEFAULT NULL,
+  responseCode INTEGER DEFAULT NULL,
+  responseTimestamp INTEGER DEFAULT NULL,
   responseContentType TEXT DEFAULT NULL,
   responseHeaders TEXT AS Map<String, List<String>> DEFAULT NULL,
+  responseContentLength INTEGER DEFAULT NULL,
   responseBody BLOB DEFAULT NULL,
   error TEXT DEFAULT NULL
 );
 
 saveRequest:
-INSERT INTO call (id, method, url, requestTime, requestSize, requestHeaders, requestContentType, requestBody) VALUES (?, ?, ?, ?, ?, ?, ?, ?);
+INSERT INTO call (id, method, url, requestTimestamp, requestHeaders, requestContentType, requestContentLength, requestBody) VALUES (?, ?, ?, ?, ?, ?, ?, ?);
 
 saveResponse:
-UPDATE call SET responseCode = ?, requestTime = ?, responseTime = ?, responseContentType = ?, responseHeaders = ?, protocol = ? WHERE id = ?;
+UPDATE call SET protocol = ?, requestTimestamp = ?, responseCode = ?, responseTimestamp = ?, responseContentType = ?, responseHeaders = ? WHERE id = ?;
 
 saveResponseBody:
-UPDATE call SET responseSize = ?, responseBody = ? WHERE id = ?;
+UPDATE call SET responseContentLength = ?, responseBody = ? WHERE id = ?;
 
 saveError:
 UPDATE call SET error = ? WHERE id = ?;
 
 selectCalls:
-SELECT id, method, url, responseCode, requestTime, responseTime, responseSize, responseContentType, error FROM call ORDER BY requestTime DESC;
+SELECT id, method, url, requestTimestamp, responseCode, responseTimestamp, responseContentType, responseContentLength, error FROM call ORDER BY requestTimestamp DESC;
 
 selectCallsWithLimit:
-SELECT id, method, url, responseCode, requestTime, responseTime, responseSize, responseContentType, error FROM call ORDER BY requestTime DESC LIMIT ?;
+SELECT id, method, url, requestTimestamp, responseCode, responseTimestamp, responseContentType, responseContentLength, error FROM call ORDER BY requestTimestamp DESC LIMIT ?;
 
 selectCall:
-SELECT id, method, url, protocol, responseCode, requestTime, requestSize, requestHeaders, requestContentType, requestBody, responseTime, responseSize, responseContentType, responseHeaders, responseBody, error FROM call WHERE id = ?;
+SELECT id, method, url, protocol, requestTimestamp, requestHeaders, requestContentType, requestContentLength, requestBody, responseCode, responseTimestamp, responseContentType, responseHeaders, responseContentLength, responseBody, error FROM call WHERE id = ?;
 
 deleteCalls:
 DELETE FROM call;
+
+deleteCallsBefore:
+DELETE FROM call WHERE requestTimestamp < ?;

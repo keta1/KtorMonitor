@@ -6,6 +6,7 @@ import kotlinx.coroutines.SupervisorJob
 import org.koin.core.module.dsl.factoryOf
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
+import ro.cosminmihu.ktor.monitor.library.api.LoggingConfig
 import ro.cosminmihu.ktor.monitor.library.db.LibraryDao
 import ro.cosminmihu.ktor.monitor.library.db.createDatabase
 import ro.cosminmihu.ktor.monitor.library.db.createDatabaseDriver
@@ -13,9 +14,10 @@ import ro.cosminmihu.ktor.monitor.library.domain.DeleteCallsUseCase
 import ro.cosminmihu.ktor.monitor.library.domain.GetCallUseCase
 import ro.cosminmihu.ktor.monitor.library.domain.GetCallsUseCase
 import ro.cosminmihu.ktor.monitor.library.domain.ListenByRecentCallsUseCase
+import ro.cosminmihu.ktor.monitor.library.domain.RetentionUseCase
 import ro.cosminmihu.ktor.monitor.library.ui.detail.DetailViewModel
-import ro.cosminmihu.ktor.monitor.library.ui.notification.NotificationManager
 import ro.cosminmihu.ktor.monitor.library.ui.list.ListViewModel
+import ro.cosminmihu.ktor.monitor.library.ui.notification.NotificationManager
 
 internal fun libraryModule() = listOf(
     coroutineModule,
@@ -48,7 +50,11 @@ internal val viewModelModule = module {
 }
 
 internal val domainModule = module {
+    factoryOf(::LoggingConfig)
+
     factoryOf(::ListenByRecentCallsUseCase)
+    factoryOf(::RetentionUseCase)
+
     factoryOf(::GetCallsUseCase)
     factoryOf(::GetCallUseCase)
     factoryOf(::DeleteCallsUseCase)

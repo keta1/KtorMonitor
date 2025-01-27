@@ -71,7 +71,7 @@ class ListViewModel(
                     responseCode = it.responseCode?.toString() ?: "",
                     contentType = it.responseContentType?.contentType ?: ContentType.UNKNOWN,
                     duration = it.durationAsText ?: "",
-                    size = it.responseSize?.sizeAsText() ?: "",
+                    size = it.responseContentLength?.sizeAsText() ?: "",
                     error = it.error ?: ""
                 )
             )

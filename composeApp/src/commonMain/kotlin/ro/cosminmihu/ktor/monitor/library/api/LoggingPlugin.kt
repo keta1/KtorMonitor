@@ -9,7 +9,6 @@ import io.ktor.util.AttributeKey
 import kotlinx.coroutines.CoroutineScope
 import ro.cosminmihu.ktor.monitor.library.api.util.ReceiveHook
 import ro.cosminmihu.ktor.monitor.library.api.util.ResponseHook
-import ro.cosminmihu.ktor.monitor.library.api.util.SanitizedHeader
 import ro.cosminmihu.ktor.monitor.library.api.util.SendHook
 import ro.cosminmihu.ktor.monitor.library.api.util.logRequest
 import ro.cosminmihu.ktor.monitor.library.api.util.logRequestException
@@ -19,6 +18,7 @@ import ro.cosminmihu.ktor.monitor.library.api.util.logResponseException
 import ro.cosminmihu.ktor.monitor.library.db.LibraryDao
 import ro.cosminmihu.ktor.monitor.library.di.LibraryKoinContext
 import ro.cosminmihu.ktor.monitor.library.di.inject
+import ro.cosminmihu.ktor.monitor.library.domain.ListenByRecentCallsUseCase
 
 private val DisableLogging = AttributeKey<Unit>("KtorMonitorDisableLogging")
 private val CallIdentifier = AttributeKey<String>("KtorMonitorCallIdentifier")
@@ -33,7 +33,10 @@ internal val LoggingPlugin: ClientPlugin<LoggingConfig> =
         val enabled: Boolean = pluginConfig.isActive
 
         // Init library dependency.
-        LibraryKoinContext.init()
+        LibraryKoinContext.init(pluginConfig)
+
+        // Listen by recent calls.
+        LibraryKoinContext.koin.get<ListenByRecentCallsUseCase>()()
 
         // Get library dependencies.
         val dao: LibraryDao by LibraryKoinContext.inject<LibraryDao>()

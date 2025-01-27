@@ -3,8 +3,8 @@ package ro.cosminmihu.ktor.monitor.library.db
 import app.cash.sqldelight.Query
 import app.cash.sqldelight.coroutines.asFlow
 import kotlinx.coroutines.flow.Flow
-import ro.cosminmihu.ktor.monitor.LibraryDatabase
 import ro.cosminmihu.ktor.monitor.Call
+import ro.cosminmihu.ktor.monitor.LibraryDatabase
 import ro.cosminmihu.ktor.monitor.SelectCalls
 import ro.cosminmihu.ktor.monitor.SelectCallsWithLimit
 
@@ -14,21 +14,21 @@ class LibraryDao(private val database: LibraryDatabase) {
         id: String,
         method: String,
         url: String,
-        requestTime: Long,
-        requestSize: Long,
+        requestTimestamp: Long,
         requestHeaders: Map<String, List<String>>,
         requestContentType: String?,
+        requestContentLength: Long,
         requestBody: ByteArray?,
     ) {
         database.callQueries.saveRequest(
             id,
             method,
             url,
-            requestTime,
-            requestSize,
+            requestTimestamp,
             requestHeaders,
             requestContentType,
-            requestBody
+            requestContentLength,
+            requestBody,
         )
     }
 
@@ -44,31 +44,31 @@ class LibraryDao(private val database: LibraryDatabase) {
 
     fun saveResponse(
         id: String,
+        protocol: String?,
+        requestTimestamp: Long,
         responseCode: Int,
-        requestTime: Long,
-        responseTime: Long,
+        responseTimestamp: Long,
         responseContentType: String?,
         responseHeaders: Map<String, List<String>>?,
-        protocol: String?,
     ) {
         database.callQueries.saveResponse(
+            protocol,
+            requestTimestamp,
             responseCode.toLong(),
-            requestTime,
-            responseTime,
+            responseTimestamp,
             responseContentType,
             responseHeaders,
-            protocol,
             id
         )
     }
 
     fun saveResponseBody(
         id: String,
-        responseSize: Long?,
+        responseContentLength: Long?,
         responseBody: ByteArray?,
     ) {
         database.callQueries.saveResponseBody(
-            responseSize,
+            responseContentLength,
             responseBody,
             id
         )
@@ -95,5 +95,9 @@ class LibraryDao(private val database: LibraryDatabase) {
 
     fun deleteCalls() {
         database.callQueries.deleteCalls()
+    }
+
+    fun deleteCallsBefore(threshold: Long) {
+        database.callQueries.deleteCallsBefore(threshold)
     }
 }

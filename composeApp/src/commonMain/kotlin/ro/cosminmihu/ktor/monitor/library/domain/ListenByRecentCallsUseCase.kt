@@ -2,19 +2,23 @@ package ro.cosminmihu.ktor.monitor.library.domain
 
 import app.cash.sqldelight.Query
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
+import ro.cosminmihu.ktor.monitor.SelectCallsWithLimit
+import ro.cosminmihu.ktor.monitor.library.api.LoggingConfig
 import ro.cosminmihu.ktor.monitor.library.db.LibraryDao
 import ro.cosminmihu.ktor.monitor.library.domain.model.encodedPathAndQuery
 import ro.cosminmihu.ktor.monitor.library.domain.model.isError
 import ro.cosminmihu.ktor.monitor.library.domain.model.isInProgress
 import ro.cosminmihu.ktor.monitor.library.ui.notification.NotificationManager
-import ro.cosminmihu.ktor.monitor.SelectCallsWithLimit
 
 class ListenByRecentCallsUseCase(
     private val dao: LibraryDao,
+    private val config: LoggingConfig,
     private val coroutineScope: CoroutineScope,
     private val notificationManager: NotificationManager,
+    private val retentionUseCase: RetentionUseCase,
 ) {
 
     operator fun invoke() {
@@ -37,8 +41,16 @@ class ListenByRecentCallsUseCase(
                             append(it.encodedPathAndQuery)
                         }
                     }
-                }.collect {
-                    notificationManager.notify(it)
+                }
+                .distinctUntilChanged()
+                .collect {
+                    // Show notification
+                    if (config.showNotification) {
+                        notificationManager.notify(it)
+                    }
+
+                    // Delete old calls.
+                    retentionUseCase()
                 }
         }
     }

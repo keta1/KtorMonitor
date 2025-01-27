@@ -10,6 +10,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.datetime.Clock
+import ro.cosminmihu.ktor.monitor.library.api.SanitizedHeader
 import ro.cosminmihu.ktor.monitor.library.db.LibraryDao
 
 internal fun logRequestException(
@@ -43,18 +44,18 @@ internal suspend fun logRequest(
     val channel = ByteChannel()
     coroutineScope.launch(Dispatchers.Default) {
         val charset = content.contentType?.charset() ?: Charsets.UTF_8
-        val text = channel.tryReadText(charset)?.toByteArray(charset)
+        val body = channel.tryReadText(charset)?.toByteArray(charset)
 
         // Save request.
         dao.saveRequest(
             id = id,
             method = method,
             url = url,
-            requestTime = Clock.System.now().toEpochMilliseconds(),
+            requestTimestamp = Clock.System.now().toEpochMilliseconds(),
             requestHeaders = headers,
             requestContentType = contentType,
-            requestSize = contentLength,
-            requestBody = text,
+            requestContentLength = contentLength,
+            requestBody = body,
         )
     }
 
