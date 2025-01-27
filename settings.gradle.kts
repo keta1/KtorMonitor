@@ -1,4 +1,4 @@
-rootProject.name = "Tarna"
+rootProject.name = "KtorMonitor"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {
