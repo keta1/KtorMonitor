@@ -179,12 +179,12 @@ private fun Body(body: DetailUiState.Body, modifier: Modifier = Modifier) {
 
         body.raw != null && selectedDisplayMode == SHOW_TYPE_RAW ->
             SelectionContainer {
-                Text(text = body.raw, modifier = Modifier.horizontalScroll(rememberScrollState()))
+                Text(text = body.raw)
             }
 
         body.bytes != null && body.bytes.isNotEmpty() && selectedDisplayMode == SHOW_TYPE_BYTES ->
             SelectionContainer {
-                Text(text = body.bytes, modifier = Modifier.horizontalScroll(rememberScrollState()))
+                Text(text = body.bytes)
             }
     }
 }

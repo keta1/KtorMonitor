@@ -71,10 +71,10 @@ class DetailViewModel(
                         headers = call.requestHeaders,
                         body = DetailUiState.Body(
                             bytes = bodyBytes(call.requestBody),
-                            raw = bodyRaw(call.responseContentType, call.responseBody),
+                            raw = bodyRaw(call.responseContentType, call.requestBody),
                             code = bodyCode(call.requestContentType, call.requestBody),
                             image = bodyImage(call.requestContentType, call.requestBody),
-                            html = bodyHtml(call.responseContentType, call.responseBody),
+                            html = bodyHtml(call.responseContentType, call.requestBody),
                         )
                     ),
                     response = Response(

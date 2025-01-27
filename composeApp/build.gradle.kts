@@ -9,6 +9,7 @@ plugins {
     alias(libs.plugins.kotlinxSerialization)
     alias(libs.plugins.sqldelight)
     id("maven-publish")
+    id("org.jetbrains.kotlinx.atomicfu") version "0.27.0"
 }
 
 group = "ro.cosminmihu.ktor.monitor"

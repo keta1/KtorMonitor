@@ -32,26 +32,44 @@ class LibraryDao(private val database: LibraryDatabase) {
         )
     }
 
+    fun saveRequest(
+        id: String,
+        error: Throwable,
+    ) {
+        database.callQueries.saveError(
+            error.stackTraceToString(),
+            id
+        )
+    }
+
     fun saveResponse(
         id: String,
         responseCode: Int,
         requestTime: Long,
         responseTime: Long,
-        responseSize: Long?,
         responseContentType: String?,
         responseHeaders: Map<String, List<String>>?,
-        responseBody: ByteArray?,
         protocol: String?,
     ) {
         database.callQueries.saveResponse(
             responseCode.toLong(),
             requestTime,
             responseTime,
-            responseSize,
             responseContentType,
             responseHeaders,
-            responseBody,
             protocol,
+            id
+        )
+    }
+
+    fun saveResponseBody(
+        id: String,
+        responseSize: Long?,
+        responseBody: ByteArray?,
+    ) {
+        database.callQueries.saveResponseBody(
+            responseSize,
+            responseBody,
             id
         )
     }

@@ -25,7 +25,10 @@ saveRequest:
 INSERT INTO call (id, method, url, requestTime, requestSize, requestHeaders, requestContentType, requestBody) VALUES (?, ?, ?, ?, ?, ?, ?, ?);
 
 saveResponse:
-UPDATE call SET responseCode = ?, requestTime = ?, responseTime = ?, responseSize = ?, responseContentType = ?, responseHeaders = ?, responseBody = ?, protocol = ? WHERE id = ?;
+UPDATE call SET responseCode = ?, requestTime = ?, responseTime = ?, responseContentType = ?, responseHeaders = ?, protocol = ? WHERE id = ?;
+
+saveResponseBody:
+UPDATE call SET responseSize = ?, responseBody = ? WHERE id = ?;
 
 saveError:
 UPDATE call SET error = ? WHERE id = ?;
