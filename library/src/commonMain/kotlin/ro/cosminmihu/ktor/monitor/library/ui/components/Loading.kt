@@ -19,8 +19,8 @@ import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.stringResource
-import ro.cosminmihu.ktor.monitor.composeapp.generated.resources.Res
-import ro.cosminmihu.ktor.monitor.composeapp.generated.resources.in_progress
+import ro.cosminmihu.ktor.monitor.library.generated.resources.Res
+import ro.cosminmihu.ktor.monitor.library.generated.resources.in_progress
 
 object Loading {
 

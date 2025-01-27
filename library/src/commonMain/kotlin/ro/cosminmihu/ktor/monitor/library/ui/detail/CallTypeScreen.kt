@@ -28,14 +28,14 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import org.jetbrains.compose.resources.stringResource
-import ro.cosminmihu.ktor.monitor.composeapp.generated.resources.Res
-import ro.cosminmihu.ktor.monitor.composeapp.generated.resources.error
-import ro.cosminmihu.ktor.monitor.composeapp.generated.resources.no_body
-import ro.cosminmihu.ktor.monitor.composeapp.generated.resources.response_view_binary
-import ro.cosminmihu.ktor.monitor.composeapp.generated.resources.response_view_code
-import ro.cosminmihu.ktor.monitor.composeapp.generated.resources.response_view_html
-import ro.cosminmihu.ktor.monitor.composeapp.generated.resources.response_view_image
-import ro.cosminmihu.ktor.monitor.composeapp.generated.resources.response_view_raw
+import ro.cosminmihu.ktor.monitor.library.generated.resources.Res
+import ro.cosminmihu.ktor.monitor.library.generated.resources.error
+import ro.cosminmihu.ktor.monitor.library.generated.resources.no_body
+import ro.cosminmihu.ktor.monitor.library.generated.resources.response_view_binary
+import ro.cosminmihu.ktor.monitor.library.generated.resources.response_view_code
+import ro.cosminmihu.ktor.monitor.library.generated.resources.response_view_html
+import ro.cosminmihu.ktor.monitor.library.generated.resources.response_view_image
+import ro.cosminmihu.ktor.monitor.library.generated.resources.response_view_raw
 import ro.cosminmihu.ktor.monitor.library.ui.components.Loading
 
 private const val SHOW_TYPE_HTML = 0

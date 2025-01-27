@@ -20,10 +20,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringResource
-import ro.cosminmihu.ktor.monitor.composeapp.generated.resources.Res
-import ro.cosminmihu.ktor.monitor.composeapp.generated.resources.request
-import ro.cosminmihu.ktor.monitor.composeapp.generated.resources.response
-import ro.cosminmihu.ktor.monitor.composeapp.generated.resources.summary
+import ro.cosminmihu.ktor.monitor.library.generated.resources.Res
+import ro.cosminmihu.ktor.monitor.library.generated.resources.request
+import ro.cosminmihu.ktor.monitor.library.generated.resources.response
+import ro.cosminmihu.ktor.monitor.library.generated.resources.summary
 
 private const val PAGE_COUNT = 3
 

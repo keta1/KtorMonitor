@@ -3,8 +3,8 @@ package ro.cosminmihu.ktor.monitor.library.ui
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.window.MenuScope
 import org.jetbrains.compose.resources.stringResource
-import ro.cosminmihu.ktor.monitor.composeapp.generated.resources.Res
-import ro.cosminmihu.ktor.monitor.composeapp.generated.resources.tray_name
+import ro.cosminmihu.ktor.monitor.library.generated.resources.Res
+import ro.cosminmihu.ktor.monitor.library.generated.resources.tray_name
 
 @Composable
 fun MenuScope.KtorMonitorMenuItem(

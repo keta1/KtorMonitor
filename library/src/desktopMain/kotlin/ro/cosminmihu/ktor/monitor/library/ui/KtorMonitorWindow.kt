@@ -5,8 +5,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.window.Window
 import org.jetbrains.compose.resources.stringResource
-import ro.cosminmihu.ktor.monitor.composeapp.generated.resources.Res
-import ro.cosminmihu.ktor.monitor.composeapp.generated.resources.library_name
+import ro.cosminmihu.ktor.monitor.library.generated.resources.Res
+import ro.cosminmihu.ktor.monitor.library.generated.resources.library_name
 
 @Composable
 fun KtorMonitorWindow(

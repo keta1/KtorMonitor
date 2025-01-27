@@ -9,9 +9,9 @@ import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
-import ro.cosminmihu.ktor.monitor.composeapp.generated.resources.Res
-import ro.cosminmihu.ktor.monitor.composeapp.generated.resources.app_name
-import ro.cosminmihu.ktor.monitor.composeapp.generated.resources.ic_launcher
+import ro.cosminmihu.ktor.monitor.library.generated.resources.Res
+import ro.cosminmihu.ktor.monitor.library.generated.resources.app_name
+import ro.cosminmihu.ktor.monitor.library.generated.resources.ic_launcher
 import ro.cosminmihu.ktor.monitor.library.ui.KtorMonitorMenuItem
 import ro.cosminmihu.ktor.monitor.library.ui.KtorMonitorWindow
 

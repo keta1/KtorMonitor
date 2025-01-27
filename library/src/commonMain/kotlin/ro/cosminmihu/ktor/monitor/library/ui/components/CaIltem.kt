@@ -23,9 +23,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
-import ro.cosminmihu.ktor.monitor.composeapp.generated.resources.Res
-import ro.cosminmihu.ktor.monitor.composeapp.generated.resources.error
-import ro.cosminmihu.ktor.monitor.composeapp.generated.resources.in_progress
+import ro.cosminmihu.ktor.monitor.library.generated.resources.Res
+import ro.cosminmihu.ktor.monitor.library.generated.resources.error
+import ro.cosminmihu.ktor.monitor.library.generated.resources.in_progress
 import ro.cosminmihu.ktor.monitor.library.domain.model.ContentType
 import ro.cosminmihu.ktor.monitor.library.domain.model.asColor
 import ro.cosminmihu.ktor.monitor.library.ui.list.ListUiState
