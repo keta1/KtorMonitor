@@ -4,12 +4,15 @@
 
     <string name="ktor_filter">Filter</string>
     <string name="ktor_clean">Clean</string>
+    <string name="ktor_close">Close</string>
+    <string name="ktor_back">Back</string>
 
     <string name="ktor_summary">Summary</string>
     <string name="ktor_request">Request</string>
     <string name="ktor_response">Response</string>
 
     <string name="ktor_list_empty">No items.</string>
+    <string name="ktor_no_selection">Noting selected.</string>
 
     <string name="ktor_no_body">(body is empty)</string>
 

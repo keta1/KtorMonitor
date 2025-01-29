@@ -45,7 +45,14 @@ internal fun LibraryScreen(
             detailPane = {
                 val id = navigator.currentDestination?.contentKey
                 AnimatedPane {
-                    DetailRoute(id)
+                    DetailRoute(
+                        id = id,
+                        onBack = {
+                            coroutineScope.launch {
+                                navigator.navigateBack()
+                            }
+                        }
+                    )
                 }
             },
             paneExpansionDragHandle = {

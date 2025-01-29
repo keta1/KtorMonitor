@@ -17,6 +17,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -34,6 +35,7 @@ import org.jetbrains.compose.resources.vectorResource
 import ro.cosminmihu.ktor.monitor.ui.components.CallItem
 import ro.cosminmihu.ktor.monitor.ui.components.Loading
 import ro.cosminmihu.ktor.monitor.ui.components.SearchField
+import ro.cosminmihu.ktor.monitor.ui.components.temporaryWindowInsets
 import ro.cosminmihu.ktor.monitor.ui.resources.Res
 import ro.cosminmihu.ktor.monitor.ui.resources.ktor_clean
 import ro.cosminmihu.ktor.monitor.ui.resources.ktor_filter
@@ -56,10 +58,10 @@ internal fun ListScreen(
 
     Scaffold(
         modifier = modifier,
-        contentWindowInsets = WindowInsets(0), // TODO remove after jetbrains fix
+        contentWindowInsets = WindowInsets.temporaryWindowInsets,
         topBar = {
             TopAppBar(
-                windowInsets = WindowInsets(0), // TODO remove after jetbrains fix
+                windowInsets = WindowInsets.temporaryWindowInsets,
                 title = {
                     Text(
                         text = stringResource(Res.string.ktor_library_title),
@@ -77,13 +79,15 @@ internal fun ListScreen(
                     IconButton(onClick = { showSearchBar = !showSearchBar }) {
                         Icon(
                             imageVector = Icons.Filled.Search,
-                            contentDescription = stringResource(Res.string.ktor_filter)
+                            contentDescription = stringResource(Res.string.ktor_filter),
+                            tint = MaterialTheme.colorScheme.primary,
                         )
                     }
                     IconButton(onClick = deleteCalls) {
                         Icon(
                             imageVector = Icons.Filled.Delete,
-                            contentDescription = stringResource(Res.string.ktor_clean)
+                            contentDescription = stringResource(Res.string.ktor_clean),
+                            tint = MaterialTheme.colorScheme.primary,
                         )
                     }
                 }
@@ -91,6 +95,7 @@ internal fun ListScreen(
         }
     ) {
         Column(modifier = Modifier.padding(it).fillMaxWidth()) {
+            HorizontalDivider()
 
             AnimatedVisibility(visible = showSearchBar) {
                 SearchField(
@@ -120,13 +125,13 @@ internal fun ListScreen(
                     LazyColumn(
                         modifier = Modifier.weight(1f).fillMaxWidth()
                     ) {
-                        itemsIndexed(uiState.calls) { index, item ->
-                            if (index == 0) {
-                                HorizontalDivider()
-                            }
+                        itemsIndexed(
+                            items = uiState.calls,
+                            key = { _, item -> item.id }
+                        ) { index, item ->
                             CallItem(
                                 call = item,
-                                modifier = Modifier.clickable { onCallClick(item.id) }
+                                modifier = Modifier.animateItem().clickable { onCallClick(item.id) }
                             )
                             HorizontalDivider()
                         }

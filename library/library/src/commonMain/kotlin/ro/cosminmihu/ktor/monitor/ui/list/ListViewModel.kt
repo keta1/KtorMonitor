@@ -32,7 +32,7 @@ internal class ListViewModel(
 ) : ViewModel() {
 
     private val _searchQuery = MutableStateFlow("")
-    private val searchQuery = _searchQuery.debounce(0.5.seconds)
+    private val searchQuery = _searchQuery.debounce(0.2.seconds)
     private val calls = getCallsUseCase()
 
     val uiState = combine(
