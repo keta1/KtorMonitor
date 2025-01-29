@@ -1,6 +1,0 @@
-<resources>
-    <string name="app_name">Ktor Monitor Sample</string>
-    <string name="activity_name">Ktor Monitor</string>
-
-    <string name="clear">Clear</string>
-</resources>

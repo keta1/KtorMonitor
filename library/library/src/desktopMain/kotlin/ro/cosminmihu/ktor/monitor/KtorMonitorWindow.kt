@@ -1,0 +1,25 @@
+package ro.cosminmihu.ktor.monitor
+
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.window.Window
+import org.jetbrains.compose.resources.stringResource
+import ro.cosminmihu.ktor.monitor.ui.resources.Res
+import ro.cosminmihu.ktor.monitor.ui.resources.ktor_library_name
+import ro.cosminmihu.ktor.monitor.ui.LibraryUI
+
+@Composable
+public fun KtorMonitorWindow(
+    show: Boolean,
+    onCloseRequest: () -> Unit = {},
+) {
+    if (!show) return
+
+    Window(
+        onCloseRequest = onCloseRequest,
+        title = stringResource(Res.string.ktor_library_name),
+    ) {
+        LibraryUI(modifier = Modifier.fillMaxSize())
+    }
+}

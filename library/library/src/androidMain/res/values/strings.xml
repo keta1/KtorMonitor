@@ -1,0 +1,5 @@
+<resources>
+    <string name="ktor_activity_name">Ktor Monitor Logging</string>
+
+    <string name="ktor_clear">Clear</string>
+</resources>

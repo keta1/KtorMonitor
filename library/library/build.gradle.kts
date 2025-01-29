@@ -1,0 +1,187 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
+plugins {
+    alias(libs.plugins.kotlinMultiplatform)
+    alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.composeMultiplatform)
+    alias(libs.plugins.composeCompiler)
+    alias(libs.plugins.kotlinxSerialization)
+    alias(libs.plugins.sqldelight)
+    alias(libs.plugins.kotlinx.atomicfu)
+    id("maven-publish")
+}
+
+group = "ro.cosminmihu.ktor"
+version = "1.0.0-dev18"
+
+publishing {
+    repositories {
+        maven {
+//            url = uri("https://maven.pkg.jetbrains.space/public/p/compose/p/compose")
+//            credentials {
+//                username = project.findProperty("composeUsername") as String?
+//                password = project.findProperty("composePassword") as String?
+//            }
+        }
+    }
+
+    publications.withType<MavenPublication> {
+        pom {
+            name.set("Ktor Monitor Logging")
+            description.set("Powerful tools to log Ktor Client requests and responses, making it easier to debug and analyze network communication.")
+            url.set("https://github.com/CosminMihuMDC/KtorMonitor")
+
+            licenses {
+                license {
+                    name = "The Apache Software License, Version 2.0"
+                    url = "https://www.apache.org/licenses/LICENSE-2.0.txt"
+                    distribution = "repo"
+                }
+            }
+
+            developers {
+                developer {
+                    id = "Cosmin Mihu"
+                    name = "Cosmin Mihu"
+                    email = "cosmin.mihu@gmail.com"
+                    url = "https://www.cosminmihu.ro"
+                }
+            }
+
+            scm {
+                developerConnection = "scm:git:git://github.com/CosminMihuMDC/KtorMonitor.git"
+                connection = "scm:git:git://github.com/CosminMihuMDC/KtorMonitor.git"
+                url = "https://github.com/CosminMihuMDC/KtorMonitor.git"
+            }
+
+            issueManagement {
+                system = "GitHub Issues"
+                url = "https://github.com/CosminMihuMDC/KtorMonitor/issues"
+            }
+
+            ciManagement {
+                system = "GitHub Actions"
+                url = "https://github.com/CosminMihuMDC/KtorMonitor/actions"
+            }
+
+            distributionManagement {
+                downloadUrl = "https://github.com/CosminMihuMDC/KtorMonitor/releases"
+            }
+        }
+    }
+}
+
+sqldelight {
+    databases {
+        create("LibraryDatabase") {
+            packageName.set("ro.cosminmihu.ktor.monitor.db.sqldelight")
+        }
+    }
+    linkSqlite = true
+}
+
+compose.resources {
+    packageOfResClass = "ro.cosminmihu.ktor.monitor.ui.resources"
+}
+
+kotlin {
+    explicitApi()
+
+    compilerOptions {
+        freeCompilerArgs.add("-Xexpect-actual-classes") // TODO remove after jetbrains fix
+    }
+
+    androidTarget {
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_11)
+        }
+        publishLibraryVariants("release")
+    }
+
+    listOf(
+        iosX64(),
+        iosArm64(),
+        iosSimulatorArm64()
+    ).forEach { iosTarget ->
+        iosTarget.binaries.framework {
+            baseName = "ComposeApp"
+            isStatic = true
+            linkerOpts("-lsqlite3")
+        }
+    }
+
+    jvm("desktop")
+
+    sourceSets {
+        val desktopMain by getting
+
+        androidMain.dependencies {
+            implementation(compose.preview)
+            implementation(libs.androidx.activity.compose)
+            implementation(libs.ktor.client.okhttp)
+            implementation(libs.sqldelight.android)
+            implementation(libs.koin.android)
+        }
+        iosMain.dependencies {
+            implementation(libs.ktor.client.darwin)
+            implementation(libs.sqldelight.native)
+        }
+        commonMain.dependencies {
+            implementation(compose.runtime)
+            implementation(compose.foundation)
+            implementation(compose.material3)
+            implementation(compose.materialIconsExtended)
+            implementation(compose.material3AdaptiveNavigationSuite)
+            implementation(compose.ui)
+            implementation(compose.components.resources)
+            implementation(compose.components.uiToolingPreview)
+            implementation(libs.androidx.lifecycle.viewmodel)
+            implementation(libs.androidx.lifecycle.runtime.compose)
+            implementation(libs.ktor.client.core)
+            implementation(libs.ktor.client.logging)
+            implementation(libs.ktor.client.content.negotiation)
+            implementation(libs.ktor.serialization.kotlinx.json)
+            implementation(libs.sqldelight.runtime)
+            implementation(libs.sqldelight.coroutines)
+            implementation(libs.sqldelight.primitive.adapters)
+            implementation(libs.koin.core)
+            implementation(libs.koin.compose)
+            implementation(libs.koin.compose.viewmodel)
+            implementation(libs.kotlinx.datetime)
+            implementation(libs.coil.compose)
+            implementation(libs.coil.network.ktor)
+            implementation(libs.kotlinx.atomicfu)
+            implementation("org.jetbrains.compose.material3.adaptive:adaptive:1.1.0-alpha02") // TODO import using compose.adaptive
+            implementation("org.jetbrains.compose.material3.adaptive:adaptive-layout:1.1.0-alpha02") // TODO compose.adaptive
+            implementation("org.jetbrains.compose.material3.adaptive:adaptive-navigation:1.1.0-alpha02") // TODO compose.adaptive
+        }
+        desktopMain.dependencies {
+            implementation(compose.desktop.currentOs)
+            implementation(libs.kotlinx.coroutines.swing)
+            implementation(libs.ktor.client.cio)
+            implementation(libs.sqldelight.sqlite)
+        }
+    }
+}
+
+android {
+    namespace = "ro.cosminmihu.ktor.monitor"
+    compileSdk = libs.versions.android.compileSdk.get().toInt()
+
+    defaultConfig {
+        minSdk = libs.versions.android.minSdk.get().toInt()
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
+    buildTypes {
+        release {
+            isMinifyEnabled = false
+        }
+    }
+}
+
+dependencies {
+    debugImplementation(compose.uiTooling)
+}
