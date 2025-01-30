@@ -35,7 +35,7 @@ publishing {
                 license {
                     name = "The Apache Software License, Version 2.0"
                     url = "https://www.apache.org/licenses/LICENSE-2.0.txt"
-                    distribution = "repo"
+                    distribution = "http://www.apache.org/licenses/LICENSE-2.0.txt"
                 }
             }
 
@@ -159,7 +159,7 @@ kotlin {
             implementation(compose.desktop.currentOs)
             implementation(libs.kotlinx.coroutines.swing)
             implementation(libs.ktor.client.cio)
-            implementation(libs.sqldelight.sqlite)
+            implementation(libs.sqldelight.jvm)
         }
     }
 }

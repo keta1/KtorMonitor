@@ -40,6 +40,8 @@ internal object LibraryKoinContext {
 
     internal fun applyPlatformContext() {
         ro.cosminmihu.ktor.monitor.core.applyPlatformContext()
+
+        checkNotNull(koin.getOrNull<PlatformContext>()) { "Context is not set." }
     }
 }
 

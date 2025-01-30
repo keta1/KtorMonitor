@@ -3,6 +3,19 @@ Powerful tools to log [Ktor Client](https://ktor.io/) requests and responses, ma
 
 ## SETUP
 
+### Gradle
+
+```kotlin
+// projectDir/composeApp/build.gradle.kts
+kotlin {
+    sourceSets {
+        commonMain.dependencies {
+            implementation("ro.cosminmihu.ktor:ktor-monitor-logging:1.0.0")
+        }
+    }
+}
+```
+
 ### Common
 
 ```kotlin
