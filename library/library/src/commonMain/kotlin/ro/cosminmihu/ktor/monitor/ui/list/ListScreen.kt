@@ -41,7 +41,6 @@ import ro.cosminmihu.ktor.monitor.ui.resources.ktor_clean
 import ro.cosminmihu.ktor.monitor.ui.resources.ktor_filter
 import ro.cosminmihu.ktor.monitor.ui.resources.ktor_ic_logo
 import ro.cosminmihu.ktor.monitor.ui.resources.ktor_library_name
-import ro.cosminmihu.ktor.monitor.ui.resources.ktor_library_title
 import ro.cosminmihu.ktor.monitor.ui.resources.ktor_list_empty
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -64,7 +63,7 @@ internal fun ListScreen(
                 windowInsets = WindowInsets.temporaryWindowInsets,
                 title = {
                     Text(
-                        text = stringResource(Res.string.ktor_library_title),
+                        text = stringResource(Res.string.ktor_library_name),
                         fontWeight = FontWeight.Bold,
                     )
                 },

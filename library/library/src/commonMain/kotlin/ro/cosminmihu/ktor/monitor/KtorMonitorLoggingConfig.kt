@@ -8,7 +8,7 @@ import kotlin.time.Duration.Companion.days
 import kotlin.time.Duration.Companion.hours
 
 /**
- * A configuration for the [ro.cosminmihu.ktor.monitor.api.LoggingPlugin] plugin.
+ * A configuration for the [ro.cosminmihu.ktor.monitor.KtorMonitorLogging] plugin.
  */
 @KtorDsl
 public class KtorMonitorLoggingConfig {

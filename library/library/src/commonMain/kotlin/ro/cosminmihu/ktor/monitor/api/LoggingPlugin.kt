@@ -22,8 +22,8 @@ import ro.cosminmihu.ktor.monitor.di.LibraryKoinContext
 import ro.cosminmihu.ktor.monitor.di.inject
 import ro.cosminmihu.ktor.monitor.domain.ListenByRecentCallsUseCase
 
-private val DisableLogging = AttributeKey<Unit>("KtorMonitorLoggingDisableLogging")
-private val CallIdentifier = AttributeKey<String>("KtorMonitorLoggingCallIdentifier")
+private val DisableLogging = AttributeKey<Unit>("KtorMonitorDisableLogging")
+private val CallIdentifier = AttributeKey<String>("KtorMonitorCallIdentifier")
 private const val PluginName = "KtorMonitorLogging"
 
 internal val LoggingPlugin: ClientPlugin<KtorMonitorLoggingConfig> =

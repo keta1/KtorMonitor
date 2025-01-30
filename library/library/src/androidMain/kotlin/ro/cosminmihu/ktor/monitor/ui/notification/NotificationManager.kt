@@ -15,9 +15,9 @@ import ro.cosminmihu.ktor.monitor.R
 import ro.cosminmihu.ktor.monitor.di.LibraryKoinComponent
 import ro.cosminmihu.ktor.monitor.ui.KtorMonitorActivity
 
-private const val NOTIFICATION_CHANNEL_ID = "KtorMonitorLoggingNotificationChannel"
-private const val NOTIFICATION_CHANNEL_NAME = "Ktor Monitor Logging Notification Channel"
-private const val NOTIFICATION_CHANNEL_DESCRIPTION = "Ktor Monitor Logging Notification Channel"
+private const val NOTIFICATION_CHANNEL_ID = "KtorMonitorNotificationChannel"
+private const val NOTIFICATION_CHANNEL_NAME = "Ktor Monitor Notification Channel"
+private const val NOTIFICATION_CHANNEL_DESCRIPTION = "Ktor Monitor Notification Channel"
 
 internal actual class NotificationManager : LibraryKoinComponent {
 

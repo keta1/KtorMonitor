@@ -1,4 +1,4 @@
-rootProject.name = "KtorMonitorLogging"
+rootProject.name = "KtorMonitor"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {
