@@ -75,6 +75,8 @@ internal fun ListScreen(
                     )
                 },
                 actions = {
+                    if (uiState.isEmpty) return@TopAppBar
+
                     IconButton(onClick = { showSearchBar = !showSearchBar }) {
                         Icon(
                             imageVector = Icons.Filled.Search,

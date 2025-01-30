@@ -100,7 +100,7 @@ dependencies {
 
 compose.desktop {
     application {
-        mainClass = "ro.cosminmihu.ktor.monitor.sample.MainKt"
+        mainClass = "ro.cosminmihu.ktor.monitor.sample.compose.MainKt"
 
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)

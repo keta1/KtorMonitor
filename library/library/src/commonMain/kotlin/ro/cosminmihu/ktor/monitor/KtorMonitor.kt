@@ -8,7 +8,7 @@ import ro.cosminmihu.ktor.monitor.ui.LibraryUI
  * Ktor Monitor UI entry point.
  */
 @Composable
-public fun KtorMonitorUI(
+public fun KtorMonitor(
     modifier: Modifier = Modifier,
     useKtorMonitorTheme: Boolean = true,
 ) {

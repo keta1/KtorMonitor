@@ -7,7 +7,7 @@ Powerful tools to log [Ktor Client](https://ktor.io/) requests and responses, ma
 // projectDir/composeApp/src/commonMain/kotlin/com/example/api/HttpClient.kt
 
 HttpClient {
-	...
+	
     install(KtorMonitorLogging) {  
         sanitizeHeader { header -> header == "Authorization" }  
         filter { request -> !request.url.host.contains("cosminmihu.ro") }  
@@ -15,7 +15,7 @@ HttpClient {
         showNotification = true  
         retentionPeriod = RetentionPeriod.OneHour  
     }
-    ...
+    
 }
 ```
 
@@ -34,7 +34,7 @@ class MyApp: Application() {
 ## Desktop
 
 ```kotlin
-// projectDir/composeApp/src/desktopMain/kotlin/com/example/main.kt
+// projectDir/composeApp/src/desktopMain/kotlin/com/example/compose/main.kt
 
 fun main() = application {
 
@@ -43,12 +43,12 @@ fun main() = application {
         onCloseRequest = { showKtorMonitor = false },  
         show = showKtorMonitor  
     )  
-	...
+	
 }
 ```
 
 ```kotlin
-// projectDir/composeApp/src/desktopMain/kotlin/com/example/main.kt
+// projectDir/composeApp/src/desktopMain/kotlin/com/example/compose/main.kt
 
 fun main() = application {
 
@@ -64,5 +64,19 @@ fun main() = application {
         onCloseRequest = { showKtorMonitor = false },  
         show = showKtorMonitor  
     )  
-	...
+
 }
+```
+
+```kotlin
+// projectDir/composeApp/src/desktopMain/kotlin/com/example/swing/main.kt
+
+fun main() = application {
+
+    SwingUtilities.invokeLater {
+        val frame = JFrame()
+        frame.add(KtorMonitorPanel, BorderLayout.CENTER)
+    }
+
+}
+```
