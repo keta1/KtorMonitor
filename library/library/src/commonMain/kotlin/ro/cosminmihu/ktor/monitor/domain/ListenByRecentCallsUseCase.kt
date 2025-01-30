@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import ro.cosminmihu.ktor.monitor.db.sqldelight.SelectCallsWithLimit
-import ro.cosminmihu.ktor.monitor.KtorMonitorLoggingConfig
+import ro.cosminmihu.ktor.monitor.api.LibraryConfig
 import ro.cosminmihu.ktor.monitor.db.LibraryDao
 import ro.cosminmihu.ktor.monitor.domain.model.encodedPathAndQuery
 import ro.cosminmihu.ktor.monitor.domain.model.isError
@@ -15,7 +15,7 @@ import ro.cosminmihu.ktor.monitor.ui.notification.NotificationManager
 
 internal class ListenByRecentCallsUseCase(
     private val dao: LibraryDao,
-    private val config: KtorMonitorLoggingConfig,
+    private val config: LibraryConfig,
     private val coroutineScope: CoroutineScope,
     private val notificationManager: NotificationManager,
     private val retentionUseCase: RetentionUseCase,

@@ -6,7 +6,7 @@ import org.koin.core.parameter.ParametersHolder
 import org.koin.core.qualifier.Qualifier
 import org.koin.dsl.koinApplication
 import org.koin.dsl.module
-import ro.cosminmihu.ktor.monitor.KtorMonitorLoggingConfig
+import ro.cosminmihu.ktor.monitor.api.LibraryConfig
 import ro.cosminmihu.ktor.monitor.core.PlatformContext
 
 internal interface LibraryKoinComponent : KoinComponent {
@@ -29,10 +29,10 @@ internal object LibraryKoinContext {
         koin.loadModules(modules = listOf(module { single { platformContext } }))
     }
 
-    internal fun set(config: KtorMonitorLoggingConfig) {
+    internal fun set(config: LibraryConfig) {
         this@LibraryKoinContext.applyPlatformContext()
 
-        val alreadyInjected = koin.getOrNull<KtorMonitorLoggingConfig>() != null
+        val alreadyInjected = koin.getOrNull<LibraryConfig>() != null
         if (alreadyInjected) return
 
         koin.loadModules(modules = listOf(module { factory { config } }))

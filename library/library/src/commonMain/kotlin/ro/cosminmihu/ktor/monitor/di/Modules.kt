@@ -6,7 +6,7 @@ import kotlinx.coroutines.SupervisorJob
 import org.koin.core.module.dsl.factoryOf
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
-import ro.cosminmihu.ktor.monitor.KtorMonitorLoggingConfig
+import ro.cosminmihu.ktor.monitor.api.LibraryConfig
 import ro.cosminmihu.ktor.monitor.db.LibraryDao
 import ro.cosminmihu.ktor.monitor.db.createDatabase
 import ro.cosminmihu.ktor.monitor.db.createDatabaseDriver
@@ -53,7 +53,7 @@ internal val viewModelModule = module {
 }
 
 internal val domainModule = module {
-    factoryOf(::KtorMonitorLoggingConfig)
+    factoryOf(::LibraryConfig)
 
     factoryOf(::ListenByRecentCallsUseCase)
     factoryOf(::RetentionUseCase)

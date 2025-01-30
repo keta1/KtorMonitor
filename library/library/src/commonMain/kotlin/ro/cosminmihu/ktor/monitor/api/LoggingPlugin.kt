@@ -7,8 +7,6 @@ import io.ktor.client.plugins.observer.ResponseObserver
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.util.AttributeKey
 import kotlinx.coroutines.CoroutineScope
-import ro.cosminmihu.ktor.monitor.KtorMonitorLoggingConfig
-import ro.cosminmihu.ktor.monitor.SanitizedHeader
 import ro.cosminmihu.ktor.monitor.api.util.ReceiveHook
 import ro.cosminmihu.ktor.monitor.api.util.ResponseHook
 import ro.cosminmihu.ktor.monitor.api.util.SendHook
@@ -26,8 +24,8 @@ private val DisableLogging = AttributeKey<Unit>("KtorMonitorDisableLogging")
 private val CallIdentifier = AttributeKey<String>("KtorMonitorCallIdentifier")
 private const val PluginName = "KtorMonitorLogging"
 
-internal val LoggingPlugin: ClientPlugin<KtorMonitorLoggingConfig> =
-    createClientPlugin(PluginName, ::KtorMonitorLoggingConfig) {
+internal val LoggingPlugin: ClientPlugin<LibraryConfig> =
+    createClientPlugin(PluginName, ::LibraryConfig) {
 
         // Plugin configuration.
         val filters: List<(HttpRequestBuilder) -> Boolean> = pluginConfig.filters

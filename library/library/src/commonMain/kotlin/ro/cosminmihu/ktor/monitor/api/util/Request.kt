@@ -10,7 +10,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.datetime.Clock
-import ro.cosminmihu.ktor.monitor.SanitizedHeader
+import ro.cosminmihu.ktor.monitor.api.SanitizedHeader
 import ro.cosminmihu.ktor.monitor.db.LibraryDao
 
 internal fun logRequestException(

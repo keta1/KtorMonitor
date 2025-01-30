@@ -3,7 +3,7 @@ package ro.cosminmihu.ktor.monitor.api.util
 import io.ktor.client.statement.HttpResponse
 import io.ktor.client.statement.readRawBytes
 import io.ktor.http.contentType
-import ro.cosminmihu.ktor.monitor.SanitizedHeader
+import ro.cosminmihu.ktor.monitor.api.SanitizedHeader
 import ro.cosminmihu.ktor.monitor.db.LibraryDao
 
 internal fun logResponseException(

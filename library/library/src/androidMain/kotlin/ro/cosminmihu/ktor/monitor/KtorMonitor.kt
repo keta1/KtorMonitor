@@ -4,7 +4,7 @@ import ro.cosminmihu.ktor.monitor.core.PlatformContext
 import ro.cosminmihu.ktor.monitor.di.LibraryKoinContext
 
 /**
- * Init.
+ * Ktor Monitor Initializer.
  */
 public object KtorMonitor {
 
