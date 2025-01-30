@@ -1,10 +1,12 @@
 # KtorMonitor
 Powerful tools to log [Ktor Client](https://ktor.io/) requests and responses, making it easier to debug and analyze network communication.
 
-## Common: Ktor Client Configuration
+## SETUP
+
+### Common
 
 ```kotlin
-// projectDir/composeApp/src/commonMain/kotlin/com/example/api/HttpClient.kt
+// projectDir/composeApp/src/commonMain/kotlin/HttpClient.kt
 
 HttpClient {
 	
@@ -19,10 +21,10 @@ HttpClient {
 }
 ```
 
-## Android: KtorMonitor Initialization
+### Android
 
 ```kotlin
-// projectDir/composeApp/src/androidMain/kotlin/com/example/MyApp.kt
+// projectDir/composeApp/src/androidMain/kotlin/MyApp.kt
 
 class MyApp: Application() {  
     init {  
@@ -31,45 +33,64 @@ class MyApp: Application() {
 }
 ```
 
-## Desktop
+## USE
+
+### Common / Android / Desktop
+
+* Use ```KtorMonitor``` Composable
 
 ```kotlin
-// projectDir/composeApp/src/desktopMain/kotlin/com/example/compose/main.kt
-
-fun main() = application {
-
-    var showKtorMonitor by rememberSaveable { mutableStateOf(false) }  
-	KtorMonitorWindow(  
-        onCloseRequest = { showKtorMonitor = false },  
-        show = showKtorMonitor  
-    )  
-	
+@Composable
+fun Composable() {
+    KtorMonitor()
 }
 ```
 
+### Desktop Only
+
+* Use ```KtorMonitorWindow``` Composable Wrapper
+
 ```kotlin
-// projectDir/composeApp/src/desktopMain/kotlin/com/example/compose/main.kt
+// projectDir/composeApp/src/desktopMain/kotlin/main.kt
 
 fun main() = application {
 
-    var showKtorMonitor by rememberSaveable { mutableStateOf(false) }  
-    Tray(  
-        icon = painterResource(Res.drawable.ic_launcher),  
-        menu = {  
-            KtorMonitorMenuItem { showKtorMonitor = true }  
-        }  
-    )  
-
-    KtorMonitorWindow(  
-        onCloseRequest = { showKtorMonitor = false },  
-        show = showKtorMonitor  
-    )  
+    var showKtorMonitor by rememberSaveable { mutableStateOf(false) }
+    KtorMonitorWindow(
+        onCloseRequest = { showKtorMonitor = false },
+        show = showKtorMonitor
+    )
 
 }
 ```
 
+* Use ```KtorMonitorWindow``` Composable Wrapper with ```KtorMonitorMenuItem```
+
 ```kotlin
-// projectDir/composeApp/src/desktopMain/kotlin/com/example/swing/main.kt
+// projectDir/composeApp/src/desktopMain/kotlin/main.kt
+
+fun main() = application {
+
+    var showKtorMonitor by rememberSaveable { mutableStateOf(false) }
+    Tray(
+        icon = painterResource(Res.drawable.ic_launcher),
+        menu = {
+            KtorMonitorMenuItem { showKtorMonitor = true }
+        }
+    )
+
+    KtorMonitorWindow(
+        onCloseRequest = { showKtorMonitor = false },
+        show = showKtorMonitor
+    )
+
+}
+```
+
+* Use ```KtorMonitorPanel``` Swing Panel Wrapper
+
+```kotlin
+// projectDir/composeApp/src/desktopMain/kotlin/main.kt
 
 fun main() = application {
 
