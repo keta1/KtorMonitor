@@ -1,3 +1,4 @@
+import com.vanniktech.maven.publish.SonatypeHost
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
@@ -12,62 +13,57 @@ plugins {
     alias(libs.plugins.binary.compatibility.validator)
 }
 
-group = "ro.cosminmihu.ktor"
-version = "1.0.0-dev1"
+mavenPublishing {
+//    publishToMavenCentral(SonatypeHost.DEFAULT)
+    // or when publishing to https://s01.oss.sonatype.org
+//    publishToMavenCentral(SonatypeHost.S01)
+    // or when publishing to https://central.sonatype.com/
+//    publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
 
-publishing {
-    repositories {
-        maven {
-//            url = uri("https://maven.pkg.jetbrains.space/public/p/compose/p/compose")
-//            credentials {
-//                username = project.findProperty("composeUsername") as String?
-//                password = project.findProperty("composePassword") as String?
-//            }
+//    signAllPublications() // TODO
+
+    coordinates("ro.cosminmihu.ktor", "ktor-monitor-logging", "1.0.0-dev1")
+
+    pom {
+        name.set("Ktor Monitor")
+        description.set("""Powerful tools to log Ktor Client requests and responses, making it easier to debug and analyze network communication.""".trimMargin())
+        inceptionYear.set("2025")
+        url.set("https://github.com/CosminMihuMDC/KtorMonitor")
+
+        licenses {
+            license {
+                name = "The Apache Software License, Version 2.0"
+                url = "https://www.apache.org/licenses/LICENSE-2.0.txt"
+                distribution = "http://www.apache.org/licenses/LICENSE-2.0.txt"
+            }
         }
-    }
 
-    publications.withType<MavenPublication> {
-        pom {
-            name.set("Ktor Monitor Logging")
-            description.set("Powerful tools to log Ktor Client requests and responses, making it easier to debug and analyze network communication.")
-            url.set("https://github.com/CosminMihuMDC/KtorMonitor")
-
-            licenses {
-                license {
-                    name = "The Apache Software License, Version 2.0"
-                    url = "https://www.apache.org/licenses/LICENSE-2.0.txt"
-                    distribution = "http://www.apache.org/licenses/LICENSE-2.0.txt"
-                }
+        developers {
+            developer {
+                id = "Cosmin Mihu"
+                name = "Cosmin Mihu"
+                url = "https://www.cosminmihu.ro/"
             }
+        }
 
-            developers {
-                developer {
-                    id = "Cosmin Mihu"
-                    name = "Cosmin Mihu"
-                    email = "cosmin.mihu@gmail.com"
-                    url = "https://www.cosminmihu.ro"
-                }
-            }
+        scm {
+            url = "https://github.com/CosminMihuMDC/KtorMonitor.git"
+            connection = "scm:git:git://github.com/CosminMihuMDC/KtorMonitor.git"
+            developerConnection = "scm:git:git://github.com/CosminMihuMDC/KtorMonitor.git"
+        }
 
-            scm {
-                developerConnection = "scm:git:git://github.com/CosminMihuMDC/KtorMonitor.git"
-                connection = "scm:git:git://github.com/CosminMihuMDC/KtorMonitor.git"
-                url = "https://github.com/CosminMihuMDC/KtorMonitor.git"
-            }
+        issueManagement {
+            system = "GitHub Issues"
+            url = "https://github.com/CosminMihuMDC/KtorMonitor/issues"
+        }
 
-            issueManagement {
-                system = "GitHub Issues"
-                url = "https://github.com/CosminMihuMDC/KtorMonitor/issues"
-            }
+        ciManagement {
+            system = "GitHub Actions"
+            url = "https://github.com/CosminMihuMDC/KtorMonitor/actions"
+        }
 
-            ciManagement {
-                system = "GitHub Actions"
-                url = "https://github.com/CosminMihuMDC/KtorMonitor/actions"
-            }
-
-            distributionManagement {
-                downloadUrl = "https://github.com/CosminMihuMDC/KtorMonitor/releases"
-            }
+        distributionManagement {
+            downloadUrl = "https://github.com/CosminMihuMDC/KtorMonitor/releases"
         }
     }
 }

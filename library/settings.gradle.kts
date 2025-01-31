@@ -29,4 +29,3 @@ dependencyResolutionManagement {
 }
 
 include(":library")
-project(":library").name = "ktor-monitor-logging"
