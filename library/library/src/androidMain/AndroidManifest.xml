@@ -24,6 +24,11 @@
             android:name=".ui.notification.ClearBroadcastReceiver"
             android:exported="false" />
 
+        <provider
+            android:name=".core.LibraryInitializer"
+            android:authorities="${applicationId}.my_library_initializer"
+            android:exported="false" />
+
     </application>
 
 </manifest>

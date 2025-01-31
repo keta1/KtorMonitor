@@ -35,20 +35,6 @@ HttpClient {
 }
 ```
 
-### Android
-
-- in ```projectDir/composeApp/src/androidMain/AndroidManifest.xml```
-
-```kotlin
-class MyApp: Application() { 
-    
-    init {  
-        KtorMonitor.init(this)  
-    }
-    
-}
-```
-
 ## USE
 
 ### Common / Android / Desktop

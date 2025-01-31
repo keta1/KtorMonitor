@@ -9,7 +9,7 @@ compose-multiplatform = "1.7.3"
 kotlin = "2.1.0"
 kotlinx-coroutines = "1.10.1"
 ktor = "3.0.1"
-ktorMonitor = "1.0.0-dev18"
+ktorMonitor = "1.0.0-dev1"
 
 [libraries]
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }

@@ -1,14 +1,13 @@
 package ro.cosminmihu.ktor.monitor.core
 
 import android.content.Context
-import ro.cosminmihu.ktor.monitor.KtorMonitor
 import ro.cosminmihu.ktor.monitor.di.LibraryKoinContext
 
 internal actual typealias PlatformContext = Context
 
 internal actual fun applyPlatformContext() {
     /**
-     * PlatformContext should be already injected using [KtorMonitor.init].
+     * PlatformContext should be already injected using [LibraryInitializer].
      */
 
     /**

@@ -13,7 +13,7 @@ plugins {
 }
 
 group = "ro.cosminmihu.ktor"
-version = "1.0.0-dev18"
+version = "1.0.0-dev1"
 
 publishing {
     repositories {
