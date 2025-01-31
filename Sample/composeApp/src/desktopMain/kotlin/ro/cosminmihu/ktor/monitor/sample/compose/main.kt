@@ -37,8 +37,8 @@ fun main() = application {
     )
 
     KtorMonitorWindow(
-        onCloseRequest = { showKtorMonitor = false },
-        show = showKtorMonitor
+        show = showKtorMonitor,
+        onCloseRequest = { showKtorMonitor = false }
     )
 
     Window(

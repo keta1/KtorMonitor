@@ -11,10 +11,19 @@ import ro.cosminmihu.ktor.monitor.ui.resources.ktor_library_name
 
 /**
  * Ktor Monitor [Window].
+ *
+ * ```kotlin
+ * var showWindow by rememberSaveable { mutableStateOf(false) }
+ *
+ * KtorMonitorWindow(
+ *      show = showWindow,
+ *      onCloseRequest = { showWindow = false },
+ * )
+ * ```
  */
 @Composable
 public fun KtorMonitorWindow(
-    show: Boolean,
+    show: Boolean = true,
     onCloseRequest: () -> Unit = {},
 ) {
     if (!show) return

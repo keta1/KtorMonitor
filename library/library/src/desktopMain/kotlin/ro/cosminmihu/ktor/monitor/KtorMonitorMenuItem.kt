@@ -9,6 +9,22 @@ import ro.cosminmihu.ktor.monitor.ui.resources.ktor_tray_name
 
 /**
  * A [Tray] menu item for Ktor Monitor.
+ *
+ * ```kotlin
+ * var showWindow by rememberSaveable { mutableStateOf(false) }
+ *
+ * Tray(
+ *      icon = painterResource(Res.drawable.ic_launcher),
+ *      menu = {
+ *         KtorMonitorMenuItem { showWindow = true }
+ *      }
+ * )
+ *
+ * KtorMonitorWindow(
+ *      show = showWindow,
+ *      onCloseRequest = { showWindow = false },
+ * )
+ * ```
  */
 @Composable
 public fun MenuScope.KtorMonitorMenuItem(

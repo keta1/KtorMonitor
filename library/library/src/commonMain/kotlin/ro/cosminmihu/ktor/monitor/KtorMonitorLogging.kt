@@ -26,5 +26,17 @@ public object RetentionPeriod {
  * A client's plugin that provides the capability to log HTTP calls.
  *
  * You can learn more from [KtorMonitor](https://github.com/CosminMihuMDC/KtorMonitor).
+ *
+ * ```kotlin
+ * HttpClient {
+ *    install(KtorMonitorLogging) {
+ *       sanitizeHeader { header -> header == "Authorization" }
+ *       filter { request -> !request.url.host.contains("cosminmihu.ro") }
+ *       isActive = true
+ *       showNotification = true
+ *       retentionPeriod = RetentionPeriod.OneHour
+ *    }
+ * }
+ * ```
  */
 public val KtorMonitorLogging: ClientPlugin<KtorMonitorLoggingConfig> = LoggingPlugin
