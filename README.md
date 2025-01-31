@@ -5,7 +5,7 @@ Powerful tools to log [Ktor Client](https://ktor.io/) requests and responses, ma
 
 ### Gradle
 
-- in ```projectDir/settings.gradle.kts```
+> ```projectDir/settings.gradle.kts```
 
 ```kotlin
 kotlin {
@@ -19,7 +19,7 @@ kotlin {
 
 ### Common
 
-- in ```projectDir/composeApp/src/commonMain/kotlin/HttpClient.kt```
+> ```projectDir/composeApp/src/commonMain/kotlin/HttpClient.kt```
 
 ```kotlin
 HttpClient {
@@ -52,7 +52,7 @@ fun Composable() {
 
 * Use ```KtorMonitorWindow``` Composable Wrapper
 
-- in ```projectDir/composeApp/src/desktopMain/kotlin/main.kt```
+> ```projectDir/composeApp/src/desktopMain/kotlin/main.kt```
 
 ```kotlin
 fun main() = application {
@@ -68,7 +68,7 @@ fun main() = application {
 
 * Use ```KtorMonitorWindow``` Composable Wrapper with ```KtorMonitorMenuItem```
 
-- in ```projectDir/composeApp/src/desktopMain/kotlin/main.kt```
+> ```projectDir/composeApp/src/desktopMain/kotlin/main.kt```
 
 ```kotlin
 fun main() = application {
@@ -91,7 +91,7 @@ fun main() = application {
 
 * Use ```KtorMonitorPanel``` Swing Panel Wrapper
 
-- in ```projectDir/composeApp/src/desktopMain/kotlin/main.kt```
+> ```projectDir/composeApp/src/desktopMain/kotlin/main.kt```
 
 ```kotlin
 fun main() = application {
