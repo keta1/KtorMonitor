@@ -41,7 +41,7 @@ import ro.cosminmihu.ktor.monitor.ui.notification.NotificationPermissionBanner
 import ro.cosminmihu.ktor.monitor.ui.resources.Res
 import ro.cosminmihu.ktor.monitor.ui.resources.ktor_clean
 import ro.cosminmihu.ktor.monitor.ui.resources.ktor_filter
-import ro.cosminmihu.ktor.monitor.ui.resources.ktor_ic_logo
+import ro.cosminmihu.ktor.monitor.ui.resources.ktor_ic_launcher
 import ro.cosminmihu.ktor.monitor.ui.resources.ktor_library_name
 import ro.cosminmihu.ktor.monitor.ui.resources.ktor_list_empty
 
@@ -71,7 +71,7 @@ internal fun ListScreen(
                 },
                 navigationIcon = {
                     Image(
-                        imageVector = vectorResource(Res.drawable.ktor_ic_logo),
+                        imageVector = vectorResource(Res.drawable.ktor_ic_launcher),
                         contentDescription = stringResource(Res.string.ktor_library_name),
                         modifier = Modifier.size(40.dp)
                     )
