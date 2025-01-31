@@ -1,4 +1,3 @@
-import com.vanniktech.maven.publish.SonatypeHost
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
@@ -11,7 +10,13 @@ plugins {
     alias(libs.plugins.kotlinx.atomicfu)
     alias(libs.plugins.maven.publish)
     alias(libs.plugins.binary.compatibility.validator)
+    alias(libs.plugins.dokka)
 }
+
+val module = "ktor-monitor"
+val artifact = "ktor-monitor-logging"
+group = "ro.cosminmihu.ktor"
+version = "1.0.0-dev1"
 
 mavenPublishing {
 //    publishToMavenCentral(SonatypeHost.DEFAULT)
@@ -22,7 +27,7 @@ mavenPublishing {
 
 //    signAllPublications() // TODO
 
-    coordinates("ro.cosminmihu.ktor", "ktor-monitor-logging", "1.0.0-dev1")
+    coordinates(group.toString(), artifact.toString(), version.toString())
 
     pom {
         name.set("Ktor Monitor")
@@ -73,6 +78,26 @@ apiValidation {
     klib {
         enabled = true
         strictValidation = true
+    }
+}
+
+tasks {
+    dokkaHtml {
+        moduleName = module
+        moduleVersion = project.version.toString()
+        outputDirectory = File(rootDir, "docs/html")
+    }
+
+    dokkaGfm {
+        moduleName = module
+        moduleVersion = project.version.toString()
+        outputDirectory = File(rootDir, "docs/gfm")
+    }
+
+    dokkaJekyll {
+        moduleName = module
+        moduleVersion = project.version.toString()
+        outputDirectory = File(rootDir, "docs/jekyll")
     }
 }
 

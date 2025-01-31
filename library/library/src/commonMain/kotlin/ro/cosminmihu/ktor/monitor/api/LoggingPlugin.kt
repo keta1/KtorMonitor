@@ -7,6 +7,7 @@ import io.ktor.client.plugins.observer.ResponseObserver
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.util.AttributeKey
 import kotlinx.coroutines.CoroutineScope
+import ro.cosminmihu.ktor.monitor.SanitizedHeader
 import ro.cosminmihu.ktor.monitor.api.util.ReceiveHook
 import ro.cosminmihu.ktor.monitor.api.util.ResponseHook
 import ro.cosminmihu.ktor.monitor.api.util.SendHook

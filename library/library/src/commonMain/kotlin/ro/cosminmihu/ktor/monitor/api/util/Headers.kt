@@ -2,7 +2,7 @@ package ro.cosminmihu.ktor.monitor.api.util
 
 import io.ktor.http.Headers
 import io.ktor.http.HeadersBuilder
-import ro.cosminmihu.ktor.monitor.api.SanitizedHeader
+import ro.cosminmihu.ktor.monitor.SanitizedHeader
 
 
 internal fun HeadersBuilder.sanitizedHeaders(
