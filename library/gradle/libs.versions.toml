@@ -18,6 +18,8 @@ koin = "4.0.0"
 kotlinx-datetime = "0.6.1"
 coil = "3.0.4"
 kotlin-atomicfu = "0.27.0"
+maven-publish = "0.30.0"
+binary-compatibility-validator = "0.17.0"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -63,3 +65,5 @@ kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref =
 kotlinxSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 sqldelight = { id = "app.cash.sqldelight", version.ref = "sqldelight" }
 kotlinx-atomicfu = { id = "org.jetbrains.kotlinx.atomicfu", version.ref = "kotlin-atomicfu" }
+maven-publish = { id = "com.vanniktech.maven.publish", version.ref = "maven-publish" }
+binary-compatibility-validator = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version.ref = "binary-compatibility-validator" }

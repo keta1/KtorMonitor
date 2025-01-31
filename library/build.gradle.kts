@@ -8,4 +8,6 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform) apply false
     alias(libs.plugins.sqldelight) apply false
     alias(libs.plugins.kotlinx.atomicfu) apply false
+    alias(libs.plugins.maven.publish) apply false
+    alias(libs.plugins.binary.compatibility.validator) apply false
 }

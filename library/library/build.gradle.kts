@@ -8,7 +8,8 @@ plugins {
     alias(libs.plugins.kotlinxSerialization)
     alias(libs.plugins.sqldelight)
     alias(libs.plugins.kotlinx.atomicfu)
-    id("maven-publish")
+    alias(libs.plugins.maven.publish)
+    alias(libs.plugins.binary.compatibility.validator)
 }
 
 group = "ro.cosminmihu.ktor"
@@ -68,6 +69,14 @@ publishing {
                 downloadUrl = "https://github.com/CosminMihuMDC/KtorMonitor/releases"
             }
         }
+    }
+}
+
+apiValidation {
+    @OptIn(kotlinx.validation.ExperimentalBCVApi::class)
+    klib {
+        enabled = true
+        strictValidation = true
     }
 }
 
