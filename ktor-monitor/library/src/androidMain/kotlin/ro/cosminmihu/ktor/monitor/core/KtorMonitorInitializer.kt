@@ -9,7 +9,7 @@ import ro.cosminmihu.ktor.monitor.di.LibraryKoinContext
 /**
  * Content provider used to initialize the [android.content.Context] as [PlatformContext].
  */
-internal class LibraryInitializer : ContentProvider() {
+internal class KtorMonitorInitializer : ContentProvider() {
 
     override fun onCreate(): Boolean {
         val context = context?.applicationContext ?: return false

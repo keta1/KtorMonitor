@@ -70,12 +70,13 @@ internal fun bodyHtml(
 
 private fun formatText(txt: ByteArray): AnnotatedString = bodyString(txt)
 
+private val jsonSerializer = Json { prettyPrint = true }
+
 private fun formatJson(json: ByteArray): AnnotatedString = buildAnnotatedString {
     try {
         // Parse and pretty-print JSON
         val jsonElement = Json.parseToJsonElement(json.decodeToString())
-        val prettyJson = Json { prettyPrint = true }
-            .encodeToString(JsonElement.serializer(), jsonElement)
+        val prettyJson = jsonSerializer.encodeToString(JsonElement.serializer(), jsonElement)
 
         // Regex to match JSON parts: strings, numbers, punctuation
         val regex = Regex("""("(\\.|[^"\\])*"|\d+|[{}\\[\\]:,]|\n|\s+)""")

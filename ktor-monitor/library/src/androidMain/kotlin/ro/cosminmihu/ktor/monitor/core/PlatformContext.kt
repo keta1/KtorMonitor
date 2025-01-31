@@ -7,7 +7,7 @@ internal actual typealias PlatformContext = Context
 
 internal actual fun applyPlatformContext() {
     /**
-     * PlatformContext should be already injected using [LibraryInitializer].
+     * PlatformContext should be already injected using [KtorMonitorInitializer].
      */
 
     /**

@@ -21,12 +21,12 @@
         </activity>
 
         <receiver
-            android:name=".ui.notification.ClearBroadcastReceiver"
+            android:name=".ui.notification.KtorMonitorClearBroadcastReceiver"
             android:exported="false" />
 
         <provider
-            android:name=".core.LibraryInitializer"
-            android:authorities="${applicationId}.my_library_initializer"
+            android:name=".core.KtorMonitorInitializer"
+            android:authorities="${applicationId}.ktorMonitorInitializer"
             android:exported="false" />
 
     </application>

@@ -87,7 +87,7 @@ internal actual class NotificationManager : LibraryKoinComponent {
 
     private fun createClearAction(): NotificationCompat.Action {
         val clearTitle = context.getString(R.string.ktor_clear)
-        val clearTransactionsBroadcastIntent = Intent(context, ClearBroadcastReceiver::class.java)
+        val clearTransactionsBroadcastIntent = Intent(context, KtorMonitorClearBroadcastReceiver::class.java)
         val pendingBroadcastIntent =
             PendingIntent.getBroadcast(
                 context,

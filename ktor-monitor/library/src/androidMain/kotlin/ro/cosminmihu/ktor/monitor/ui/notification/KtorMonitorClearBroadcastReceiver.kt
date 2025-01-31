@@ -7,7 +7,7 @@ import org.koin.core.component.get
 import ro.cosminmihu.ktor.monitor.di.LibraryKoinComponent
 import ro.cosminmihu.ktor.monitor.domain.DeleteCallsUseCase
 
-internal class ClearBroadcastReceiver : BroadcastReceiver(), LibraryKoinComponent {
+internal class KtorMonitorClearBroadcastReceiver : BroadcastReceiver(), LibraryKoinComponent {
 
     override fun onReceive(
         context: Context,
