@@ -13,6 +13,7 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.SearchOff
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -76,16 +77,25 @@ internal fun ListScreen(
                     )
                 },
                 actions = {
-                    if (uiState.isEmpty) return@TopAppBar
+                    if (uiState.isEmpty && !showSearchBar) return@TopAppBar
 
                     IconButton(onClick = { showSearchBar = !showSearchBar }) {
                         Icon(
-                            imageVector = Icons.Filled.Search,
+                            imageVector = when (showSearchBar) {
+                                true -> Icons.Filled.SearchOff
+                                else -> Icons.Filled.Search
+                            },
                             contentDescription = stringResource(Res.string.ktor_filter),
                             tint = MaterialTheme.colorScheme.primary,
                         )
                     }
-                    IconButton(onClick = deleteCalls) {
+                    IconButton(
+                        onClick = {
+                            deleteCalls()
+                            clearSearchQuery()
+                            showSearchBar = false
+                        }
+                    ) {
                         Icon(
                             imageVector = Icons.Filled.Delete,
                             contentDescription = stringResource(Res.string.ktor_clean),
@@ -105,10 +115,7 @@ internal fun ListScreen(
             AnimatedVisibility(visible = showSearchBar) {
                 SearchField(
                     onSearch = setSearchQuery,
-                    onClose = {
-                        clearSearchQuery()
-                        showSearchBar = false
-                    }
+                    onClear = clearSearchQuery
                 )
             }
 

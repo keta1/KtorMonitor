@@ -7,6 +7,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -26,7 +27,7 @@ import ro.cosminmihu.ktor.monitor.ui.resources.ktor_filter
 @Composable
 internal fun SearchField(
     onSearch: (String) -> Unit,
-    onClose: () -> Unit,
+    onClear: () -> Unit,
 ) {
     var searchQuery by rememberSaveable { mutableStateOf("") }
 
@@ -46,14 +47,23 @@ internal fun SearchField(
             },
             singleLine = true,
             label = { Text(stringResource(Res.string.ktor_filter)) },
+            trailingIcon = {
+                if (searchQuery.isNotEmpty()) {
+                    IconButton(
+                        onClick = {
+                            searchQuery = ""
+                            onClear()
+                        }
+                    ) {
+                        Icon(
+                            imageVector = Icons.Filled.Close,
+                            contentDescription = stringResource(Res.string.ktor_close),
+                            tint = MaterialTheme.colorScheme.primary,
+                        )
+                    }
+                }
+            }
         )
-
-        IconButton(onClick = { onClose() }) {
-            Icon(
-                imageVector = Icons.Filled.Close,
-                contentDescription = stringResource(Res.string.ktor_close),
-            )
-        }
     }
 }
 
@@ -62,6 +72,6 @@ internal fun SearchField(
 private fun SearchFieldPreview() {
     SearchField(
         onSearch = { },
-        onClose = { },
+        onClear = { },
     )
 }
