@@ -34,7 +34,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringResource
-import ro.cosminmihu.ktor.monitor.ui.components.temporaryWindowInsets
 import ro.cosminmihu.ktor.monitor.ui.resources.Res
 import ro.cosminmihu.ktor.monitor.ui.resources.ktor_back
 import ro.cosminmihu.ktor.monitor.ui.resources.ktor_request
@@ -59,7 +58,6 @@ internal fun DetailScreen(
 
     Scaffold(
         modifier = modifier,
-        contentWindowInsets = WindowInsets.temporaryWindowInsets
     ) {
         Column(
             modifier = Modifier.padding(it).fillMaxWidth()
