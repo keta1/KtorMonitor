@@ -36,6 +36,7 @@ import ro.cosminmihu.ktor.monitor.ui.components.CallItem
 import ro.cosminmihu.ktor.monitor.ui.components.Loading
 import ro.cosminmihu.ktor.monitor.ui.components.SearchField
 import ro.cosminmihu.ktor.monitor.ui.components.temporaryWindowInsets
+import ro.cosminmihu.ktor.monitor.ui.notification.NotificationPermissionBanner
 import ro.cosminmihu.ktor.monitor.ui.resources.Res
 import ro.cosminmihu.ktor.monitor.ui.resources.ktor_clean
 import ro.cosminmihu.ktor.monitor.ui.resources.ktor_filter
@@ -96,7 +97,10 @@ internal fun ListScreen(
         }
     ) {
         Column(modifier = Modifier.padding(it).fillMaxWidth()) {
-            HorizontalDivider()
+
+            if (uiState.showNotification) {
+                NotificationPermissionBanner()
+            }
 
             AnimatedVisibility(visible = showSearchBar) {
                 SearchField(
@@ -107,6 +111,8 @@ internal fun ListScreen(
                     }
                 )
             }
+
+            HorizontalDivider()
 
             when {
                 uiState.isLoading -> {

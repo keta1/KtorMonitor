@@ -12,6 +12,7 @@ import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
+import ro.cosminmihu.ktor.monitor.api.LibraryConfig
 import ro.cosminmihu.ktor.monitor.db.sqldelight.SelectCalls
 import ro.cosminmihu.ktor.monitor.domain.DeleteCallsUseCase
 import ro.cosminmihu.ktor.monitor.domain.GetCallsUseCase
@@ -29,6 +30,7 @@ import kotlin.time.Duration.Companion.seconds
 internal class ListViewModel(
     getCallsUseCase: GetCallsUseCase,
     private val deleteCallsUseCase: DeleteCallsUseCase,
+    private val config: LibraryConfig,
 ) : ViewModel() {
 
     private val _searchQuery = MutableStateFlow("")
@@ -57,6 +59,7 @@ internal class ListViewModel(
         calls: List<SelectCalls>,
     ): ListUiState = ListUiState(
         searchQuery = query,
+        showNotification = config.showNotification,
         calls = calls.map {
             ListUiState.Call(
                 id = it.id,

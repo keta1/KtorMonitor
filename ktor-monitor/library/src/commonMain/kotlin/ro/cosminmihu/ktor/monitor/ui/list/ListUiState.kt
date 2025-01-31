@@ -5,6 +5,7 @@ import ro.cosminmihu.ktor.monitor.domain.model.ContentType
 internal data class ListUiState(
     val calls: List<Call>? = null,
     val searchQuery: String = "",
+    val showNotification: Boolean = false,
 ) {
     data class Call(
         val id: String,
