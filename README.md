@@ -5,9 +5,9 @@ Powerful tools to log [Ktor Client](https://ktor.io/) requests and responses, ma
 
 ### Gradle
 
-```kotlin
-// projectDir/composeApp/build.gradle.kts
+- in ```projectDir/settings.gradle.kts```
 
+```kotlin
 kotlin {
     sourceSets {
         commonMain.dependencies {
@@ -19,9 +19,9 @@ kotlin {
 
 ### Common
 
-```kotlin
-// projectDir/composeApp/src/commonMain/kotlin/HttpClient.kt
+- in ```projectDir/composeApp/src/commonMain/kotlin/HttpClient.kt```
 
+```kotlin
 HttpClient {
 	
     install(KtorMonitorLogging) {  
@@ -37,13 +37,15 @@ HttpClient {
 
 ### Android
 
-```kotlin
-// projectDir/composeApp/src/androidMain/kotlin/MyApp.kt
+- in ```projectDir/composeApp/src/androidMain/AndroidManifest.xml```
 
-class MyApp: Application() {  
+```kotlin
+class MyApp: Application() { 
+    
     init {  
         KtorMonitor.init(this)  
-    }  
+    }
+    
 }
 ```
 
@@ -64,9 +66,9 @@ fun Composable() {
 
 * Use ```KtorMonitorWindow``` Composable Wrapper
 
-```kotlin
-// projectDir/composeApp/src/desktopMain/kotlin/main.kt
+- in ```projectDir/composeApp/src/desktopMain/kotlin/main.kt```
 
+```kotlin
 fun main() = application {
 
     var showKtorMonitor by rememberSaveable { mutableStateOf(false) }
@@ -80,9 +82,9 @@ fun main() = application {
 
 * Use ```KtorMonitorWindow``` Composable Wrapper with ```KtorMonitorMenuItem```
 
-```kotlin
-// projectDir/composeApp/src/desktopMain/kotlin/main.kt
+- in ```projectDir/composeApp/src/desktopMain/kotlin/main.kt```
 
+```kotlin
 fun main() = application {
 
     var showKtorMonitor by rememberSaveable { mutableStateOf(false) }
@@ -94,8 +96,8 @@ fun main() = application {
     )
 
     KtorMonitorWindow(
-        onCloseRequest = { showKtorMonitor = false },
-        show = showKtorMonitor
+        show = showKtorMonitor,
+        onCloseRequest = { showKtorMonitor = false }
     )
 
 }
@@ -103,14 +105,15 @@ fun main() = application {
 
 * Use ```KtorMonitorPanel``` Swing Panel Wrapper
 
-```kotlin
-// projectDir/composeApp/src/desktopMain/kotlin/main.kt
+- in ```projectDir/composeApp/src/desktopMain/kotlin/main.kt```
 
+```kotlin
 fun main() = application {
 
     SwingUtilities.invokeLater {
         val frame = JFrame()
         frame.add(KtorMonitorPanel, BorderLayout.CENTER)
+        frame.isVisible = true
     }
 
 }
