@@ -1,5 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
-    <path d="M 0 166.665 L 166.666 0 L 500 333.334 L 333.335 500 L 0 166.665 Z" fill="#6b57ff" />
+    <linearGradient id="gradient" gradientUnits="userSpaceOnUse" x1="1" x2="31" y1="17" y2="47"
+        gradientTransform="matrix(10.41669, 0, 0, 10.41669, -0.001357, -0.000671)">
+        <stop offset="0" stop-color="#6b57ff" />
+        <stop offset="0.5" stop-color="#ff45ed" />
+        <stop offset="1" stop-color="#dd1265" />
+    </linearGradient>
+    <path d="M 0 166.665 L 166.666 0 L 500 333.334 L 333.335 500 L 0 166.665 Z" fill="url(#gradient)" />
     <path fill="#27282C"
         d="M 333.335 166.665 L 166.666 166.665 L 166.666 333.334 L 333.335 333.334 L 333.335 166.665 Z" />
     <path
