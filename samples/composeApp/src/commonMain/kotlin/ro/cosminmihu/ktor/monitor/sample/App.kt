@@ -3,6 +3,7 @@ package ro.cosminmihu.ktor.monitor.sample
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -21,6 +22,8 @@ fun App() {
         KtorMonitor()
     }
 
-    Calls()
+    LaunchedEffect(Unit) {
+        makeCalls()
+    }
 }
 
