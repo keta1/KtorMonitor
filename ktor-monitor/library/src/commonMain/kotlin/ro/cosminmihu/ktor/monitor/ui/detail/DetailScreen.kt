@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -31,9 +30,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringResource
+import ro.cosminmihu.ktor.monitor.ui.Dimens
 import ro.cosminmihu.ktor.monitor.ui.resources.Res
 import ro.cosminmihu.ktor.monitor.ui.resources.ktor_back
 import ro.cosminmihu.ktor.monitor.ui.resources.ktor_request
@@ -75,7 +74,9 @@ internal fun DetailScreen(
                     modifier = Modifier.fillMaxHeight().width(IntrinsicSize.Max)
                 ) {
                     Box(
-                        modifier = Modifier.weight(1f).padding(start = 4.dp, top = 8.dp),
+                        modifier = Modifier
+                            .weight(1f)
+                            .padding(start = Dimens.Small, top = Dimens.Small),
                         contentAlignment = Alignment.Center
                     ) {
                         IconButton(onClick = onBack) {
@@ -104,7 +105,7 @@ internal fun DetailScreen(
                     ) {
                         Text(
                             text = stringResource(Res.string.ktor_summary),
-                            modifier = Modifier.padding(vertical = 16.dp)
+                            modifier = Modifier.padding(vertical = Dimens.Medium)
                         )
                     }
                     Tab(
@@ -117,7 +118,7 @@ internal fun DetailScreen(
                     ) {
                         Text(
                             text = stringResource(Res.string.ktor_request),
-                            modifier = Modifier.padding(vertical = 16.dp)
+                            modifier = Modifier.padding(vertical = Dimens.Medium)
                         )
                     }
                     Tab(
@@ -130,7 +131,7 @@ internal fun DetailScreen(
                     ) {
                         Text(
                             text = stringResource(Res.string.ktor_response),
-                            modifier = Modifier.padding(vertical = 16.dp)
+                            modifier = Modifier.padding(vertical = Dimens.Medium)
                         )
                     }
                 }

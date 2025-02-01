@@ -19,11 +19,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import ro.cosminmihu.ktor.monitor.domain.model.ContentType
 import ro.cosminmihu.ktor.monitor.domain.model.asColor
+import ro.cosminmihu.ktor.monitor.ui.Dimens
 import ro.cosminmihu.ktor.monitor.ui.list.ListUiState
 import ro.cosminmihu.ktor.monitor.ui.list.isError
 import ro.cosminmihu.ktor.monitor.ui.list.isLoading
@@ -37,7 +37,7 @@ internal fun CallItem(
     modifier: Modifier = Modifier,
 ) {
     Row(
-        modifier = modifier.height(IntrinsicSize.Max).padding(vertical = 8.dp)
+        modifier = modifier.height(IntrinsicSize.Max).padding(vertical = Dimens.Small)
     ) {
         Column(
             modifier = Modifier.fillMaxHeight().weight(0.2f),
@@ -55,13 +55,13 @@ internal fun CallItem(
 
                 else -> {
                     Text(
-                        modifier = Modifier.padding(horizontal = 8.dp),
+                        modifier = Modifier.padding(horizontal = Dimens.Small),
                         text = call.response.responseCode.toString(),
                         fontWeight = FontWeight.Bold,
                         color = if (call.isError) MaterialTheme.colorScheme.error else Color.Unspecified,
                     )
                     Text(
-                        modifier = Modifier.padding(8.dp),
+                        modifier = Modifier.padding(Dimens.Small),
                         text = call.response.contentType.contentName,
                         fontWeight = FontWeight.Bold,
                         color = call.response.contentType.asColor,
@@ -74,13 +74,13 @@ internal fun CallItem(
             modifier = Modifier.fillMaxHeight().weight(0.8f)
         ) {
             Text(
-                modifier = Modifier.padding(horizontal = 8.dp),
+                modifier = Modifier.padding(horizontal = Dimens.Small),
                 text = call.request.method + " " + call.request.pathAndQuery,
                 fontWeight = FontWeight.Bold,
                 color = if (call.isError) MaterialTheme.colorScheme.error else Color.Unspecified,
             )
             Text(
-                modifier = Modifier.padding(horizontal = 8.dp),
+                modifier = Modifier.padding(horizontal = Dimens.Small),
                 text = when (call.isSecure) {
                     true -> """🔒${call.request.host}"""
                     else -> call.request.host
@@ -88,13 +88,13 @@ internal fun CallItem(
             )
             when {
                 call.isLoading -> Text(
-                    modifier = Modifier.padding(horizontal = 8.dp),
+                    modifier = Modifier.padding(horizontal = Dimens.Small),
                     text = stringResource(Res.string.ktor_in_progress),
                     fontStyle = FontStyle.Italic,
                 )
 
                 call.isError -> Text(
-                    modifier = Modifier.padding(horizontal = 8.dp),
+                    modifier = Modifier.padding(horizontal = Dimens.Small),
                     text = call.response.error,
                     fontStyle = FontStyle.Italic,
                     color = MaterialTheme.colorScheme.error,
@@ -102,7 +102,7 @@ internal fun CallItem(
                 )
 
                 else -> {
-                    Row(modifier = Modifier.padding(horizontal = 8.dp)) {
+                    Row(modifier = Modifier.padding(horizontal = Dimens.Small)) {
                         Text(
                             text = call.request.requestTime,
                             textAlign = TextAlign.Start,

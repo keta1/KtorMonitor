@@ -12,11 +12,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.isGranted
 import com.google.accompanist.permissions.rememberPermissionState
 import ro.cosminmihu.ktor.monitor.R
+import ro.cosminmihu.ktor.monitor.ui.Dimens
 
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
@@ -31,7 +31,7 @@ internal actual fun NotificationPermissionBanner() {
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
                 .background(MaterialTheme.colorScheme.surfaceContainerLow)
-                .padding(vertical = 8.dp, horizontal = 16.dp)
+                .padding(vertical = Dimens.Small, horizontal = Dimens.Medium)
         ) {
             Text(
                 modifier = Modifier.weight(1f),

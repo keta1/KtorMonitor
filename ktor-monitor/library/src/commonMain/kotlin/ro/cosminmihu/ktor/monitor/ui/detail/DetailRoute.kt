@@ -14,11 +14,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.parameter.parametersOf
+import ro.cosminmihu.ktor.monitor.ui.Dimens
 import ro.cosminmihu.ktor.monitor.ui.resources.Res
 import ro.cosminmihu.ktor.monitor.ui.resources.ktor_no_selection
 
@@ -54,12 +54,12 @@ private fun EmptyState(modifier: Modifier) {
             Icon(
                 imageVector = Icons.Default.TouchApp,
                 contentDescription = null,
-                modifier = Modifier.size(36.dp)
+                modifier = Modifier.size(Dimens.ExtraLarge)
             )
             Text(
                 text = string,
                 style = MaterialTheme.typography.titleMedium,
-                modifier = Modifier.padding(top = 16.dp)
+                modifier = Modifier.padding(top = Dimens.Medium)
             )
         }
     }

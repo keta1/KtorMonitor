@@ -4,7 +4,6 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -30,9 +29,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
+import ro.cosminmihu.ktor.monitor.ui.Dimens
 import ro.cosminmihu.ktor.monitor.ui.components.CallItem
 import ro.cosminmihu.ktor.monitor.ui.components.Loading
 import ro.cosminmihu.ktor.monitor.ui.components.SearchField
@@ -70,7 +69,7 @@ internal fun ListScreen(
                     Image(
                         imageVector = vectorResource(Res.drawable.ktor_ic_launcher),
                         contentDescription = stringResource(Res.string.ktor_library_name),
-                        modifier = Modifier.size(40.dp)
+                        modifier = Modifier.size(Dimens.ExtraExtraLarge)
                     )
                 },
                 actions = {

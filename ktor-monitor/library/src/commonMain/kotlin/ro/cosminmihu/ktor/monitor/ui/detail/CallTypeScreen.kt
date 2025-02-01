@@ -26,11 +26,11 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
-import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import io.ktor.utils.io.core.toByteArray
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import ro.cosminmihu.ktor.monitor.ui.Dimens
 import ro.cosminmihu.ktor.monitor.ui.LibraryTheme
 import ro.cosminmihu.ktor.monitor.ui.components.Loading
 import ro.cosminmihu.ktor.monitor.ui.resources.Res
@@ -58,7 +58,10 @@ internal fun CallDetailsScreen(
     modifier: Modifier = Modifier,
 ) {
     Column(
-        modifier = modifier.padding(vertical = 8.dp, horizontal = 16.dp),
+        modifier = modifier.padding(
+            vertical = Dimens.Small,
+            horizontal = Dimens.Medium
+        ),
     ) {
 
         if (isLoading) {
@@ -74,12 +77,12 @@ internal fun CallDetailsScreen(
         }
 
         if (body.noBody) {
-            Spacer(modifier = Modifier.padding(8.dp))
+            Spacer(modifier = Modifier.padding(Dimens.Small))
             NoBody()
             return
         }
 
-        Spacer(modifier = Modifier.padding(8.dp))
+        Spacer(modifier = Modifier.padding(Dimens.Small))
         body?.let { Body(body = it) }
     }
 }
@@ -168,7 +171,9 @@ private fun Body(body: DetailUiState.Body, modifier: Modifier = Modifier) {
             AsyncImage(
                 model = body.image,
                 contentDescription = null,
-                modifier = Modifier.horizontalScroll(rememberScrollState()).padding(top = 8.dp),
+                modifier = Modifier
+                    .horizontalScroll(rememberScrollState())
+                    .padding(top = Dimens.Small),
             )
 
         body.html != null && selectedDisplayMode == SHOW_TYPE_HTML ->
@@ -231,7 +236,9 @@ private fun Error(error: String) {
             text = error,
             color = MaterialTheme.colorScheme.error,
             style = MaterialTheme.typography.bodySmall,
-            modifier = Modifier.horizontalScroll(rememberScrollState()).padding(top = 8.dp),
+            modifier = Modifier
+                .horizontalScroll(rememberScrollState())
+                .padding(top = Dimens.Small),
         )
     }
 }
