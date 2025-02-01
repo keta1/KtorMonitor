@@ -218,3 +218,48 @@ android {
 dependencies {
     debugImplementation(compose.uiTooling)
 }
+
+tasks.register("makeSqlDelightInternal") {
+    group = "sqldelight"
+    description = "Changes visibility of generated SQLDelight classes to internal."
+
+    doLast {
+        fileTree(layout.buildDirectory.dir("generated/sqldelight")).forEach { file ->
+            if (file.extension == "kt") {
+                val content = file.readText()
+                val updatedContent = content
+                    .replace("public class", "internal class")
+                    .replace("public data class", "internal data class")
+                    .replace("public interface", "internal interface")
+                    .replace("public fun", "internal fun")
+                    .replace("public val", "internal val")
+                    .replace("public companion", "internal companion")
+                    .replace("public operator", "internal operator")
+                    .replace("public object", "internal object")
+                    .replace("public typealias", "internal typealias")
+                    .replace("public enum", "internal enum")
+                    .replace("public annotation", "internal annotation")
+                    .replace("public const val", "internal const val")
+                    .replace("public inline fun", "internal inline fun")
+                    .replace("public inline val", "internal inline val")
+                    .replace("public inline var", "internal inline var")
+                    .run {
+                        if (contains("internal interface")) {
+                            replace("internal val callQueries", "val callQueries")
+                                .replace("internal companion object", "companion object")
+                        } else {
+                            this
+                        }
+                    }
+
+                file.writeText(updatedContent)
+            }
+        }
+    }
+}
+
+tasks.whenTaskAdded {
+    if (name == "generateCommonMainLibraryDatabaseInterface") {
+        finalizedBy("makeSqlDelightInternal")
+    }
+}

@@ -7,14 +7,14 @@ internal data class DetailUiState(
     val call: Call? = null,
     val summary: Summary? = null,
 ) {
-    data class Call(
+    internal data class Call(
         val id: String,
         val isSecure: Boolean,
         val request: Request,
         val response: Response,
     )
 
-    data class Summary(
+    internal data class Summary(
         val url: String,
         val method: String,
         val protocol: String,
@@ -29,7 +29,7 @@ internal data class DetailUiState(
         val isError: Boolean,
     )
 
-    data class Request(
+    internal data class Request(
         val method: String,
         val host: String,
         val pathAndQuery: String,
@@ -38,7 +38,7 @@ internal data class DetailUiState(
         val body: Body,
     )
 
-    data class Response(
+    internal data class Response(
         val responseCode: String,
         val contentType: ContentType,
         val duration: String,
@@ -48,7 +48,7 @@ internal data class DetailUiState(
         val body: Body,
     )
 
-    data class Body(
+    internal data class Body(
         val bytes: AnnotatedString?,
         val raw: AnnotatedString?,
         val code: AnnotatedString?,
