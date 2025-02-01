@@ -127,7 +127,7 @@ internal fun CallItem(
 
 @Preview
 @Composable
-private fun CallItemPreview() {
+private fun CallItemSuccessPreview() {
     val call = ListUiState.Call(
         id = "1",
         isSecure = true,
@@ -143,6 +143,29 @@ private fun CallItemPreview() {
             duration = "123 ms",
             size = "123 KB",
             error = ""
+        )
+    )
+    CallItem(call)
+}
+
+@Preview
+@Composable
+private fun CallItemFailurePreview() {
+    val call = ListUiState.Call(
+        id = "1",
+        isSecure = true,
+        request = ListUiState.Request(
+            method = "GET",
+            host = "www.example.com",
+            pathAndQuery = "/path/to/resource?param1=value1&param2=value2",
+            requestTime = "2023-05-01 12:34:56",
+        ),
+        response = ListUiState.Response(
+            responseCode = "",
+            contentType = ContentType.UNKNOWN,
+            duration = "123 ms",
+            size = "123 KB",
+            error = "TimeoutException: Connection timed out."
         )
     )
     CallItem(call)

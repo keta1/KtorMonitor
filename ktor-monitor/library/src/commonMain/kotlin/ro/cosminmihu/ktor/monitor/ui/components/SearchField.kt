@@ -20,6 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import ro.cosminmihu.ktor.monitor.ui.LibraryTheme
 import ro.cosminmihu.ktor.monitor.ui.resources.Res
 import ro.cosminmihu.ktor.monitor.ui.resources.ktor_close
 import ro.cosminmihu.ktor.monitor.ui.resources.ktor_filter
@@ -70,8 +71,10 @@ internal fun SearchField(
 @Preview
 @Composable
 private fun SearchFieldPreview() {
-    SearchField(
-        onSearch = { },
-        onClear = { },
-    )
+    LibraryTheme {
+        SearchField(
+            onSearch = { },
+            onClear = { },
+        )
+    }
 }

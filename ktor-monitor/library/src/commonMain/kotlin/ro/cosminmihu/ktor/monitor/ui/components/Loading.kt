@@ -19,6 +19,8 @@ import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.stringResource
+import org.jetbrains.compose.ui.tooling.preview.Preview
+import ro.cosminmihu.ktor.monitor.ui.LibraryTheme
 import ro.cosminmihu.ktor.monitor.ui.resources.Res
 import ro.cosminmihu.ktor.monitor.ui.resources.ktor_in_progress
 
@@ -59,3 +61,20 @@ internal object Loading {
         }
     }
 }
+
+@Preview
+@Composable
+private fun SmallLoadingPreview() {
+    LibraryTheme {
+        Loading.Small()
+    }
+}
+
+@Preview
+@Composable
+private fun MediumLoadingPreview() {
+    LibraryTheme {
+        Loading.Medium()
+    }
+}
+

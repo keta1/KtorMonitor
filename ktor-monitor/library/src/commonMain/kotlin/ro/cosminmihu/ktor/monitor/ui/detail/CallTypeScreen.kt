@@ -20,6 +20,7 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontStyle
@@ -27,7 +28,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
+import io.ktor.utils.io.core.toByteArray
 import org.jetbrains.compose.resources.stringResource
+import org.jetbrains.compose.ui.tooling.preview.Preview
+import ro.cosminmihu.ktor.monitor.ui.LibraryTheme
+import ro.cosminmihu.ktor.monitor.ui.components.Loading
 import ro.cosminmihu.ktor.monitor.ui.resources.Res
 import ro.cosminmihu.ktor.monitor.ui.resources.ktor_error
 import ro.cosminmihu.ktor.monitor.ui.resources.ktor_no_body
@@ -36,7 +41,6 @@ import ro.cosminmihu.ktor.monitor.ui.resources.ktor_response_view_code
 import ro.cosminmihu.ktor.monitor.ui.resources.ktor_response_view_html
 import ro.cosminmihu.ktor.monitor.ui.resources.ktor_response_view_image
 import ro.cosminmihu.ktor.monitor.ui.resources.ktor_response_view_raw
-import ro.cosminmihu.ktor.monitor.ui.components.Loading
 
 private const val SHOW_TYPE_HTML = 0
 private const val SHOW_TIME_IMAGE = 1
@@ -237,3 +241,26 @@ private data class BodyShowTypeSegment(
     val selected: Boolean,
     val onClick: () -> Unit,
 )
+
+@Preview
+@Composable
+private fun CallDetailsScreenPreview() {
+    LibraryTheme {
+        CallDetailsScreen(
+            isLoading = false,
+            isError = false,
+            headers = mapOf(
+                "Content-Type" to listOf("text/html"),
+                "Content-Length" to listOf("1234"),
+            ),
+            body = DetailUiState.Body(
+                html = AnnotatedString("<html><body><h1>Hello, World!</h1></body></html>"),
+                image = null,
+                code = AnnotatedString("fun main() { println(\"Hello, World!\") }"),
+                raw = AnnotatedString("Hello, World!"),
+                bytes = AnnotatedString("Hello, World!".toByteArray().toString()),
+            ),
+            error = "Error message",
+        )
+    }
+}
