@@ -51,9 +51,9 @@ internal data class DetailUiState(
     data class Body(
         val bytes: AnnotatedString?,
         val raw: AnnotatedString?,
-        val code: AnnotatedString?,
+        val code: List<AnnotatedString>?,
         val image: ByteArray?,
-        val html: AnnotatedString?,
+        val html: List<AnnotatedString>?,
     )
 }
 

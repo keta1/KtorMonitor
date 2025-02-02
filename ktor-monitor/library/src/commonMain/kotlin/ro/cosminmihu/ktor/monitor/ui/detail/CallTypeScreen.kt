@@ -4,6 +4,8 @@ import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material.icons.Icons
@@ -177,13 +179,21 @@ private fun Body(body: DetailUiState.Body, modifier: Modifier = Modifier) {
             )
 
         body.html != null && selectedDisplayMode == SHOW_TYPE_HTML ->
-            SelectionContainer {
-                Text(text = body.html, modifier = Modifier.horizontalScroll(rememberScrollState()))
+            LazyColumn {
+                items(body.html) {
+                    SelectionContainer {
+                        Text(text = it)
+                    }
+                }
             }
 
         body.code != null && selectedDisplayMode == SHOW_TYPE_CODE ->
-            SelectionContainer {
-                Text(text = body.code, modifier = Modifier.horizontalScroll(rememberScrollState()))
+            LazyColumn {
+                items(body.code) {
+                    SelectionContainer {
+                        Text(text = it)
+                    }
+                }
             }
 
         body.raw != null && selectedDisplayMode == SHOW_TYPE_RAW ->
@@ -261,9 +271,26 @@ private fun CallDetailsScreenPreview() {
                 "Content-Length" to listOf("1234"),
             ),
             body = DetailUiState.Body(
-                html = AnnotatedString("<html><body><h1>Hello, World!</h1></body></html>"),
+                html = listOf(
+                    AnnotatedString("<html>"),
+                    AnnotatedString("<head>"),
+                    AnnotatedString("<title>"),
+                    AnnotatedString("Hello, World!"),
+                    AnnotatedString("</title>"),
+                    AnnotatedString("</head>"),
+                    AnnotatedString("<body>"),
+                    AnnotatedString("<h1>"),
+                    AnnotatedString("Hello, World!"),
+                    AnnotatedString("</h1>"),
+                    AnnotatedString("</body>"),
+                    AnnotatedString("</html>"),
+                ),
                 image = null,
-                code = AnnotatedString("fun main() { println(\"Hello, World!\") }"),
+                code = listOf(
+                    AnnotatedString("fun main() {"),
+                    AnnotatedString("    println(\"Hello, World!\")"),
+                    AnnotatedString("}"),
+                ),
                 raw = AnnotatedString("Hello, World!"),
                 bytes = AnnotatedString("Hello, World!".toByteArray().toString()),
             ),
