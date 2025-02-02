@@ -27,11 +27,11 @@ private const val PluginName = "KtorMonitorLogging"
 
 internal val LoggingPlugin: ClientPlugin<LibraryConfig> =
     createClientPlugin(PluginName, ::LibraryConfig) {
+        if (!pluginConfig.isActive) return@createClientPlugin
 
         // Plugin configuration.
         val filters: List<(HttpRequestBuilder) -> Boolean> = pluginConfig.filters
         val sanitizedHeaders: List<SanitizedHeader> = pluginConfig.sanitizedHeaders
-        val enabled: Boolean = pluginConfig.isActive
 
         // Init library dependency.
         LibraryKoinContext.set(pluginConfig)
@@ -45,7 +45,7 @@ internal val LoggingPlugin: ClientPlugin<LibraryConfig> =
 
         // Filter out requests that should not be logged.
         fun shouldBeLogged(request: HttpRequestBuilder): Boolean =
-            enabled && (filters.isEmpty() || filters.any { it(request) })
+            filters.isEmpty() || filters.any { it(request) }
 
         on(SendHook) { request ->
             // Disable logging for requests that should not be logged.
