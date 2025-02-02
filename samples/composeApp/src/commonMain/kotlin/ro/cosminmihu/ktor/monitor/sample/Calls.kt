@@ -1,33 +1,43 @@
 package ro.cosminmihu.ktor.monitor.sample
 
+import io.ktor.client.request.delete
 import io.ktor.client.request.get
+import io.ktor.client.request.patch
+import io.ktor.client.request.post
+import io.ktor.client.request.put
+
+private const val httpbin = "https://httpbin.org"
 
 internal suspend fun makeCalls() {
-//        delay(2.seconds)
-    listOf(
-//            "https://png.pngtree.com/png-vector/20250117/ourlarge/pngtree-goldfish-ornamental-fish-creature-orange-cute-cartoon-three-dimensional-png-image_15181370.png",
-//            "https://gsp.ro/", // TODO redirect
-//            "https://media.istockphoto.com/id/1973365581/vector/sample-ink-rubber-stamp.jpg?s=612x612&w=0&k=20&c=_m6hNbFtLdulg3LK5LRjJiH6boCb_gcxPvRLytIz0Ws=",
-        "https://dexonline.ro/cuvantul-zilei/json",
-//            "hts://plm.xss/",
-        "https://dexonline.ro/cuvantul-zilei/xml",
-        "https://github.com/",
-        "https://github.githubassets.com/assets/light-7aa84bb7e11e.css",
-//            "ws://ws.mock",
-//            "https://mp5a3efdb353ef904741.free.beeceptor.com/data"
-    ).map {
-        runCatching {
-            httpClient().get(it)
-        }
+
+    // HTML
+    with(httpClient()) {
+        runCatching { this.get(httpbin) }
+        runCatching { this.delete(httpbin) }
+        runCatching { this.patch(httpbin) }
+        runCatching { this.post(httpbin) }
+        runCatching { this.put(httpbin) }
     }
 
-//        runCatching {
-//            delay(15.seconds)
-//            httpClient().submitFormWithBinaryData(
-//                url = "https://tests.free.beeceptor.com/get-api-token",
-//                formData = formData {
-//                    append("description", "Ktor logo")
-//                }
-//            )
-//        }
+    // Images
+    with(httpClient()) {
+        runCatching { this.get("$httpbin/image") }
+        runCatching { this.get("$httpbin/image/png") }
+        runCatching { this.get("$httpbin/image/jpeg") }
+        runCatching { this.get("$httpbin/image/svg") }
+        runCatching { this.get("$httpbin/image/webp") }
+    }
+
+    // Response Content Type
+    with(httpClient()) {
+        runCatching { this.get("$httpbin/html") }
+        runCatching { this.get("$httpbin/xml") }
+        runCatching { this.get("$httpbin/json") }
+        runCatching { this.get("$httpbin/robots.txt") }
+        runCatching { this.get("$httpbin/gzip") }
+        runCatching { this.get("$httpbin/encoding/utf8") }
+        runCatching { this.get("$httpbin/deny") }
+        runCatching { this.get("$httpbin/deflate") }
+        runCatching { this.get("$httpbin/brotli") }
+    }
 }

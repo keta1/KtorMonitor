@@ -3,7 +3,6 @@ package ro.cosminmihu.ktor.monitor.ui.detail
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyListScope
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material3.SegmentedButton
@@ -42,16 +41,16 @@ internal fun LazyListScope.Body(
             }
 
         body.html != null && displayMode == DisplayMode.HTML ->
-            items(body.html) {
+            item {
                 SelectionContainer {
-                    Text(text = it)
+                    Text(text = body.html)
                 }
             }
 
         body.code != null && displayMode == DisplayMode.CODE ->
-            items(body.code) {
+            item {
                 SelectionContainer {
-                    Text(text = it)
+                    Text(text = body.code)
                 }
             }
 

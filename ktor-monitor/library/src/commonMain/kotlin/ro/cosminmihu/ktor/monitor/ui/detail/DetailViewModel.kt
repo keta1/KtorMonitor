@@ -1,6 +1,5 @@
 package ro.cosminmihu.ktor.monitor.ui.detail
 
-import androidx.compose.ui.text.AnnotatedString
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
@@ -25,9 +24,11 @@ import ro.cosminmihu.ktor.monitor.domain.model.totalSizeAsText
 import ro.cosminmihu.ktor.monitor.ui.detail.DetailUiState.Call
 import ro.cosminmihu.ktor.monitor.ui.detail.DetailUiState.Request
 import ro.cosminmihu.ktor.monitor.ui.detail.DetailUiState.Response
+import ro.cosminmihu.ktor.monitor.ui.formater.bodyBytes
 import ro.cosminmihu.ktor.monitor.ui.formater.bodyCode
 import ro.cosminmihu.ktor.monitor.ui.formater.bodyHtml
 import ro.cosminmihu.ktor.monitor.ui.formater.bodyImage
+import ro.cosminmihu.ktor.monitor.ui.formater.bodyString
 import kotlin.time.Duration.Companion.seconds
 
 private const val NO_DATA = "-"
@@ -68,9 +69,9 @@ internal class DetailViewModel(
                         body = DetailUiState.Body(
                             bytes = bodyBytes(call.requestBody),
                             raw = bodyString(call.requestBody),
-                            code = bodyCode(call.requestContentType, call.requestBody).split(),
+                            code = bodyCode(call.requestContentType, call.requestBody),
                             image = bodyImage(call.requestContentType, call.requestBody),
-                            html = bodyHtml(call.responseContentType, call.requestBody).split(),
+                            html = bodyHtml(call.responseContentType, call.requestBody),
                         )
                     ),
                     response = Response(
@@ -83,9 +84,9 @@ internal class DetailViewModel(
                         body = DetailUiState.Body(
                             bytes = bodyBytes(call.responseBody),
                             raw = bodyString(call.responseBody),
-                            code = bodyCode(call.responseContentType, call.responseBody).split(),
+                            code = bodyCode(call.responseContentType, call.responseBody),
                             image = bodyImage(call.responseContentType, call.responseBody),
-                            html = bodyHtml(call.responseContentType, call.responseBody).split(),
+                            html = bodyHtml(call.responseContentType, call.responseBody),
                         )
                     )
                 )
@@ -98,9 +99,3 @@ internal class DetailViewModel(
             DetailUiState()
         )
 }
-
-private fun AnnotatedString?.split(): List<AnnotatedString>? {
-    this ?: return null
-    return this.split("\n").map { AnnotatedString(it) }
-}
-
