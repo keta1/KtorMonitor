@@ -43,12 +43,6 @@ internal fun CallItem(
             verticalArrangement = Arrangement.Center,
         ) {
             when {
-                call.isError -> Icon(
-                    imageVector = Icons.Filled.Warning,
-                    contentDescription = stringResource(Res.string.ktor_error),
-                    tint = MaterialTheme.colorScheme.error,
-                )
-
                 call.isLoading -> Loading.Small()
 
                 else -> {
@@ -58,6 +52,13 @@ internal fun CallItem(
                         fontWeight = FontWeight.Bold,
                         color = if (call.isError) MaterialTheme.colorScheme.error else Color.Unspecified,
                     )
+                    if (call.isError) {
+                        Icon(
+                            imageVector = Icons.Filled.Warning,
+                            contentDescription = stringResource(Res.string.ktor_error),
+                            tint = MaterialTheme.colorScheme.error,
+                        )
+                    }
                     Text(
                         modifier = Modifier.padding(Dimens.Small),
                         text = call.response.contentType.contentName,
@@ -91,14 +92,6 @@ internal fun CallItem(
                     fontStyle = FontStyle.Italic,
                 )
 
-                call.isError -> Text(
-                    modifier = Modifier.padding(horizontal = Dimens.Small),
-                    text = call.response.error,
-                    fontStyle = FontStyle.Italic,
-                    color = MaterialTheme.colorScheme.error,
-                    maxLines = 3
-                )
-
                 else -> {
                     Row(modifier = Modifier.padding(horizontal = Dimens.Small)) {
                         Text(
@@ -115,6 +108,15 @@ internal fun CallItem(
                             text = call.response.size,
                             textAlign = TextAlign.Center,
                             modifier = Modifier.weight(1f)
+                        )
+                    }
+                    if (call.response.error.isNotBlank()) {
+                        Text(
+                            modifier = Modifier.padding(horizontal = Dimens.Small),
+                            text = call.response.error,
+                            fontStyle = FontStyle.Italic,
+                            color = MaterialTheme.colorScheme.error,
+                            maxLines = 3
                         )
                     }
                 }

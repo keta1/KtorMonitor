@@ -40,4 +40,8 @@ internal val ListUiState.Call.isLoading
     get() = response.responseCode.isBlank() && response.error.isBlank()
 
 internal val ListUiState.Call.isError
-    get() = response.responseCode.isBlank() && response.error.isNotBlank()
+    get() = when {
+        response.responseCode.isBlank() && response.error.isNotBlank() -> true
+        response.responseCode.isNotBlank() -> response.responseCode.toIntOrNull() !in 200..<300
+        else -> false
+    }
