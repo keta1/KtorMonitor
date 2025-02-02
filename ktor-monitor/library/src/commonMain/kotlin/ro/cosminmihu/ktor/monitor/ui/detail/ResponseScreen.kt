@@ -5,7 +5,7 @@ import androidx.compose.ui.Modifier
 
 @Composable
 internal fun ResponseScreen(response: DetailUiState.Response, modifier: Modifier = Modifier) {
-    CallDetailsScreen(
+    Transaction(
         isLoading = response.isLoading,
         isError = response.isError,
         headers = response.headers,

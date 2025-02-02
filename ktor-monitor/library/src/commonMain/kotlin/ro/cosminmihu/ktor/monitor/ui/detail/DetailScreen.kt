@@ -12,8 +12,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBackIos
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -144,17 +142,17 @@ internal fun DetailScreen(
                 when (page) {
                     PAGE_INDEX_SUMMARY -> SummaryScreen(
                         summary = uiState.summary,
-                        modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())
+                        modifier = Modifier.fillMaxSize()
                     )
 
                     PAGE_INDEX_REQUEST -> RequestScreen(
                         request = uiState.call.request,
-                        modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())
+                        modifier = Modifier.fillMaxSize()
                     )
 
                     PAGE_INDEX_RESPONSE -> ResponseScreen(
                         response = uiState.call.response,
-                        modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())
+                        modifier = Modifier.fillMaxSize()
                     )
                 }
             }
