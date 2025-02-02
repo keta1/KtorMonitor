@@ -40,4 +40,9 @@ internal suspend fun makeCalls() {
         runCatching { this.get("$httpbin/deflate") }
         runCatching { this.get("$httpbin/brotli") }
     }
+
+    // Request Error
+    with(httpClient()) {
+        runCatching { this.get("https://-1-1") }
+    }
 }
