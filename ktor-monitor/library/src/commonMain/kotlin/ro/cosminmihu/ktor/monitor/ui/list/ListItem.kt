@@ -1,4 +1,4 @@
-package ro.cosminmihu.ktor.monitor.ui.components
+package ro.cosminmihu.ktor.monitor.ui.list
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -24,9 +24,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 import ro.cosminmihu.ktor.monitor.domain.model.ContentType
 import ro.cosminmihu.ktor.monitor.domain.model.asColor
 import ro.cosminmihu.ktor.monitor.ui.Dimens
-import ro.cosminmihu.ktor.monitor.ui.list.ListUiState
-import ro.cosminmihu.ktor.monitor.ui.list.isError
-import ro.cosminmihu.ktor.monitor.ui.list.isLoading
+import ro.cosminmihu.ktor.monitor.ui.Loading
 import ro.cosminmihu.ktor.monitor.ui.resources.Res
 import ro.cosminmihu.ktor.monitor.ui.resources.ktor_error
 import ro.cosminmihu.ktor.monitor.ui.resources.ktor_in_progress

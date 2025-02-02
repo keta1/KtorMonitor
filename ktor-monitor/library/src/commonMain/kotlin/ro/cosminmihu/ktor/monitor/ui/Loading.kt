@@ -1,4 +1,4 @@
-package ro.cosminmihu.ktor.monitor.ui.components
+package ro.cosminmihu.ktor.monitor.ui
 
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.infiniteRepeatable
@@ -19,8 +19,6 @@ import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.text.font.FontStyle
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
-import ro.cosminmihu.ktor.monitor.ui.Dimens
-import ro.cosminmihu.ktor.monitor.ui.LibraryTheme
 import ro.cosminmihu.ktor.monitor.ui.resources.Res
 import ro.cosminmihu.ktor.monitor.ui.resources.ktor_in_progress
 

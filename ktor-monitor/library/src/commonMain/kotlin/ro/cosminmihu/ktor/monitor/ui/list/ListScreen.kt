@@ -32,9 +32,7 @@ import androidx.compose.ui.text.font.FontWeight
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
 import ro.cosminmihu.ktor.monitor.ui.Dimens
-import ro.cosminmihu.ktor.monitor.ui.components.CallItem
-import ro.cosminmihu.ktor.monitor.ui.components.Loading
-import ro.cosminmihu.ktor.monitor.ui.components.SearchField
+import ro.cosminmihu.ktor.monitor.ui.Loading
 import ro.cosminmihu.ktor.monitor.ui.notification.NotificationPermissionBanner
 import ro.cosminmihu.ktor.monitor.ui.resources.Res
 import ro.cosminmihu.ktor.monitor.ui.resources.ktor_clean

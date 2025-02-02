@@ -1,4 +1,4 @@
-package ro.cosminmihu.ktor.monitor.ui.components
+package ro.cosminmihu.ktor.monitor.ui.list
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
