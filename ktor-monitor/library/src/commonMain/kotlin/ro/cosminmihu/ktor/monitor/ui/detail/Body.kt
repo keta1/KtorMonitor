@@ -1,6 +1,8 @@
 package ro.cosminmihu.ktor.monitor.ui.detail
 
 import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.rememberScrollState
@@ -9,6 +11,7 @@ import androidx.compose.material3.SegmentedButton
 import androidx.compose.material3.SegmentedButtonDefaults
 import androidx.compose.material3.SingleChoiceSegmentedButtonRow
 import androidx.compose.material3.Text
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import coil3.compose.AsyncImage
 import org.jetbrains.compose.resources.stringResource
@@ -24,9 +27,15 @@ internal fun LazyListScope.Body(
     body: DetailUiState.Body,
     displayMode: DisplayMode,
     onDisplayMode: (DisplayMode) -> Unit,
-    modifier: Modifier = Modifier,
 ) {
-    DisplayModeSelector(body, displayMode, onDisplayMode, modifier)
+    DisplayModeSelector(
+        body = body,
+        displayMode = displayMode,
+        onDisplayMode = onDisplayMode,
+        modifier = Modifier.padding(
+            horizontal = Dimens.Medium
+        ),
+    )
 
     when {
         body.image != null && displayMode == DisplayMode.IMAGE ->
@@ -36,7 +45,6 @@ internal fun LazyListScope.Body(
                     contentDescription = null,
                     modifier = Modifier
                         .horizontalScroll(rememberScrollState())
-                        .padding(top = Dimens.Small),
                 )
             }
 
@@ -125,19 +133,25 @@ private fun LazyListScope.DisplayModeSelector(
             }
         }
 
-        SingleChoiceSegmentedButtonRow(
-            modifier = modifier.horizontalScroll(rememberScrollState()),
+        Box(
+            modifier = modifier.fillMaxWidth()
         ) {
-            segmentedButtons.forEachIndexed { index, item ->
-                SegmentedButton(
-                    selected = item.selected,
-                    onClick = item.onClick,
-                    shape = SegmentedButtonDefaults.itemShape(
-                        index = index,
-                        count = segmentedButtons.size
-                    )
-                ) {
-                    Text(text = item.text)
+            SingleChoiceSegmentedButtonRow(
+                modifier = Modifier
+                    .horizontalScroll(rememberScrollState())
+                    .align(Alignment.CenterEnd),
+            ) {
+                segmentedButtons.forEachIndexed { index, item ->
+                    SegmentedButton(
+                        selected = item.selected,
+                        onClick = item.onClick,
+                        shape = SegmentedButtonDefaults.itemShape(
+                            index = index,
+                            count = segmentedButtons.size
+                        )
+                    ) {
+                        Text(text = item.text)
+                    }
                 }
             }
         }

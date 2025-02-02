@@ -36,15 +36,15 @@ internal fun Transaction(
     error: String,
     modifier: Modifier = Modifier,
 ) {
-    Column(
-        modifier = modifier.padding(
-            vertical = Dimens.Small,
-            horizontal = Dimens.Medium
-        ),
-    ) {
+    Column(modifier = modifier) {
 
         if (isLoading) {
-            Loading.Medium()
+            Loading.Medium(
+                modifier = Modifier.padding(
+                    horizontal = Dimens.Medium,
+                    vertical = Dimens.Small,
+                )
+            )
             return
         }
 
@@ -63,10 +63,11 @@ internal fun Transaction(
         LazyColumn {
             item { Headers(headers) }
 
-            if (isError) {
+            if (error.isNotBlank()) {
                 item {
                     Error(error)
                 }
+                return@LazyColumn
             }
 
             if (body == null || body.noBody == true) {
@@ -87,6 +88,8 @@ internal fun Error(error: String) {
         imageVector = Icons.Filled.Warning,
         contentDescription = stringResource(Res.string.ktor_error),
         tint = MaterialTheme.colorScheme.error,
+        modifier = Modifier
+            .padding(horizontal = Dimens.Medium)
     )
     SelectionContainer {
         Text(
@@ -95,7 +98,10 @@ internal fun Error(error: String) {
             style = MaterialTheme.typography.bodySmall,
             modifier = Modifier
                 .horizontalScroll(rememberScrollState())
-                .padding(top = Dimens.Small),
+                .padding(
+                    horizontal = Dimens.Medium,
+                    vertical = Dimens.Small,
+                )
         )
     }
 }

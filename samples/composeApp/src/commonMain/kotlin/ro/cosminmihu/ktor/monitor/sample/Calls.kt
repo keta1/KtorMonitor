@@ -43,6 +43,7 @@ internal suspend fun makeCalls() {
 
     // Request Error
     with(httpClient()) {
-        runCatching { this.get("https://-1-1") }
+        runCatching { this.get("https://12345678") }
+        runCatching { this.get("abcdefghijklmnopqrstuvwxyz") } // TODO
     }
 }
