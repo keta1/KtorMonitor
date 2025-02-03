@@ -83,9 +83,22 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+    signingConfigs {
+        create("release") {
+            storeFile = File(project.rootDir, "extra/ktor-monitor-sample.jks")
+            storePassword = "ktor-monitor-sample"
+            keyAlias = "ktor-monitor-sample"
+            keyPassword = "ktor-monitor-sample"
+        }
+    }
     buildTypes {
+        debug {
+            versionNameSuffix = ".debug"
+        }
+
         getByName("release") {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            signingConfig = signingConfigs.getByName("release")
         }
     }
     compileOptions {
