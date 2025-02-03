@@ -27,6 +27,7 @@ private const val PluginName = "KtorMonitorLogging"
 
 internal val LoggingPlugin: ClientPlugin<LibraryConfig> =
     createClientPlugin(PluginName, ::LibraryConfig) {
+        // Check if plugin is active.
         if (!pluginConfig.isActive) return@createClientPlugin
 
         // Plugin configuration.

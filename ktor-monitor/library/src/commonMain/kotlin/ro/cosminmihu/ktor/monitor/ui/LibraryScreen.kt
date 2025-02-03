@@ -15,6 +15,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import kotlinx.coroutines.launch
+import org.koin.compose.koinInject
+import ro.cosminmihu.ktor.monitor.api.LibraryConfig
 import ro.cosminmihu.ktor.monitor.ui.detail.DetailRoute
 import ro.cosminmihu.ktor.monitor.ui.list.ListRoute
 
@@ -23,6 +25,10 @@ import ro.cosminmihu.ktor.monitor.ui.list.ListRoute
 internal fun LibraryScreen(
     modifier: Modifier = Modifier,
 ) {
+    // Check if the library is active.
+    val config = koinInject<LibraryConfig>()
+    if (!config.isActive) return
+
     val coroutineScope = rememberCoroutineScope()
     val navigator = rememberListDetailPaneScaffoldNavigator<String?>()
 
