@@ -10,7 +10,7 @@ private const val httpbin = "https://httpbin.org"
 
 internal suspend fun makeCalls() {
 
-    // HTML
+    // HTTP Methods
     with(httpClient()) {
         runCatching { this.get(httpbin) }
         runCatching { this.delete(httpbin) }
@@ -28,7 +28,7 @@ internal suspend fun makeCalls() {
         runCatching { this.get("$httpbin/image/webp") }
     }
 
-    // Response Content Type
+    // Response formats
     with(httpClient()) {
         runCatching { this.get("$httpbin/html") }
         runCatching { this.get("$httpbin/xml") }
@@ -45,5 +45,20 @@ internal suspend fun makeCalls() {
     with(httpClient()) {
         runCatching { this.get("https://12345678") }
         runCatching { this.get("abcdefghijklmnopqrstuvwxyz") } // TODO
+    }
+
+    // Cookies
+    with(httpClient()) {
+        runCatching { this.get("$httpbin/cookies") }
+        runCatching { this.get("$httpbin/cookies/delete") }
+        runCatching { this.get("$httpbin/cookies/set") }
+        runCatching { this.get("$httpbin/cookies/set/name/value") }
+    }
+
+    // Request inspection
+    with(httpClient()) {
+        runCatching { this.get("$httpbin/headers") }
+        runCatching { this.get("$httpbin/ip") }
+        runCatching { this.get("$httpbin/user-agent") }
     }
 }
