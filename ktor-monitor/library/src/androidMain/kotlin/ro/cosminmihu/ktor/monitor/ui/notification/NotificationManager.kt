@@ -63,15 +63,13 @@ internal actual class NotificationManager : LibraryKoinComponent {
     }
 
     private fun createNotificationChannel(notificationManager: NotificationManager) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel = NotificationChannel(
-                NOTIFICATION_CHANNEL_ID,
-                NOTIFICATION_CHANNEL_NAME,
-                NotificationManager.IMPORTANCE_DEFAULT
-            )
-            channel.description = NOTIFICATION_CHANNEL_DESCRIPTION
-            notificationManager.createNotificationChannel(channel)
-        }
+        val channel = NotificationChannel(
+            NOTIFICATION_CHANNEL_ID,
+            NOTIFICATION_CHANNEL_NAME,
+            NotificationManager.IMPORTANCE_DEFAULT
+        )
+        channel.description = NOTIFICATION_CHANNEL_DESCRIPTION
+        notificationManager.createNotificationChannel(channel)
     }
 
     private fun createPendingIntent(): PendingIntent? {
@@ -96,7 +94,7 @@ internal actual class NotificationManager : LibraryKoinComponent {
                 PendingIntent.FLAG_ONE_SHOT or PendingIntent.FLAG_IMMUTABLE,
             )
         return NotificationCompat.Action(
-            null,
+            R.drawable.ktor_ic_clear_all,
             clearTitle,
             pendingBroadcastIntent,
         )
