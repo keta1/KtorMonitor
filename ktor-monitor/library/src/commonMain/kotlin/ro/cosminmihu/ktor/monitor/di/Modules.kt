@@ -4,6 +4,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import org.koin.core.module.dsl.factoryOf
+import org.koin.core.module.dsl.singleOf
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 import ro.cosminmihu.ktor.monitor.api.LibraryConfig
@@ -55,7 +56,7 @@ internal val viewModelModule = module {
 internal val domainModule = module {
     factoryOf(::LibraryConfig)
 
-    factoryOf(::ListenByRecentCallsUseCase)
+    singleOf(::ListenByRecentCallsUseCase)
     factoryOf(::RetentionUseCase)
 
     factoryOf(::GetCallsUseCase)

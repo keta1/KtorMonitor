@@ -2,6 +2,7 @@ package ro.cosminmihu.ktor.monitor.domain
 
 import app.cash.sqldelight.Query
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
@@ -43,7 +44,7 @@ internal class ListenByRecentCallsUseCase(
                     }
                 }
                 .distinctUntilChanged()
-                .collect {
+                .collectLatest {
                     // Show notification
                     if (config.showNotification) {
                         notificationManager.notify(it)
