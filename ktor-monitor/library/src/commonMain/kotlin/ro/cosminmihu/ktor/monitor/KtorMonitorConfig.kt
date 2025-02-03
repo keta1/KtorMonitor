@@ -2,6 +2,7 @@ package ro.cosminmihu.ktor.monitor
 
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.utils.io.KtorDsl
+import ro.cosminmihu.ktor.monitor.core.PlatformConfig
 import kotlin.time.Duration
 
 /**
@@ -32,9 +33,9 @@ public class KtorMonitorConfig {
 
     /**
      * Enable or disable the logging of requests and responses.
-     * Enabled by default.
+     * By default it is enabled in debug mode only.
      */
-    public var isActive: Boolean = true
+    public var isActive: Boolean = PlatformConfig.isDebug
 
     /**
      * Keep track of latest requests and responses into notification.
