@@ -7,7 +7,6 @@ import org.koin.core.module.dsl.factoryOf
 import org.koin.core.module.dsl.singleOf
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
-import ro.cosminmihu.ktor.monitor.core.LibraryConfig
 import ro.cosminmihu.ktor.monitor.db.LibraryDao
 import ro.cosminmihu.ktor.monitor.db.createDatabase
 import ro.cosminmihu.ktor.monitor.db.createDatabaseDriver

@@ -10,5 +10,5 @@ internal actual abstract class PlatformContext private constructor() {
 }
 
 internal actual fun applyPlatformContext() {
-    LibraryKoinContext.setPlatformContext(PlatformContext.INSTANCE)
+    LibraryKoinContext.set(PlatformContext.INSTANCE)
 }

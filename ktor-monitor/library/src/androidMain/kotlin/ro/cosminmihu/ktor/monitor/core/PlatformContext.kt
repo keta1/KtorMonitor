@@ -13,6 +13,5 @@ internal actual fun applyPlatformContext() {
     /**
      * Check if the context is set. If not, throw an exception.
      */
-    val platformContext = LibraryKoinContext.koin.getOrNull<PlatformContext>()
-    checkNotNull(platformContext) { "Context is not set." }
+    checkNotNull(LibraryKoinContext.koin.getOrNull<PlatformContext>()) { "Context is not set." }
 }

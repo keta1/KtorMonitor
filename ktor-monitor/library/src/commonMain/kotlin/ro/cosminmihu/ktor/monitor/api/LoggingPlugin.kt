@@ -7,7 +7,6 @@ import io.ktor.client.plugins.observer.ResponseObserver
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.util.AttributeKey
 import kotlinx.coroutines.CoroutineScope
-import ro.cosminmihu.ktor.monitor.KtorMonitorLoggingConfig
 import ro.cosminmihu.ktor.monitor.SanitizedHeader
 import ro.cosminmihu.ktor.monitor.api.util.ReceiveHook
 import ro.cosminmihu.ktor.monitor.api.util.ResponseHook
@@ -26,15 +25,17 @@ private val DisableLogging = AttributeKey<Unit>("KtorMonitorDisableLogging")
 private val CallIdentifier = AttributeKey<String>("KtorMonitorCallIdentifier")
 private const val PluginName = "KtorMonitorLogging"
 
-internal val LoggingPlugin: ClientPlugin<KtorMonitorLoggingConfig> =
-    createClientPlugin(PluginName, ::KtorMonitorLoggingConfig) {
-        // Check if library is active.
-        val config = LibraryKoinContext.getLibraryConfig()
-        if (!config.isActive) return@createClientPlugin
+internal val LoggingPlugin: ClientPlugin<LoggingConfig> =
+    createClientPlugin(PluginName, ::LoggingConfig) {
+        // Check if plugin is active.
+        if (!pluginConfig.isActive) return@createClientPlugin
 
         // Plugin configuration.
         val filters: List<(HttpRequestBuilder) -> Boolean> = pluginConfig.filters
         val sanitizedHeaders: List<SanitizedHeader> = pluginConfig.sanitizedHeaders
+
+        // Init library dependency.
+        LibraryKoinContext.set(pluginConfig)
 
         // Listen by recent calls.
         LibraryKoinContext.koin.get<ListenByRecentCallsUseCase>()()

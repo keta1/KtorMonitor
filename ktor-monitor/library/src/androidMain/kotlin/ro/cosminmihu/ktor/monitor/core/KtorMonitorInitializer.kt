@@ -13,7 +13,7 @@ internal class KtorMonitorInitializer : ContentProvider() {
 
     override fun onCreate(): Boolean {
         val context = context?.applicationContext ?: return false
-        LibraryKoinContext.setPlatformContext(context)
+        LibraryKoinContext.set(context)
         return true
     }
 

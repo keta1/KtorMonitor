@@ -1,5 +1,5 @@
 package ro.cosminmihu.ktor.monitor.core
 
-internal expect object PlatformDebug {
+internal expect object PlatformConfig {
     val isDebug: Boolean
 }
