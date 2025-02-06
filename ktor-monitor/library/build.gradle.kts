@@ -125,7 +125,7 @@ kotlin {
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_11)
         }
-        publishLibraryVariants("release")
+        publishLibraryVariants("debug", "release")
     }
 
     listOf(

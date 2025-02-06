@@ -1,6 +1,8 @@
 <resources>
     <string name="ktor_library_name">Ktor Monitor</string>
 
+    <string name="ktor_library_disabled">Ktor Monitor is disabled.</string>
+
     <string name="ktor_filter">Filter</string>
     <string name="ktor_clean">Clean</string>
     <string name="ktor_close">Close</string>

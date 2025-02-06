@@ -25,8 +25,8 @@ import ro.cosminmihu.ktor.monitor.ui.resources.ktor_no_selection
 @Composable
 internal fun DetailRoute(
     id: String?,
-    modifier: Modifier = Modifier,
     onBack: () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     if (id == null) {
         EmptyState(modifier)
@@ -44,7 +44,7 @@ internal fun DetailRoute(
 }
 
 @Composable
-private fun EmptyState(modifier: Modifier) {
+private fun EmptyState(modifier: Modifier = Modifier) {
     Box(modifier = modifier, contentAlignment = Alignment.Center) {
         val string = stringResource(Res.string.ktor_no_selection)
         Column(

@@ -31,6 +31,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
+import org.jetbrains.compose.ui.tooling.preview.Preview
 import ro.cosminmihu.ktor.monitor.ui.Dimens
 import ro.cosminmihu.ktor.monitor.ui.Loading
 import ro.cosminmihu.ktor.monitor.ui.notification.NotificationPermissionBanner
@@ -44,12 +45,12 @@ import ro.cosminmihu.ktor.monitor.ui.resources.ktor_list_empty
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun ListScreen(
-    modifier: Modifier,
     uiState: ListUiState,
     setSearchQuery: (String) -> Unit,
     clearSearchQuery: () -> Unit,
     deleteCalls: () -> Unit,
     onCallClick: (String) -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     var showSearchBar by rememberSaveable { mutableStateOf(false) }
 
@@ -156,3 +157,16 @@ internal fun ListScreen(
         }
     }
 }
+
+@Preview
+@Composable
+private fun ListScreenPreview() {
+    ListScreen(
+        modifier = Modifier,
+        uiState = ListUiState(),
+        setSearchQuery = {},
+        clearSearchQuery = {},
+        deleteCalls = {},
+        onCallClick = {})
+}
+
