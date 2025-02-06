@@ -28,12 +28,11 @@ import androidx.compose.ui.semantics.semantics
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
-import ro.cosminmihu.ktor.monitor.api.LibraryConfig
+import ro.cosminmihu.ktor.monitor.api.LoggingConfig
 import ro.cosminmihu.ktor.monitor.ui.detail.DetailRoute
 import ro.cosminmihu.ktor.monitor.ui.list.ListRoute
 import ro.cosminmihu.ktor.monitor.ui.resources.Res
 import ro.cosminmihu.ktor.monitor.ui.resources.ktor_library_disabled
-import ro.cosminmihu.ktor.monitor.ui.resources.ktor_no_selection
 
 @OptIn(ExperimentalMaterial3AdaptiveApi::class)
 @Composable
@@ -41,7 +40,7 @@ internal fun LibraryScreen(
     modifier: Modifier = Modifier,
 ) {
     // Check if the library is active.
-    val config = koinInject<LibraryConfig>()
+    val config = koinInject<LoggingConfig>()
     if (!config.isActive) {
         EmptyState(modifier)
         return

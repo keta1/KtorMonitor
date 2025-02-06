@@ -33,4 +33,4 @@ public object RetentionPeriod {
  * }
  * ```
  */
-public val KtorMonitorLogging: ClientPlugin<KtorMonitorConfig> = LoggingPlugin
+public val KtorMonitorLogging: ClientPlugin<KtorMonitorLoggingConfig> = LoggingPlugin

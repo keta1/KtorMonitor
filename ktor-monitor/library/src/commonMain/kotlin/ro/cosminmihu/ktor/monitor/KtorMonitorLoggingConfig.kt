@@ -9,7 +9,7 @@ import kotlin.time.Duration
  * A configuration for the [KtorMonitorLogging] plugin.
  */
 @KtorDsl
-public class KtorMonitorConfig {
+public class KtorMonitorLoggingConfig {
     internal val filters = mutableListOf<(HttpRequestBuilder) -> Boolean>()
     internal val sanitizedHeaders = mutableListOf<SanitizedHeader>()
 

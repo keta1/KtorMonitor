@@ -25,8 +25,8 @@ private val DisableLogging = AttributeKey<Unit>("KtorMonitorDisableLogging")
 private val CallIdentifier = AttributeKey<String>("KtorMonitorCallIdentifier")
 private const val PluginName = "KtorMonitorLogging"
 
-internal val LoggingPlugin: ClientPlugin<LibraryConfig> =
-    createClientPlugin(PluginName, ::LibraryConfig) {
+internal val LoggingPlugin: ClientPlugin<LoggingConfig> =
+    createClientPlugin(PluginName, ::LoggingConfig) {
         // Check if plugin is active.
         if (!pluginConfig.isActive) return@createClientPlugin
 
