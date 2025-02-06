@@ -2,7 +2,7 @@ package ro.cosminmihu.ktor.monitor.core
 
 import kotlin.experimental.ExperimentalNativeApi
 
-internal actual object PlatformConfig {
+internal actual object PlatformDebug {
 
     @OptIn(ExperimentalNativeApi::class)
     actual val isDebug: Boolean = Platform.isDebugBinary

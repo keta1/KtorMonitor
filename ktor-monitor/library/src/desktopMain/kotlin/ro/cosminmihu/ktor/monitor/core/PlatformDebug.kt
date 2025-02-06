@@ -1,6 +1,6 @@
 package ro.cosminmihu.ktor.monitor.core
 
-internal actual object PlatformConfig {
+internal actual object PlatformDebug {
 
     actual val isDebug: Boolean = true
 }
