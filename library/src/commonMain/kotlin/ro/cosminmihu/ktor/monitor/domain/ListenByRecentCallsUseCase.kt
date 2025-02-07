@@ -18,7 +18,7 @@ internal class ListenByRecentCallsUseCase(
     private val dao: LibraryDao,
     private val coroutineScope: CoroutineScope,
     private val notificationManager: NotificationManager,
-    private val setupUseCase: SetupUseCase,
+    private val setupUseCase: ConfigUseCase,
     private val retentionUseCase: RetentionUseCase,
 ) {
 

@@ -5,11 +5,11 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
-import ro.cosminmihu.ktor.monitor.domain.SetupUseCase
+import ro.cosminmihu.ktor.monitor.domain.ConfigUseCase
 import kotlin.time.Duration.Companion.seconds
 
 internal class MainViewModel(
-    setupUseCase: SetupUseCase,
+    setupUseCase: ConfigUseCase,
 ) : ViewModel() {
 
     val uiState = setupUseCase.isSetupDone

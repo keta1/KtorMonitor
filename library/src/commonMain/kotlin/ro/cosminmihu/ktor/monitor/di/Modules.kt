@@ -15,7 +15,7 @@ import ro.cosminmihu.ktor.monitor.domain.GetCallUseCase
 import ro.cosminmihu.ktor.monitor.domain.GetCallsUseCase
 import ro.cosminmihu.ktor.monitor.domain.ListenByRecentCallsUseCase
 import ro.cosminmihu.ktor.monitor.domain.RetentionUseCase
-import ro.cosminmihu.ktor.monitor.domain.SetupUseCase
+import ro.cosminmihu.ktor.monitor.domain.ConfigUseCase
 import ro.cosminmihu.ktor.monitor.ui.detail.DetailViewModel
 import ro.cosminmihu.ktor.monitor.ui.list.ListViewModel
 import ro.cosminmihu.ktor.monitor.ui.main.MainViewModel
@@ -56,7 +56,7 @@ internal val viewModelModule = module {
 }
 
 internal val domainModule = module {
-    singleOf(::SetupUseCase)
+    singleOf(::ConfigUseCase)
 
     singleOf(::ListenByRecentCallsUseCase)
     factoryOf(::RetentionUseCase)

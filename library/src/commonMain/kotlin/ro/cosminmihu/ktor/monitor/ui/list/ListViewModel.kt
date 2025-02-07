@@ -15,7 +15,7 @@ import kotlinx.coroutines.flow.update
 import ro.cosminmihu.ktor.monitor.db.sqldelight.SelectCalls
 import ro.cosminmihu.ktor.monitor.domain.DeleteCallsUseCase
 import ro.cosminmihu.ktor.monitor.domain.GetCallsUseCase
-import ro.cosminmihu.ktor.monitor.domain.SetupUseCase
+import ro.cosminmihu.ktor.monitor.domain.ConfigUseCase
 import ro.cosminmihu.ktor.monitor.domain.model.ContentType
 import ro.cosminmihu.ktor.monitor.domain.model.contentType
 import ro.cosminmihu.ktor.monitor.domain.model.durationAsText
@@ -28,7 +28,7 @@ import kotlin.time.Duration.Companion.seconds
 
 @OptIn(FlowPreview::class)
 internal class ListViewModel(
-    setupUseCase: SetupUseCase,
+    setupUseCase: ConfigUseCase,
     getCallsUseCase: GetCallsUseCase,
     private val deleteCallsUseCase: DeleteCallsUseCase,
 ) : ViewModel() {

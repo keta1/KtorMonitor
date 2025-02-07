@@ -6,7 +6,7 @@ import ro.cosminmihu.ktor.monitor.RetentionPeriod
 import ro.cosminmihu.ktor.monitor.db.LibraryDao
 
 internal class RetentionUseCase(
-    private val setupUseCase: SetupUseCase,
+    private val setupUseCase: ConfigUseCase,
     private val dao: LibraryDao,
 ) {
     suspend operator fun invoke() {
