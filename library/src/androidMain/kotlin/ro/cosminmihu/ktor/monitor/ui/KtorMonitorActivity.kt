@@ -12,7 +12,7 @@ internal class KtorMonitorActivity : ComponentActivity() {
         enableEdgeToEdge()
 
         setContent {
-            LibraryUI()
+            Main()
         }
     }
 }

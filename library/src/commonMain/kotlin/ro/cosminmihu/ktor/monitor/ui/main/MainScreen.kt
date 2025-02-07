@@ -1,4 +1,4 @@
-package ro.cosminmihu.ktor.monitor.ui
+package ro.cosminmihu.ktor.monitor.ui.main
 
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
@@ -29,6 +29,7 @@ import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
 import ro.cosminmihu.ktor.monitor.api.LoggingConfig
+import ro.cosminmihu.ktor.monitor.ui.Dimens
 import ro.cosminmihu.ktor.monitor.ui.detail.DetailRoute
 import ro.cosminmihu.ktor.monitor.ui.list.ListRoute
 import ro.cosminmihu.ktor.monitor.ui.resources.Res
@@ -36,7 +37,7 @@ import ro.cosminmihu.ktor.monitor.ui.resources.ktor_library_disabled
 
 @OptIn(ExperimentalMaterial3AdaptiveApi::class)
 @Composable
-internal fun LibraryScreen(
+internal fun MainScreen(
     modifier: Modifier = Modifier,
 ) {
     // Check if the library is active.

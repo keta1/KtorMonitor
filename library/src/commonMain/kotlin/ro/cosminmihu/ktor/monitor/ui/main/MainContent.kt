@@ -1,4 +1,4 @@
-package ro.cosminmihu.ktor.monitor.ui
+package ro.cosminmihu.ktor.monitor.ui.main
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -10,7 +10,7 @@ import org.koin.compose.KoinIsolatedContext
 import ro.cosminmihu.ktor.monitor.di.LibraryKoinContext
 
 @Composable
-internal fun LibraryUIContent(
+internal fun MainContent(
     content: @Composable () -> Unit,
 ) {
     KoinIsolatedContext(

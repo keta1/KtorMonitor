@@ -1,21 +1,22 @@
-package ro.cosminmihu.ktor.monitor.ui
+package ro.cosminmihu.ktor.monitor.ui.main
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import ro.cosminmihu.ktor.monitor.ui.theme.LibraryTheme
 
 @Composable
-internal fun LibraryUI(
+internal fun Main(
     modifier: Modifier = Modifier,
     useLibraryTheme: Boolean = true,
 ) {
-    LibraryUIContent {
+    MainContent {
         if (useLibraryTheme) {
             LibraryTheme {
-                LibraryScreen(modifier = modifier.fillMaxSize())
+                MainScreen(modifier = modifier.fillMaxSize())
             }
         } else {
-            LibraryScreen(modifier = modifier.fillMaxSize())
+            MainScreen(modifier = modifier.fillMaxSize())
         }
     }
 }
