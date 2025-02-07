@@ -1,16 +1,16 @@
 package ro.cosminmihu.ktor.monitor.domain
 
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.datetime.Clock
 import ro.cosminmihu.ktor.monitor.RetentionPeriod
-import ro.cosminmihu.ktor.monitor.api.LoggingConfig
 import ro.cosminmihu.ktor.monitor.db.LibraryDao
 
 internal class RetentionUseCase(
-    private val config: LoggingConfig,
+    private val setupUseCase: SetupUseCase,
     private val dao: LibraryDao,
 ) {
-    operator fun invoke() {
-        val retentionPeriod = config.retentionPeriod
+    suspend operator fun invoke() {
+        val retentionPeriod = setupUseCase.retentionPeriod.firstOrNull() ?: return
         if (retentionPeriod == RetentionPeriod.Forever) return
 
         val threshold = Clock.System.now().minus(retentionPeriod).toEpochMilliseconds()

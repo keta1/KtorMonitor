@@ -12,10 +12,10 @@ import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
-import ro.cosminmihu.ktor.monitor.api.LoggingConfig
 import ro.cosminmihu.ktor.monitor.db.sqldelight.SelectCalls
 import ro.cosminmihu.ktor.monitor.domain.DeleteCallsUseCase
 import ro.cosminmihu.ktor.monitor.domain.GetCallsUseCase
+import ro.cosminmihu.ktor.monitor.domain.SetupUseCase
 import ro.cosminmihu.ktor.monitor.domain.model.ContentType
 import ro.cosminmihu.ktor.monitor.domain.model.contentType
 import ro.cosminmihu.ktor.monitor.domain.model.durationAsText
@@ -28,9 +28,9 @@ import kotlin.time.Duration.Companion.seconds
 
 @OptIn(FlowPreview::class)
 internal class ListViewModel(
+    setupUseCase: SetupUseCase,
     getCallsUseCase: GetCallsUseCase,
     private val deleteCallsUseCase: DeleteCallsUseCase,
-    private val config: LoggingConfig,
 ) : ViewModel() {
 
     private val _searchQuery = MutableStateFlow("")
@@ -39,15 +39,20 @@ internal class ListViewModel(
 
     val uiState = combine(
         searchQuery,
-        calls
-    ) { query, calls ->
-        query to when {
-            query.isBlank() -> calls
-            else -> calls.filter { it.url.contains(query.trim(), ignoreCase = true) }
-        }
+        calls,
+        setupUseCase.showNotification,
+    ) { query, calls, showNotification ->
+        Triple(
+            query,
+            when {
+                query.isBlank() -> calls
+                else -> calls.filter { it.url.contains(query.trim(), ignoreCase = true) }
+            },
+            showNotification
+        )
     }
         .flowOn(Dispatchers.Default)
-        .map { (query, it) -> buildUiState(query, it) }
+        .map { (query, calls, showNotification) -> buildUiState(query, calls, showNotification) }
         .stateIn(
             viewModelScope,
             SharingStarted.WhileSubscribed(5.seconds.inWholeMilliseconds),
@@ -57,9 +62,10 @@ internal class ListViewModel(
     private fun buildUiState(
         query: String,
         calls: List<SelectCalls>,
+        showNotification: Boolean,
     ): ListUiState = ListUiState(
         searchQuery = query,
-        showNotification = config.showNotification,
+        showNotification = showNotification,
         calls = calls.map {
             ListUiState.Call(
                 id = it.id,

@@ -16,7 +16,7 @@ internal fun httpClient() = HttpClient {
     install(KtorMonitorLogging) {
         sanitizeHeader { header -> header == "Authorization" }
 //        filter { request -> request.url.host.contains("github.com") }
-        isActive = false
+        isActive = true
         showNotification = true
         retentionPeriod = RetentionPeriod.OneHour
     }

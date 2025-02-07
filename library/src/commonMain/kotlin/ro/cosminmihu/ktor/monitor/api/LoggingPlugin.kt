@@ -20,6 +20,7 @@ import ro.cosminmihu.ktor.monitor.db.LibraryDao
 import ro.cosminmihu.ktor.monitor.di.LibraryKoinContext
 import ro.cosminmihu.ktor.monitor.di.inject
 import ro.cosminmihu.ktor.monitor.domain.ListenByRecentCallsUseCase
+import ro.cosminmihu.ktor.monitor.domain.SetupUseCase
 
 private val DisableLogging = AttributeKey<Unit>("KtorMonitorDisableLogging")
 private val CallIdentifier = AttributeKey<String>("KtorMonitorCallIdentifier")
@@ -27,8 +28,8 @@ private const val PluginName = "KtorMonitorLogging"
 
 internal val LoggingPlugin: ClientPlugin<LoggingConfig> =
     createClientPlugin(PluginName, ::LoggingConfig) {
-        // Init library dependency.
-        LibraryKoinContext.set(pluginConfig)
+        // Setup library dependency.
+        LibraryKoinContext.koin.get<SetupUseCase>().setLoggingConfig(pluginConfig)
 
         // Check if plugin is active.
         if (!pluginConfig.isActive) return@createClientPlugin
