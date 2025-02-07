@@ -31,7 +31,7 @@ internal fun libraryModule() = listOf(
 
 internal val databaseModule = module {
     factory {
-        createDatabaseDriver(get())
+        createDatabaseDriver()
     }
     single {
         createDatabase(get())

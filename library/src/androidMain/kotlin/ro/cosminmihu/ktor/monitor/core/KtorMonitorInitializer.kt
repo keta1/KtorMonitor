@@ -4,6 +4,7 @@ import android.content.ContentProvider
 import android.content.ContentValues
 import android.database.Cursor
 import android.net.Uri
+import org.koin.dsl.module
 import ro.cosminmihu.ktor.monitor.di.LibraryKoinContext
 
 /**
@@ -13,7 +14,7 @@ internal class KtorMonitorInitializer : ContentProvider() {
 
     override fun onCreate(): Boolean {
         val context = context?.applicationContext ?: return false
-        LibraryKoinContext.setPlatformContext(context)
+        LibraryKoinContext.koin.loadModules(modules = listOf(module { single { context } }))
         return true
     }
 
