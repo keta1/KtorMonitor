@@ -66,7 +66,7 @@ internal val LoggingPlugin: ClientPlugin<LoggingConfig> =
             }
 
             // Generate id.
-            request.attributes.computeIfAbsent(CallIdentifier) { callIdentifier }
+            request.attributes.put(CallIdentifier, callIdentifier)
 
             // Log request.
             val loggedRequest = try {
