@@ -18,6 +18,7 @@
     <string name="ktor_no_body">(body is empty)</string>
 
     <string name="ktor_error">Error</string>
+    <string name="ktor_redirect">Redirect</string>
     <string name="ktor_in_progress">In Progress...</string>
 
     <string name="ktor_response_view_html">html</string>

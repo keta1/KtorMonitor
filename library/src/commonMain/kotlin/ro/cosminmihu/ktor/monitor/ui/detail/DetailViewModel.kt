@@ -15,6 +15,7 @@ import ro.cosminmihu.ktor.monitor.domain.model.encodedPathAndQuery
 import ro.cosminmihu.ktor.monitor.domain.model.host
 import ro.cosminmihu.ktor.monitor.domain.model.isError
 import ro.cosminmihu.ktor.monitor.domain.model.isInProgress
+import ro.cosminmihu.ktor.monitor.domain.model.isRedirect
 import ro.cosminmihu.ktor.monitor.domain.model.isSecure
 import ro.cosminmihu.ktor.monitor.domain.model.requestDateTimeAsText
 import ro.cosminmihu.ktor.monitor.domain.model.requestTimeAsText
@@ -55,6 +56,7 @@ internal class DetailViewModel(
                     responseSize = call.responseContentLength?.sizeAsText() ?: NO_DATA,
                     totalSize = call.totalSizeAsText ?: NO_DATA,
                     isLoading = call.isInProgress,
+                    isRedirect = call.isRedirect,
                     isError = call.isError,
                 ),
                 call = Call(

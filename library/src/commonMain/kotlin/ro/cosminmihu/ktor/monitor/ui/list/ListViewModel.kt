@@ -76,7 +76,7 @@ internal class ListViewModel(
                     contentType = it.responseContentType?.contentType ?: ContentType.UNKNOWN,
                     duration = it.durationAsText ?: "",
                     size = it.responseContentLength?.sizeAsText() ?: "",
-                    error = it.error ?: ""
+                    error = it.error ?: "",
                 )
             )
         }

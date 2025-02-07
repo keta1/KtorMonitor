@@ -39,9 +39,17 @@ internal val ListUiState.isEmpty
 internal val ListUiState.Call.isLoading
     get() = response.responseCode.isBlank() && response.error.isBlank()
 
+
+internal val ListUiState.Call.isRedirect
+    get() = when {
+        response.responseCode.isNotBlank() -> response.responseCode.toIntOrNull() in 300 until 400
+        else -> false
+    }
+
 internal val ListUiState.Call.isError
     get() = when {
         response.responseCode.isBlank() && response.error.isNotBlank() -> true
-        response.responseCode.isNotBlank() -> response.responseCode.toIntOrNull() !in 200..<300
+        isRedirect -> false
+        response.responseCode.isNotBlank() -> response.responseCode.toIntOrNull() !in 200 until 300
         else -> false
     }

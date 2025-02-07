@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.RestartAlt
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -28,6 +29,7 @@ import ro.cosminmihu.ktor.monitor.ui.Loading
 import ro.cosminmihu.ktor.monitor.ui.resources.Res
 import ro.cosminmihu.ktor.monitor.ui.resources.ktor_error
 import ro.cosminmihu.ktor.monitor.ui.resources.ktor_in_progress
+import ro.cosminmihu.ktor.monitor.ui.resources.ktor_redirect
 
 @Composable
 internal fun CallItem(
@@ -52,6 +54,13 @@ internal fun CallItem(
                         fontWeight = FontWeight.Bold,
                         color = if (call.isError) MaterialTheme.colorScheme.error else Color.Unspecified,
                     )
+                    if (call.isRedirect) {
+                        Icon(
+                            imageVector = Icons.Filled.RestartAlt,
+                            contentDescription = stringResource(Res.string.ktor_redirect),
+                            tint = MaterialTheme.colorScheme.tertiary,
+                        )
+                    }
                     if (call.isError) {
                         Icon(
                             imageVector = Icons.Filled.Warning,
@@ -142,7 +151,7 @@ private fun CallItemSuccessPreview() {
             contentType = ContentType.APPLICATION_JSON,
             duration = "123 ms",
             size = "123 KB",
-            error = ""
+            error = "",
         )
     )
     CallItem(call)
@@ -165,7 +174,7 @@ private fun CallItemFailurePreview() {
             contentType = ContentType.UNKNOWN,
             duration = "123 ms",
             size = "123 KB",
-            error = "TimeoutException: Connection timed out."
+            error = "TimeoutException: Connection timed out.",
         )
     )
     CallItem(call)

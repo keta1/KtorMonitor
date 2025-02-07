@@ -8,6 +8,9 @@ import kotlin.time.Duration.Companion.milliseconds
 internal val Call.isInProgress
     get() = responseCode == null && error == null
 
+internal val Call.isRedirect
+    get() = responseCode?.toInt() in 300 until 400
+
 internal val Call.isError
     get() = !error.isNullOrBlank()
 

@@ -26,6 +26,7 @@ internal data class DetailUiState(
         val responseSize: String,
         val totalSize: String,
         val isLoading: Boolean,
+        val isRedirect: Boolean,
         val isError: Boolean,
     )
 
