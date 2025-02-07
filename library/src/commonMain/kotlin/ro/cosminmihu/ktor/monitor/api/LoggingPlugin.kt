@@ -19,9 +19,10 @@ import ro.cosminmihu.ktor.monitor.api.util.logResponseException
 import ro.cosminmihu.ktor.monitor.db.LibraryDao
 import ro.cosminmihu.ktor.monitor.di.LibraryKoinContext
 import ro.cosminmihu.ktor.monitor.di.inject
-import ro.cosminmihu.ktor.monitor.domain.ListenByRecentCallsUseCase
 import ro.cosminmihu.ktor.monitor.domain.ConfigUseCase
+import ro.cosminmihu.ktor.monitor.domain.ListenByRecentCallsUseCase
 import ro.cosminmihu.ktor.monitor.domain.model.Config
+import kotlin.time.Duration
 
 private val DisableLogging = AttributeKey<Unit>("KtorMonitorDisableLogging")
 private val CallIdentifier = AttributeKey<String>("KtorMonitorCallIdentifier")
@@ -39,12 +40,14 @@ internal val LoggingPlugin: ClientPlugin<LoggingConfig> =
 
         // Check if plugin is active.
         if (!pluginConfig.isActive) return@createClientPlugin
+        // Check if retention period is zero.
+        if (pluginConfig.retentionPeriod == Duration.ZERO) return@createClientPlugin
 
         // Plugin configuration.
         val filters: List<(HttpRequestBuilder) -> Boolean> = pluginConfig.filters
         val sanitizedHeaders: List<SanitizedHeader> = pluginConfig.sanitizedHeaders
 
-        // Listen by recent calls.
+        // Start listen by recent calls.
         LibraryKoinContext.koin.get<ListenByRecentCallsUseCase>()()
 
         // Get library dependencies.

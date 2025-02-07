@@ -12,8 +12,8 @@ internal class MainViewModel(
     setupUseCase: ConfigUseCase,
 ) : ViewModel() {
 
-    val uiState = setupUseCase.isSetupDone
-        .map { MainUiState(isLibraryReady = it) }
+    val uiState = setupUseCase.isActive
+        .map { MainUiState(isActive = it) }
         .stateIn(
             viewModelScope,
             SharingStarted.WhileSubscribed(5.seconds.inWholeMilliseconds),

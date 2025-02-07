@@ -4,7 +4,6 @@ import app.cash.sqldelight.Query
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import ro.cosminmihu.ktor.monitor.db.LibraryDao
@@ -46,12 +45,8 @@ internal class ListenByRecentCallsUseCase(
                 .distinctUntilChanged()
                 .collectLatest {
                     // Show notification
-                    when {
-                        setupUseCase.showNotification.firstOrNull() == true ->
-                            notificationManager.notify(it)
-
-                        else ->
-                            notificationManager.clear()
+                    if (setupUseCase.isShowNotification()) {
+                        notificationManager.notify(it)
                     }
 
                     // Delete old calls.

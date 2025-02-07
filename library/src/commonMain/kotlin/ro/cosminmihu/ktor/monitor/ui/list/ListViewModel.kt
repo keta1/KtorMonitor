@@ -13,9 +13,9 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import ro.cosminmihu.ktor.monitor.db.sqldelight.SelectCalls
+import ro.cosminmihu.ktor.monitor.domain.ConfigUseCase
 import ro.cosminmihu.ktor.monitor.domain.DeleteCallsUseCase
 import ro.cosminmihu.ktor.monitor.domain.GetCallsUseCase
-import ro.cosminmihu.ktor.monitor.domain.ConfigUseCase
 import ro.cosminmihu.ktor.monitor.domain.model.ContentType
 import ro.cosminmihu.ktor.monitor.domain.model.contentType
 import ro.cosminmihu.ktor.monitor.domain.model.durationAsText
@@ -28,7 +28,7 @@ import kotlin.time.Duration.Companion.seconds
 
 @OptIn(FlowPreview::class)
 internal class ListViewModel(
-    setupUseCase: ConfigUseCase,
+    configUseCase: ConfigUseCase,
     getCallsUseCase: GetCallsUseCase,
     private val deleteCallsUseCase: DeleteCallsUseCase,
 ) : ViewModel() {
@@ -40,19 +40,14 @@ internal class ListViewModel(
     val uiState = combine(
         searchQuery,
         calls,
-        setupUseCase.showNotification,
-    ) { query, calls, showNotification ->
-        Triple(
-            query,
-            when {
-                query.isBlank() -> calls
-                else -> calls.filter { it.url.contains(query.trim(), ignoreCase = true) }
-            },
-            showNotification
-        )
+    ) { query, calls ->
+        query to when {
+            query.isBlank() -> calls
+            else -> calls.filter { it.url.contains(query.trim(), ignoreCase = true) }
+        }
     }
         .flowOn(Dispatchers.Default)
-        .map { (query, calls, showNotification) -> buildUiState(query, calls, showNotification) }
+        .map { (query, calls) -> buildUiState(query, calls, configUseCase.isShowNotification()) }
         .stateIn(
             viewModelScope,
             SharingStarted.WhileSubscribed(5.seconds.inWholeMilliseconds),
