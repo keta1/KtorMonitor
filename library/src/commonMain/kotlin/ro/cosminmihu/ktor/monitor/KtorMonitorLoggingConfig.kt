@@ -33,20 +33,31 @@ public class KtorMonitorLoggingConfig {
 
     /**
      * Enable or disable the logging of requests and responses.
-     * By default it is enabled in debug mode only.
+     * By default:
+     * - android   - enabled for debug build type and disabled for release build type.
+     * - ios       - enabled for debug build type and disabled for release build type.
+     * - desktop   - enabled.
      */
     public var isActive: Boolean = PlatformDebug.isDebug
 
     /**
      * Keep track of latest requests and responses into notification.
-     * *** Android only.
+     * *** Android only. By default it is enabled.
      */
     public var showNotification: Boolean = true
 
     /**
      * The retention period for the logs.
+     * By default it is 1 hour.
      */
     public var retentionPeriod: Duration = RetentionPeriod.OneHour
+
+    /**
+     * The maximum length of the content that will be logged.
+     * After this, body will be truncated.
+     * By default it is [ContentLength.Default].
+     */
+    public var maxContentLength: Int = ContentLength.Default
 }
 
 /**

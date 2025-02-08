@@ -4,9 +4,9 @@ import app.cash.sqldelight.Query
 import app.cash.sqldelight.coroutines.asFlow
 import kotlinx.coroutines.flow.Flow
 import ro.cosminmihu.ktor.monitor.db.sqldelight.Call
+import ro.cosminmihu.ktor.monitor.db.sqldelight.LibraryDatabase
 import ro.cosminmihu.ktor.monitor.db.sqldelight.SelectCalls
 import ro.cosminmihu.ktor.monitor.db.sqldelight.SelectCallsWithLimit
-import ro.cosminmihu.ktor.monitor.db.sqldelight.LibraryDatabase
 
 internal class LibraryDao(private val database: LibraryDatabase) {
 
@@ -19,6 +19,7 @@ internal class LibraryDao(private val database: LibraryDatabase) {
         requestContentType: String?,
         requestContentLength: Long,
         requestBody: ByteArray?,
+        requestBodyTrimmed: Boolean,
     ) {
         database.callQueries.saveRequest(
             id,
@@ -29,6 +30,7 @@ internal class LibraryDao(private val database: LibraryDatabase) {
             requestContentType,
             requestContentLength,
             requestBody,
+            requestBodyTrimmed,
         )
     }
 
@@ -66,10 +68,12 @@ internal class LibraryDao(private val database: LibraryDatabase) {
         id: String,
         responseContentLength: Long?,
         responseBody: ByteArray?,
+        responseBodyTrimmed: Boolean,
     ) {
         database.callQueries.saveResponseBody(
             responseContentLength,
             responseBody,
+            responseBodyTrimmed,
             id
         )
     }

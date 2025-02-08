@@ -55,6 +55,7 @@ internal data class DetailUiState(
         val code: AnnotatedString?,
         val image: ByteArray?,
         val html: AnnotatedString?,
+        val isTrimmed: Boolean,
     )
 }
 

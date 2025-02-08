@@ -1,8 +1,10 @@
 package ro.cosminmihu.ktor.monitor.api.util
 
 import io.ktor.client.statement.HttpResponse
+import io.ktor.client.statement.readBytes
 import io.ktor.client.statement.readRawBytes
 import io.ktor.http.contentType
+import ro.cosminmihu.ktor.monitor.ContentLength
 import ro.cosminmihu.ktor.monitor.SanitizedHeader
 import ro.cosminmihu.ktor.monitor.db.LibraryDao
 
@@ -40,14 +42,20 @@ internal fun logResponse(
 internal suspend fun logResponseBody(
     dao: LibraryDao,
     id: String,
+    maxContentLength: Int,
     response: HttpResponse,
 ) {
-    val responseBody = response.readRawBytes()
+    // Read content.
+    val responseBody = when {
+        maxContentLength != ContentLength.Full -> response.readBytes(maxContentLength)
+        else -> response.readRawBytes()
+    }
 
     // Save response body.
     dao.saveResponseBody(
         id = id,
         responseContentLength = responseBody.size.toLong(),
         responseBody = responseBody,
+        responseBodyTrimmed = responseBody.size > maxContentLength,
     )
 }

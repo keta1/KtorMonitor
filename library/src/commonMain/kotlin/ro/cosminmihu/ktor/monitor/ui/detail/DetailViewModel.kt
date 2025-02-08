@@ -71,10 +71,17 @@ internal class DetailViewModel(
                         body = DetailUiState.Body(
                             bytes = bodyBytes(call.requestBody),
                             raw = bodyString(call.requestBody),
-                            code = bodyCode(call.requestContentType, call.requestBody),
-                            image = bodyImage(call.requestContentType, call.requestBody),
-                            html = bodyHtml(call.responseContentType, call.requestBody),
-                        )
+                            code = checkTrimming(call.requestBodyTrimmed) {
+                                bodyCode(call.requestContentType, call.requestBody)
+                            },
+                            image = checkTrimming(call.requestBodyTrimmed) {
+                                bodyImage(call.requestContentType, call.requestBody)
+                            },
+                            html = checkTrimming(call.requestBodyTrimmed) {
+                                bodyHtml(call.responseContentType, call.requestBody)
+                            },
+                            isTrimmed = call.requestBodyTrimmed == true
+                        ),
                     ),
                     response = Response(
                         responseCode = call.responseCode?.toString() ?: "",
@@ -86,10 +93,17 @@ internal class DetailViewModel(
                         body = DetailUiState.Body(
                             bytes = bodyBytes(call.responseBody),
                             raw = bodyString(call.responseBody),
-                            code = bodyCode(call.responseContentType, call.responseBody),
-                            image = bodyImage(call.responseContentType, call.responseBody),
-                            html = bodyHtml(call.responseContentType, call.responseBody),
-                        )
+                            code = checkTrimming(call.responseBodyTrimmed) {
+                                bodyCode(call.responseContentType, call.responseBody)
+                            },
+                            image = checkTrimming(call.responseBodyTrimmed) {
+                                bodyImage(call.responseContentType, call.responseBody)
+                            },
+                            html = checkTrimming(call.responseBodyTrimmed) {
+                                bodyHtml(call.responseContentType, call.responseBody)
+                            },
+                            isTrimmed = call.responseBodyTrimmed == true
+                        ),
                     )
                 )
             )
@@ -100,4 +114,12 @@ internal class DetailViewModel(
             SharingStarted.WhileSubscribed(5.seconds.inWholeMilliseconds),
             DetailUiState()
         )
+}
+
+
+private fun <T> checkTrimming(isTrimmed: Boolean?, value: () -> T): T? {
+    return when (isTrimmed) {
+        true -> null
+        else -> value()
+    }
 }

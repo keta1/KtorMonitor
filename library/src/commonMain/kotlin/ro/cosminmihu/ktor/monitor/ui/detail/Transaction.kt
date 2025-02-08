@@ -123,6 +123,7 @@ private fun TransactionPreview() {
                 code = AnnotatedString("Hello, World!"),
                 raw = AnnotatedString("Hello, World!"),
                 bytes = AnnotatedString("Hello, World!".toByteArray().toString()),
+                isTrimmed = false,
             ),
             error = "Error message",
         )

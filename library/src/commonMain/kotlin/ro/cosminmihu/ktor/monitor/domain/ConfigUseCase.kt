@@ -18,4 +18,6 @@ internal class ConfigUseCase {
     internal suspend fun getRetentionPeriod() = config.first().retentionPeriod
 
     internal suspend fun isShowNotification() = config.first().showNotification
+
+    internal fun getMaxContentLength() = config.value.maxContentLength
 }

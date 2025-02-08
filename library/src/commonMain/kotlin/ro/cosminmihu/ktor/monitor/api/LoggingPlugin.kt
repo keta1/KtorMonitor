@@ -35,6 +35,7 @@ internal val LoggingPlugin: ClientPlugin<LoggingConfig> =
             isActive = pluginConfig.isActive,
             showNotification = pluginConfig.showNotification,
             retentionPeriod = pluginConfig.retentionPeriod,
+            maxContentLength = pluginConfig.maxContentLength,
         )
         LibraryKoinContext.koin.get<ConfigUseCase>().setConfig(config)
 
@@ -73,6 +74,7 @@ internal val LoggingPlugin: ClientPlugin<LoggingConfig> =
                 logRequest(
                     dao = dao,
                     id = request.attributes[CallIdentifier],
+                    maxContentLength = pluginConfig.maxContentLength,
                     request = request,
                     coroutineScope = coroutineScope,
                     sanitizedHeaders = sanitizedHeaders
@@ -144,6 +146,7 @@ internal val LoggingPlugin: ClientPlugin<LoggingConfig> =
             logResponseBody(
                 dao = dao,
                 id = response.call.attributes[CallIdentifier],
+                maxContentLength = pluginConfig.maxContentLength,
                 response = response,
             )
         }
