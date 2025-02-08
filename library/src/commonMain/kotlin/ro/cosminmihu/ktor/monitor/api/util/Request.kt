@@ -3,7 +3,6 @@ package ro.cosminmihu.ktor.monitor.api.util
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.http.content.OutgoingContent
 import io.ktor.utils.io.ByteChannel
-import io.ktor.utils.io.readByteArray
 import io.ktor.utils.io.toByteArray
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -46,9 +45,13 @@ internal suspend fun logRequest(
     coroutineScope.launch(Dispatchers.Default) {
 
         // Read content.
-        val requestBody = when {
-            maxContentLength != ContentLength.Full -> channel.readByteArray(maxContentLength)
-            else -> channel.toByteArray()
+        val requestBody = channel.toByteArray()
+        val body = when {
+            maxContentLength != ContentLength.Full -> requestBody
+                .take(maxContentLength)
+                .toByteArray()
+
+            else -> requestBody
         }
 
         // Save request.
@@ -60,8 +63,8 @@ internal suspend fun logRequest(
             requestHeaders = headers,
             requestContentType = contentType,
             requestContentLength = contentLength,
-            requestBody = requestBody,
-            requestBodyTrimmed = requestBody.size > maxContentLength,
+            requestBody = body,
+            requestBodyTrimmed = contentLength != 0L && contentLength > maxContentLength,
         )
     }
 

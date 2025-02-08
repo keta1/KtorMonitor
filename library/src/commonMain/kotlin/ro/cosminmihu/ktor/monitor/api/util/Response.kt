@@ -1,7 +1,6 @@
 package ro.cosminmihu.ktor.monitor.api.util
 
 import io.ktor.client.statement.HttpResponse
-import io.ktor.client.statement.readBytes
 import io.ktor.client.statement.readRawBytes
 import io.ktor.http.contentType
 import ro.cosminmihu.ktor.monitor.ContentLength
@@ -46,16 +45,21 @@ internal suspend fun logResponseBody(
     response: HttpResponse,
 ) {
     // Read content.
-    val responseBody = when {
-        maxContentLength != ContentLength.Full -> response.readBytes(maxContentLength)
-        else -> response.readRawBytes()
+    val responseBody = response.readRawBytes()
+
+    val body = when {
+        maxContentLength != ContentLength.Full -> responseBody
+            .take(maxContentLength)
+            .toByteArray()
+
+        else -> responseBody
     }
 
     // Save response body.
     dao.saveResponseBody(
         id = id,
         responseContentLength = responseBody.size.toLong(),
-        responseBody = responseBody,
+        responseBody = body,
         responseBodyTrimmed = responseBody.size > maxContentLength,
     )
 }
