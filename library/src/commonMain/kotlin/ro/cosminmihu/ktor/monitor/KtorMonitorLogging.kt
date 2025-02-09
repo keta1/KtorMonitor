@@ -45,6 +45,7 @@ public object ContentLength {
  *       isActive = true
  *       showNotification = true
  *       retentionPeriod = RetentionPeriod.OneHour
+ *       maxContentLength = ContentLength.Default
  *    }
  * }
  * ```

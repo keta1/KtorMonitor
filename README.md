@@ -29,7 +29,8 @@ HttpClient {
         filter { request -> !request.url.host.contains("cosminmihu.ro") }  
         isActive = true  
         showNotification = true  
-        retentionPeriod = RetentionPeriod.OneHour  
+        retentionPeriod = RetentionPeriod.OneHour
+        maxContentLength = ContentLength.Default
     }
     
 }

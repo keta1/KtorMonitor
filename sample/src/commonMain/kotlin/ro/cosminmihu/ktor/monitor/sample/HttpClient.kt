@@ -5,6 +5,7 @@ import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
 import io.ktor.client.plugins.logging.SIMPLE
+import ro.cosminmihu.ktor.monitor.ContentLength
 import ro.cosminmihu.ktor.monitor.KtorMonitorLogging
 import ro.cosminmihu.ktor.monitor.RetentionPeriod
 
@@ -19,6 +20,6 @@ internal fun httpClient() = HttpClient {
         isActive = true
         showNotification = true
         retentionPeriod = RetentionPeriod.OneHour
-        maxContentLength = 10
+        maxContentLength = ContentLength.Default
     }
 }

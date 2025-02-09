@@ -17,6 +17,7 @@ HttpClient {
       isActive = true
       showNotification = true
       retentionPeriod = RetentionPeriod.OneHour
+      maxContentLength = ContentLength.Default
    }
 }
 ```
