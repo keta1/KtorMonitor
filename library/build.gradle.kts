@@ -1,3 +1,4 @@
+import com.vanniktech.maven.publish.SonatypeHost
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
@@ -19,13 +20,9 @@ group = "ro.cosminmihu.ktor"
 version = "1.0.0-dev1"
 
 mavenPublishing {
-//    publishToMavenCentral(SonatypeHost.DEFAULT)
-    // or when publishing to https://s01.oss.sonatype.org
-//    publishToMavenCentral(SonatypeHost.S01)
-    // or when publishing to https://central.sonatype.com/
-//    publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
+    publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
 
-//    signAllPublications() // TODO
+    signAllPublications()
 
     coordinates(group.toString(), artifact.toString(), version.toString())
 
