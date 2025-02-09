@@ -13,6 +13,8 @@ import ro.cosminmihu.ktor.monitor.domain.model.isError
 import ro.cosminmihu.ktor.monitor.domain.model.isInProgress
 import ro.cosminmihu.ktor.monitor.ui.notification.NotificationManager
 
+private const val LAST_CALLS = 5L
+
 internal class ListenByRecentCallsUseCase(
     private val dao: LibraryDao,
     private val coroutineScope: CoroutineScope,
@@ -23,7 +25,7 @@ internal class ListenByRecentCallsUseCase(
 
     operator fun invoke() {
         coroutineScope.launch {
-            dao.getCalls(5)
+            dao.getCalls(LAST_CALLS)
                 .map(Query<SelectCallsWithLimit>::executeAsList)
                 .map {
                     it.map {

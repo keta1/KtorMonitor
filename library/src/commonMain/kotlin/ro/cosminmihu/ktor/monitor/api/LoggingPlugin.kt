@@ -74,8 +74,8 @@ internal val LoggingPlugin: ClientPlugin<LoggingConfig> =
                 logRequest(
                     dao = dao,
                     id = request.attributes[CallIdentifier],
-                    maxContentLength = pluginConfig.maxContentLength,
                     request = request,
+                    maxContentLength = pluginConfig.maxContentLength,
                     coroutineScope = coroutineScope,
                     sanitizedHeaders = sanitizedHeaders
                 )

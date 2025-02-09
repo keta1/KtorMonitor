@@ -64,7 +64,7 @@ internal suspend fun logRequest(
             requestContentType = contentType,
             requestContentLength = contentLength,
             requestBody = body,
-            requestBodyTrimmed = contentLength != 0L && contentLength > maxContentLength,
+            isRequestBodyTruncated = contentLength != 0L && contentLength > maxContentLength,
         )
     }
 

@@ -19,7 +19,7 @@ internal class LibraryDao(private val database: LibraryDatabase) {
         requestContentType: String?,
         requestContentLength: Long,
         requestBody: ByteArray?,
-        requestBodyTrimmed: Boolean,
+        isRequestBodyTruncated: Boolean,
     ) {
         database.callQueries.saveRequest(
             id,
@@ -30,7 +30,7 @@ internal class LibraryDao(private val database: LibraryDatabase) {
             requestContentType,
             requestContentLength,
             requestBody,
-            requestBodyTrimmed,
+            isRequestBodyTruncated,
         )
     }
 
@@ -68,12 +68,12 @@ internal class LibraryDao(private val database: LibraryDatabase) {
         id: String,
         responseContentLength: Long?,
         responseBody: ByteArray?,
-        responseBodyTrimmed: Boolean,
+        isResponseBodyTruncated: Boolean,
     ) {
         database.callQueries.saveResponseBody(
             responseContentLength,
             responseBody,
-            responseBodyTrimmed,
+            isResponseBodyTruncated,
             id
         )
     }

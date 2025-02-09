@@ -8,7 +8,7 @@ import org.koin.dsl.module
 import ro.cosminmihu.ktor.monitor.di.LibraryKoinContext
 
 /**
- * Content provider used to initialize the [android.content.Context] as [PlatformContext].
+ * Content provider used to initialize the [android.content.Context].
  */
 internal class KtorMonitorInitializer : ContentProvider() {
 

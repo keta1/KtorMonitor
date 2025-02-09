@@ -71,16 +71,16 @@ internal class DetailViewModel(
                         body = DetailUiState.Body(
                             bytes = bodyBytes(call.requestBody),
                             raw = bodyString(call.requestBody),
-                            code = checkTrimming(call.requestBodyTrimmed) {
+                            code = checkBodyTruncated(call.isRequestBodyTruncated) {
                                 bodyCode(call.requestContentType, call.requestBody)
                             },
-                            image = checkTrimming(call.requestBodyTrimmed) {
+                            image = checkBodyTruncated(call.isRequestBodyTruncated) {
                                 bodyImage(call.requestContentType, call.requestBody)
                             },
-                            html = checkTrimming(call.requestBodyTrimmed) {
+                            html = checkBodyTruncated(call.isRequestBodyTruncated) {
                                 bodyHtml(call.responseContentType, call.requestBody)
                             },
-                            isTrimmed = call.requestBodyTrimmed == true
+                            isTrimmed = call.isRequestBodyTruncated == true
                         ),
                     ),
                     response = Response(
@@ -93,16 +93,16 @@ internal class DetailViewModel(
                         body = DetailUiState.Body(
                             bytes = bodyBytes(call.responseBody),
                             raw = bodyString(call.responseBody),
-                            code = checkTrimming(call.responseBodyTrimmed) {
+                            code = checkBodyTruncated(call.isResponseBodyTruncated) {
                                 bodyCode(call.responseContentType, call.responseBody)
                             },
-                            image = checkTrimming(call.responseBodyTrimmed) {
+                            image = checkBodyTruncated(call.isResponseBodyTruncated) {
                                 bodyImage(call.responseContentType, call.responseBody)
                             },
-                            html = checkTrimming(call.responseBodyTrimmed) {
+                            html = checkBodyTruncated(call.isResponseBodyTruncated) {
                                 bodyHtml(call.responseContentType, call.responseBody)
                             },
-                            isTrimmed = call.responseBodyTrimmed == true
+                            isTrimmed = call.isResponseBodyTruncated == true
                         ),
                     )
                 )
@@ -117,8 +117,8 @@ internal class DetailViewModel(
 }
 
 
-private fun <T> checkTrimming(isTrimmed: Boolean?, value: () -> T): T? {
-    return when (isTrimmed) {
+private fun <T> checkBodyTruncated(isTruncated: Boolean?, value: () -> T): T? {
+    return when (isTruncated) {
         true -> null
         else -> value()
     }

@@ -60,6 +60,6 @@ internal suspend fun logResponseBody(
         id = id,
         responseContentLength = responseBody.size.toLong(),
         responseBody = body,
-        responseBodyTrimmed = responseBody.size > maxContentLength,
+        isResponseBodyTruncated = responseBody.size > maxContentLength,
     )
 }

@@ -13,25 +13,25 @@ CREATE TABLE IF NOT EXISTS call(
   requestContentType TEXT DEFAULT NULL,
   requestContentLength INTEGER NOT NULL,
   requestBody BLOB DEFAULT NULL,
-  requestBodyTrimmed INTEGER AS Boolean DEFAULT 0,
+  isRequestBodyTruncated INTEGER AS Boolean DEFAULT 0,
   responseCode INTEGER DEFAULT NULL,
   responseTimestamp INTEGER DEFAULT NULL,
   responseContentType TEXT DEFAULT NULL,
   responseHeaders TEXT AS Map<String, List<String>> DEFAULT NULL,
   responseContentLength INTEGER DEFAULT NULL,
   responseBody BLOB DEFAULT NULL,
-  responseBodyTrimmed INTEGER AS Boolean DEFAULT 0,
+  isResponseBodyTruncated INTEGER AS Boolean DEFAULT 0,
   error TEXT DEFAULT NULL
 );
 
 saveRequest:
-INSERT INTO call (id, method, url, requestTimestamp, requestHeaders, requestContentType, requestContentLength, requestBody, requestBodyTrimmed) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);
+INSERT INTO call (id, method, url, requestTimestamp, requestHeaders, requestContentType, requestContentLength, requestBody, isRequestBodyTruncated) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);
 
 saveResponse:
 UPDATE call SET protocol = ?, requestTimestamp = ?, responseCode = ?, responseTimestamp = ?, responseContentType = ?, responseHeaders = ? WHERE id = ?;
 
 saveResponseBody:
-UPDATE call SET responseContentLength = ?, responseBody = ?, responseBodyTrimmed = ? WHERE id = ?;
+UPDATE call SET responseContentLength = ?, responseBody = ?, isResponseBodyTruncated = ? WHERE id = ?;
 
 saveError:
 UPDATE call SET error = ? WHERE id = ?;
@@ -43,7 +43,7 @@ selectCallsWithLimit:
 SELECT id, method, url, requestTimestamp, responseCode, responseTimestamp, responseContentType, responseContentLength, error FROM call ORDER BY requestTimestamp DESC LIMIT ?;
 
 selectCall:
-SELECT id, method, url, protocol, requestTimestamp, requestHeaders, requestContentType, requestContentLength, requestBody, requestBodyTrimmed, responseCode, responseTimestamp, responseContentType, responseHeaders, responseContentLength, responseBody, responseBodyTrimmed, error FROM call WHERE id = ?;
+SELECT id, method, url, protocol, requestTimestamp, requestHeaders, requestContentType, requestContentLength, requestBody, isRequestBodyTruncated, responseCode, responseTimestamp, responseContentType, responseHeaders, responseContentLength, responseBody, isResponseBodyTruncated, error FROM call WHERE id = ?;
 
 deleteCalls:
 DELETE FROM call;
