@@ -6,7 +6,7 @@ import ro.cosminmihu.ktor.monitor.db.sqldelight.LibraryDatabase
 import java.io.File
 
 internal actual fun createDatabaseDriver(): SqlDriver {
-    val filePath = File(DATABASE_NAME)
+    val filePath = File(System.getProperty("java.io.tmpdir"), DATABASE_NAME)
     return JdbcSqliteDriver("jdbc:sqlite:$filePath").also { // TODO use java temp dir
         LibraryDatabase.Schema.create(it)
     }
