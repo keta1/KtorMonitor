@@ -1,0 +1,8 @@
+<resources>
+    <string name="ktor_activity_name">Ktor Monitor</string>
+
+    <string name="ktor_clear">Clear</string>
+
+    <string name="ktor_permission_message">Grant POST_NOTIFICATIONS permission to show notification.</string>
+    <string name="ktor_permission_grant">Grant</string>
+</resources>
