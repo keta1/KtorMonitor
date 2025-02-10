@@ -4,6 +4,27 @@ import androidx.compose.ui.window.ComposeUIViewController
 import platform.UIKit.UIViewController
 
 /**
- * [KtorMonitor] [UIViewController].
+ * [UIViewController] for [KtorMonitor].
+ *
+ * ```kotlin
+ * fun MainViewController() = KtorMonitorViewController()
+ * ```
+ *
+ *```swift
+ * struct KtorMonitorView: UIViewControllerRepresentable {
+ *     func makeUIViewController(context: Context) -> UIViewController {
+ *         MainViewControllerKt.MainViewController()
+ *     }
+ *
+ *     func updateUIViewController(_ uiViewController: UIViewController, context: Context) {}
+ * }
+ *
+ * struct ContentView: View {
+ *     var body: some View {
+ *         KtorMonitorView()
+ *                 .ignoresSafeArea(.keyboard)
+ *     }
+ * }
+ *```
  */
 public fun KtorMonitorViewController(): UIViewController = ComposeUIViewController { KtorMonitor() }
