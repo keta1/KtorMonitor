@@ -145,7 +145,7 @@ struct KtorMonitorView: UIViewControllerRepresentable {
 struct ContentView: View {
     var body: some View {
         KtorMonitorView()
-                .ignoresSafeArea(.keyboard)
+                .ignoresSafeArea()
     }
 }
 ```

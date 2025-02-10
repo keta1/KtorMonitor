@@ -22,7 +22,7 @@ import platform.UIKit.UIViewController
  * struct ContentView: View {
  *     var body: some View {
  *         KtorMonitorView()
- *                 .ignoresSafeArea(.keyboard)
+ *                 .ignoresSafeArea()
  *     }
  * }
  *```

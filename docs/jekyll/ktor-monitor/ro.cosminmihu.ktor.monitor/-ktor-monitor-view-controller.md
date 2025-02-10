@@ -1,9 +1,18 @@
-//[ktor-monitor](../../index.md)/[ro.cosminmihu.ktor.monitor](index.md)/[KtorMonitorViewController](-ktor-monitor-view-controller.md)
+---
+title: KtorMonitorViewController
+---
+//[ktor-monitor](../../index.html)/[ro.cosminmihu.ktor.monitor](index.html)/[KtorMonitorViewController](-ktor-monitor-view-controller.html)
+
+
 
 # KtorMonitorViewController
 
+
+
 [ios]\
-fun [KtorMonitorViewController](-ktor-monitor-view-controller.md)(): UIViewController
+fun [KtorMonitorViewController](-ktor-monitor-view-controller.html)(): UIViewController
+
+
 
 UIViewController for KtorMonitor.
 
@@ -26,3 +35,5 @@ struct ContentView: View {
     }
 }
 ```
+
+

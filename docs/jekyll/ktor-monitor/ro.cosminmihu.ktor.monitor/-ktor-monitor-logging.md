@@ -10,7 +10,7 @@ title: KtorMonitorLogging
 
 
 [common]\
-val [KtorMonitorLogging](-ktor-monitor-logging.html): ClientPlugin&lt;[KtorMonitorConfig](-ktor-monitor-config/index.html)&gt;
+val [KtorMonitorLogging](-ktor-monitor-logging.html): ClientPlugin&lt;[KtorMonitorLoggingConfig](-ktor-monitor-logging-config/index.html)&gt;
 
 
 
@@ -28,6 +28,7 @@ HttpClient {
       isActive = true
       showNotification = true
       retentionPeriod = RetentionPeriod.OneHour
+      maxContentLength = ContentLength.Default
    }
 }
 ```
