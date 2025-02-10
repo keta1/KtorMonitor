@@ -1,14 +1,14 @@
 # <img src="./extra/ktor_ic_launcher.svg" width="35"/> KtorMonitor
 Powerful tools to log [Ktor Client](https://ktor.io/) requests and responses, making it easier to debug and analyze network communication.
 
-<div style="text-align: center;">
-   <img src="./extra/ktormonitor.gif" alt="Your Image" width="300">
-</div>
+<img src="extra/ktormonitor_android.gif" width="300"/> &emsp; <img src="extra/ktomonitor_ios.gif" width="310"/>
 
-By default, **```KtorMonitor```** is:
-- **android** -> enabled for ```debug``` builds and disabled for ```release``` builds
-- **ios** -> enabled for ```debug``` builds and disabled for ```release``` builds
-- **desktop** -> enabled for all builds
+<img src="extra/ktormonitor_desktop.gif" width="630"/>
+
+By default, **```KtorMonitor```**:
+- **android** -> is enabled for ```debug``` builds and disabled for ```release``` builds
+- **ios** -> is enabled for ```debug``` builds and disabled for ```release``` builds
+- **desktop** -> is enabled for all builds
 
 ## Setup
 
@@ -48,7 +48,7 @@ HttpClient {
 
 ## 🧩 Integration
 
-Check below how to interate library UI component in your app based on platform.
+Check below how to interate Ktor Monitor component for different platforms.
 
 ### Compose Multiplatform (all platforms)
 
