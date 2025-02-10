@@ -1,11 +1,14 @@
 # <img src="./extra/ktor_ic_launcher.svg" width="35"/> KtorMonitor
 Powerful tools to log [Ktor Client](https://ktor.io/) requests and responses, making it easier to debug and analyze network communication.
 
+By default, **```KtorMonitor```** is:
+- **android** -> enabled for ```debug``` builds and disabled for ```release``` builds
+- **ios** -> enabled for ```debug``` builds and disabled for ```release``` builds
+- **desktop** -> enabled for all builds
+
 ## Setup
 
 ### <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Gradle_logo.svg" width="100"/>
-
-> ```projectDir/settings.gradle.kts```
 
 ```kotlin
 kotlin {
@@ -18,8 +21,6 @@ kotlin {
 ```
 
 ### <img src="https://resources.jetbrains.com/storage/products/company/brand/logos/Ktor_icon.png" width="30"/> Install Ktor Client Plugin
-
-> ```projectDir/composeApp/src/commonMain/kotlin/HttpClient.kt```
 
 ```kotlin
 HttpClient {
@@ -35,9 +36,17 @@ HttpClient {
 }
 ```
 
-## USE
+- ```sanitizeHeader``` - sanitize sensitive headers to avoid their values appearing in the logs
+- ```filter``` - filter logs for calls matching a predicate.
+- ```showNotification``` - Keep track of latest requests and responses into notification. Default is **true**. Android only. **android.permission.POST_NOTIFICATIONS** needs to be granted.
+- ```retentionPeriod``` - The retention period for the logs. Deault is **1h**.
+- ```maxContentLength``` - The maximum length of the content that will be logged. After this, body will be truncated. Deafult is **250_000**. To log the entire body use ```ContentLength.Full```.
 
-### Common / Android / Desktop
+## 🧩 Integration
+
+Check below how to interate library UI component in your app based on platform.
+
+### Compose Multiplatform (all platforms)
 
 * Use ```KtorMonitor``` Composable
 
@@ -48,11 +57,14 @@ fun Composable() {
 }
 ```
 
-### Desktop Only
+### Android
 
-* Use ```KtorMonitorWindow``` Composable Wrapper
+- If ```showNotifcation = true``` and **android.permission.POST_NOTIFICATIONS** is granted, the library will display a notification showing a summary of ongoing KTOR activity. Tapping on the notification launches the full ```KtorMonitor```.
+- Apps can optionally use the ```KtorMonitor()``` Composable directly into own Composable code.
 
-> ```projectDir/composeApp/src/desktopMain/kotlin/main.kt```
+### Desktop Compose
+
+* Use ```KtorMonitorWindow``` Composable
 
 ```kotlin
 fun main() = application {
@@ -66,9 +78,7 @@ fun main() = application {
 }
 ```
 
-* Use ```KtorMonitorWindow``` Composable Wrapper with ```KtorMonitorMenuItem```
-
-> ```projectDir/composeApp/src/desktopMain/kotlin/main.kt```
+* Use ```KtorMonitorWindow``` Composable with ```KtorMonitorMenuItem```
 
 ```kotlin
 fun main() = application {
@@ -89,9 +99,9 @@ fun main() = application {
 }
 ```
 
-* Use ```KtorMonitorPanel``` Swing Panel Wrapper
+### Desktop Swing
 
-> ```projectDir/composeApp/src/desktopMain/kotlin/main.kt```
+* Use ```KtorMonitorPanel``` Swing Panel
 
 ```kotlin
 fun main() = application {
@@ -104,3 +114,16 @@ fun main() = application {
 
 }
 ```
+
+## ✍️ Feedback
+
+Feel free to send feedback on [file an issue](https://github.com/CosminMihuMDC/KtorMonitor/issues).
+
+## 🙌 Acknowledgments
+
+Some parts of this project are reusing ideas that are originally coming
+from [chucker](https://github.com/ChuckerTeam/chucker).
+
+## 🙏🏻 Credits
+
+KtorMonitor is brought to you by these [contributors](https://github.com/CosminMihuMDC/KtorMonitor/graphs/contributors).

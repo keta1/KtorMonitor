@@ -14,7 +14,7 @@ public class KtorMonitorLoggingConfig {
     internal val sanitizedHeaders = mutableListOf<SanitizedHeader>()
 
     /**
-     * Allows you to filter log messages for calls matching a [predicate].
+     * Allows you to filter logs for calls matching a [predicate].
      */
     public fun filter(predicate: (HttpRequestBuilder) -> Boolean) {
         filters.add(predicate)
