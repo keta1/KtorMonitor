@@ -25,7 +25,7 @@ By default, **```KtorMonitor```**:
 kotlin {
     sourceSets {
         commonMain.dependencies {
-            implementation("ro.cosminmihu.ktor:ktor-monitor-logging:1.0.1")
+            implementation("ro.cosminmihu.ktor:ktor-monitor-logging:1.1.0")
         }
     }
 }
