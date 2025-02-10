@@ -37,9 +37,6 @@ internal fun LazyListScope.Body(
             body = body,
             displayMode = displayMode,
             onDisplayMode = onDisplayMode,
-            modifier = Modifier.padding(
-                horizontal = Dimens.Medium
-            ),
         )
     }
 
@@ -149,16 +146,24 @@ private fun DisplayModeSelector(
         }
 
         SingleChoiceSegmentedButtonRow(
-            modifier = Modifier.horizontalScroll(rememberScrollState())
+            modifier = Modifier
+                .horizontalScroll(rememberScrollState())
                 .align(Alignment.CenterEnd),
         ) {
             segmentedButtons.forEachIndexed { index, item ->
+                val modifier = when(index) {
+                    0 -> Modifier.padding(start = Dimens.Small)
+                    segmentedButtons.lastIndex -> Modifier.padding(end = Dimens.Small)
+                    else -> Modifier
+                }
+
                 SegmentedButton(
                     selected = item.selected,
                     onClick = item.onClick,
                     shape = SegmentedButtonDefaults.itemShape(
                         index = index, count = segmentedButtons.size
-                    )
+                    ),
+                    modifier = modifier,
                 ) {
                     Text(text = item.text)
                 }

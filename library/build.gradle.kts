@@ -17,7 +17,7 @@ plugins {
 val module = "ktor-monitor"
 val artifact = "ktor-monitor-logging"
 group = "ro.cosminmihu.ktor"
-version = "1.0.1"
+version = "1.1.0"
 
 mavenPublishing {
     publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
@@ -212,6 +212,14 @@ android {
     }
     buildFeatures {
         buildConfig = true
+    }
+    sourceSets {
+        getByName("debug") {
+            manifest.srcFile("src/androidDebug/AndroidManifest.xml")
+        }
+        getByName("release") {
+            manifest.srcFile("src/androidRelease/AndroidManifest.xml")
+        }
     }
 }
 

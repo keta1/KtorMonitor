@@ -3,7 +3,7 @@
 # KtorMonitorLogging
 
 [common]\
-val [KtorMonitorLogging](-ktor-monitor-logging.md): ClientPlugin&lt;[KtorMonitorConfig](-ktor-monitor-config/index.md)&gt;
+val [KtorMonitorLogging](-ktor-monitor-logging.md): ClientPlugin&lt;[KtorMonitorLoggingConfig](-ktor-monitor-logging-config/index.md)&gt;
 
 A [Ktor](https://ktor.io/) client plugin that provides the capability to log HTTP calls.
 
