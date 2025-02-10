@@ -1,3 +1,8 @@
+[![Maven Central](https://img.shields.io/maven-central/v/ro.cosminmihu.ktor/ktor-monitor-logging)](https://img.shields.io/maven-central/v/ro.cosminmihu.ktor/ktor-monitor-logging)
+![License](https://img.shields.io/github/license/CosminMihuMDC/KtorMonitor)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-orange.svg)](http://makeapullrequest.com)
+![Platforms](https://img.shields.io/badge/Platforms-Android%20|%20iOS%20|%20JVM-brightgreen)
+
 # <img src="./extra/ktor_ic_launcher.svg" width="35"/> KtorMonitor
 Powerful tools to log [Ktor Client](https://ktor.io/) requests and responses, making it easier to debug and analyze network communication.
 
@@ -147,12 +152,16 @@ struct ContentView: View {
 
 ## ✍️ Feedback
 
-Feel free to send feedback on [file an issue](https://github.com/CosminMihuMDC/KtorMonitor/issues).
+Feel free to send feedback or [file an issue](https://github.com/CosminMihuMDC/KtorMonitor/issues).
 
 ## 🙌 Acknowledgments
 
-Some parts of this project are reusing ideas that are originally coming
-from [chucker](https://github.com/ChuckerTeam/chucker).
+Some parts of this project are reusing ideas that are originally coming from [chucker](https://github.com/ChuckerTeam/chucker).
+
+## 💸 Sponsors
+KtorMonitor is maintained and improved during nights, weekends and whenever team has free time. If you use KtorMonitor in your project, please consider sponsoring us.
+
+You can sponsor us by clicking Sponsor button.
 
 ## 🙏🏻 Credits
 
