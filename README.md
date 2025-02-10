@@ -119,6 +119,30 @@ fun main() = application {
 }
 ```
 
+### iOS
+* Use ```KtorMonitorViewController```
+
+```kotlin
+fun MainViewController() = KtorMonitorViewController()
+```
+
+```swift
+struct KtorMonitorView: UIViewControllerRepresentable {
+    func makeUIViewController(context: Context) -> UIViewController {
+        MainViewControllerKt.MainViewController()
+    }
+
+    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {}
+}
+
+struct ContentView: View {
+    var body: some View {
+        KtorMonitorView()
+                .ignoresSafeArea(.keyboard)
+    }
+}
+```
+
 ## ✍️ Feedback
 
 Feel free to send feedback on [file an issue](https://github.com/CosminMihuMDC/KtorMonitor/issues).
