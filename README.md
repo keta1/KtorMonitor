@@ -1,6 +1,10 @@
 # <img src="./extra/ktor_ic_launcher.svg" width="35"/> KtorMonitor
 Powerful tools to log [Ktor Client](https://ktor.io/) requests and responses, making it easier to debug and analyze network communication.
 
+<div style="text-align: center;">
+   <img src="./extra/ktormonitor.gif" alt="Your Image" width="300">
+</div>
+
 By default, **```KtorMonitor```** is:
 - **android** -> enabled for ```debug``` builds and disabled for ```release``` builds
 - **ios** -> enabled for ```debug``` builds and disabled for ```release``` builds
