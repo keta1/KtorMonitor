@@ -8,8 +8,7 @@ import ro.cosminmihu.ktor.monitor.RetentionPeriod
 internal fun httpClient() = HttpClient {
     install(KtorMonitorLogging) {
         sanitizeHeader { header -> header == "Authorization" }
-        filter { request -> request.url.host.contains("github.com") }
-        isActive = true
+        filter { request -> !request.url.host.contains("cosminmihu.ro") }
         showNotification = true
         retentionPeriod = RetentionPeriod.OneHour
         maxContentLength = ContentLength.Default

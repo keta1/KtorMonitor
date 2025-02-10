@@ -42,7 +42,7 @@ internal val LoggingPlugin: ClientPlugin<LoggingConfig> =
         // Check if plugin is active.
         if (!pluginConfig.isActive) return@createClientPlugin
         // Check if retention period is zero.
-        if (pluginConfig.retentionPeriod == Duration.ZERO) return@createClientPlugin
+        if (!pluginConfig.retentionPeriod.isPositive()) return@createClientPlugin
 
         // Plugin configuration.
         val filters: List<(HttpRequestBuilder) -> Boolean> = pluginConfig.filters
