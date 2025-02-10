@@ -1,9 +1,9 @@
-# KtorMonitor
+# <img src="./extra/ktor_ic_launcher.svg" width="35"/> KtorMonitor
 Powerful tools to log [Ktor Client](https://ktor.io/) requests and responses, making it easier to debug and analyze network communication.
 
-## SETUP
+## Setup
 
-### Gradle
+### <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Gradle_logo.svg" width="100"/>
 
 > ```projectDir/settings.gradle.kts```
 
@@ -11,13 +11,13 @@ Powerful tools to log [Ktor Client](https://ktor.io/) requests and responses, ma
 kotlin {
     sourceSets {
         commonMain.dependencies {
-            implementation("ro.cosminmihu.ktor:ktor-monitor-logging:1.0.0")
+            implementation("ro.cosminmihu.ktor:ktor-monitor-logging:1.0.1")
         }
     }
 }
 ```
 
-### Common
+### <img src="https://resources.jetbrains.com/storage/products/company/brand/logos/Ktor_icon.png" width="30"/> Install Ktor Client Plugin
 
 > ```projectDir/composeApp/src/commonMain/kotlin/HttpClient.kt```
 
@@ -27,7 +27,6 @@ HttpClient {
     install(KtorMonitorLogging) {  
         sanitizeHeader { header -> header == "Authorization" }  
         filter { request -> !request.url.host.contains("cosminmihu.ro") }  
-        isActive = true  
         showNotification = true  
         retentionPeriod = RetentionPeriod.OneHour
         maxContentLength = ContentLength.Default
