@@ -51,9 +51,9 @@ HttpClient {
 
 - ```sanitizeHeader``` - sanitize sensitive headers to avoid their values appearing in the logs
 - ```filter``` - filter logs for calls matching a predicate.
-- ```showNotification``` - Keep track of latest requests and responses into notification. Default is **true**. Android only. **android.permission.POST_NOTIFICATIONS** needs to be granted.
-- ```retentionPeriod``` - The retention period for the logs. Deault is **1h**.
-- ```maxContentLength``` - The maximum length of the content that will be logged. After this, body will be truncated. Deafult is **250_000**. To log the entire body use ```ContentLength.Full```.
+- ```showNotification``` - Keep track of latest requests and responses into notification. Default is **true**. Android and iOS only. **android.permission.POST_NOTIFICATIONS** needs to be granted.
+- ```retentionPeriod``` - The retention period for the logs. Default is **1h**.
+- ```maxContentLength``` - The maximum length of the content that will be logged. After this, body will be truncated. Default is **250_000**. To log the entire body use ```ContentLength.Full```.
 
 ## 🧩 Integration
 
@@ -178,7 +178,7 @@ Thanks to JetBrains for Ktor and Kotlin!
 ## 💸 Sponsors
 KtorMonitor is maintained and improved during nights, weekends and whenever team has free time. If you use KtorMonitor in your project, please consider sponsoring us.
 
-You can sponsor us by clicking <span style="color:#bf3989">♥️ Sponsor</span> Button.
+You can sponsor us by clicking <span style="color:#bf3989">♥ Sponsor</span> Button.
 
 ## 🙏🏻 Credits
 
