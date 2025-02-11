@@ -2,6 +2,8 @@
 [![License](https://img.shields.io/github/license/CosminMihuMDC/KtorMonitor?label=License)](https://github.com/CosminMihuMDC/KtorMonitor/blob/main/LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-orange.svg)](http://makeapullrequest.com)
 ![Platforms](https://img.shields.io/badge/Platforms-Android%20|%20iOS%20|%20JVM-brightgreen)
+[![GitHub stars](https://img.shields.io/github/stars/CosminMihuMDC/KtorMonitor)](https://github.com/CosminMihuMDC/KtorMonitor)
+[![GitHub forks](https://img.shields.io/github/forks/CosminMihuMDC/KtorMonitor)](https://github.com/CosminMihuMDC/KtorMonitor/fork)
 
 # <img src="./extra/ktor_ic_launcher.svg" width="35"/> KtorMonitor
 Powerful tools to log [Ktor Client](https://ktor.io/) requests and responses, making it easier to debug and analyze network communication.
@@ -163,16 +165,20 @@ struct ContentView: View {
 
 ## ✍️ Feedback
 
-Feel free to send feedback or [file an issue](https://github.com/CosminMihuMDC/KtorMonitor/issues).
+Feel free to send feedback or [file an issue](https://github.com/CosminMihuMDC/KtorMonitor/issues/new).
 
 ## 🙌 Acknowledgments
 
 Some parts of this project are reusing ideas that are originally coming from [chucker](https://github.com/ChuckerTeam/chucker).
 
+Thanks to ChuckerTeam for chucker!
+<br>
+Thanks to JetBrains for Ktor and Kotlin!
+
 ## 💸 Sponsors
 KtorMonitor is maintained and improved during nights, weekends and whenever team has free time. If you use KtorMonitor in your project, please consider sponsoring us.
 
-You can sponsor us by clicking Sponsor button.
+You can sponsor us by clicking <span style="color:#bf3989">♥️ Sponsor</span> Button.
 
 ## 🙏🏻 Credits
 
