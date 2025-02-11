@@ -55,9 +55,10 @@ HttpClient {
 
 ## 🧩 Integration
 
-Check below how to interate Ktor Monitor component for different platforms.
+Check out below how to interate Ktor Monitor for different platforms.
 
-### Compose Multiplatform (all platforms)
+<details>
+<summary><b>Compose Multiplatform (all platforms)</b></summary>
 
 * Use ```KtorMonitor``` Composable
 
@@ -67,13 +68,17 @@ fun Composable() {
     KtorMonitor()
 }
 ```
+</details>
 
-### Android
+<details>
+<summary><b>Android</b></summary>
 
 - If ```showNotifcation = true``` and **android.permission.POST_NOTIFICATIONS** is granted, the library will display a notification showing a summary of ongoing KTOR activity. Tapping on the notification launches the full ```KtorMonitor```.
 - Apps can optionally use the ```KtorMonitor()``` Composable directly into own Composable code.
+</details>
 
-### Desktop Compose
+<details>
+<summary><b>Desktop Compose</b></summary>
 
 * Use ```KtorMonitorWindow``` Composable
 
@@ -109,8 +114,10 @@ fun main() = application {
 
 }
 ```
+</details>
 
-### Desktop Swing
+<details>
+<summary><b>Desktop Swing</b></summary>
 
 * Use ```KtorMonitorPanel``` Swing Panel
 
@@ -125,8 +132,11 @@ fun main() = application {
 
 }
 ```
+</details>
 
-### iOS
+<details>
+<summary><b>iOS</b></summary>
+
 * Use ```KtorMonitorViewController```
 
 ```kotlin
@@ -149,6 +159,7 @@ struct ContentView: View {
     }
 }
 ```
+</details>
 
 ## ✍️ Feedback
 
