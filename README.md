@@ -1,5 +1,5 @@
-[![Maven Central](https://img.shields.io/maven-central/v/ro.cosminmihu.ktor/ktor-monitor-logging)](https://img.shields.io/maven-central/v/ro.cosminmihu.ktor/ktor-monitor-logging)
-![License](https://img.shields.io/github/license/CosminMihuMDC/KtorMonitor)
+[![Maven Central](https://img.shields.io/maven-central/v/ro.cosminmihu.ktor/ktor-monitor-logging?label=Maven%20Central&link=https://search.maven.org/artifact/ro.cosminmihu.ktor/ktor-monitor-logging/)](https://search.maven.org/artifact/ro.cosminmihu.ktor/ktor-monitor-logging)
+[![License](https://img.shields.io/github/license/CosminMihuMDC/KtorMonitor?label=License)](https://github.com/CosminMihuMDC/KtorMonitor/blob/main/LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-orange.svg)](http://makeapullrequest.com)
 ![Platforms](https://img.shields.io/badge/Platforms-Android%20|%20iOS%20|%20JVM-brightgreen)
 
