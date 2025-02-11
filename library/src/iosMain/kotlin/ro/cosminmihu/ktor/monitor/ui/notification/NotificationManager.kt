@@ -5,11 +5,11 @@ import platform.UserNotifications.UNAuthorizationOptionAlert
 import platform.UserNotifications.UNAuthorizationOptionBadge
 import platform.UserNotifications.UNAuthorizationOptionSound
 import platform.UserNotifications.UNMutableNotificationContent
+import platform.UserNotifications.UNNotificationInterruptionLevel
 import platform.UserNotifications.UNNotificationRequest
 import platform.UserNotifications.UNNotificationSound
 import platform.UserNotifications.UNTimeIntervalNotificationTrigger
 import platform.UserNotifications.UNUserNotificationCenter
-import platform.UserNotifications.UNNotificationInterruptionLevel
 import kotlin.coroutines.resume
 
 internal actual class NotificationManager {
@@ -29,7 +29,7 @@ internal actual class NotificationManager {
             return
         }
 
-        if (!isNotificationPermissionGranted()) {
+        if (!notificationCenter.isNotificationPermissionGranted()) {
             return
         }
 
@@ -52,13 +52,13 @@ internal actual class NotificationManager {
             }
         }
     }
-
-    private suspend fun isNotificationPermissionGranted(): Boolean =
-        suspendCancellableCoroutine { continuation ->
-            notificationCenter.requestAuthorizationWithOptions(
-                UNAuthorizationOptionAlert or UNAuthorizationOptionSound or UNAuthorizationOptionBadge
-            ) { granted, error ->
-                continuation.resume(granted)
-            }
-        }
 }
+
+internal suspend fun UNUserNotificationCenter.isNotificationPermissionGranted(): Boolean =
+    suspendCancellableCoroutine { continuation ->
+        requestAuthorizationWithOptions(
+            UNAuthorizationOptionAlert or UNAuthorizationOptionSound or UNAuthorizationOptionBadge
+        ) { granted, error ->
+            continuation.resume(granted)
+        }
+    }

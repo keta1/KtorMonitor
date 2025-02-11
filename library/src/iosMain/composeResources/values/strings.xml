@@ -1,0 +1,4 @@
+<resources>
+  <string name="ktor_permission_message">Grant NOTIFICATIONS permission to show notification.</string>
+  <string name="ktor_permission_grant">Grant</string>
+</resources>
