@@ -23,14 +23,14 @@ internal actual class NotificationManager : LibraryKoinComponent {
 
     private val context: Context by inject()
 
-    actual fun clear() {
+    actual suspend fun clear() {
         val notificationManager = ContextCompat
             .getSystemService<NotificationManager>(context, NotificationManager::class.java)
             ?: return
         notificationManager.cancel(NOTIFICATION_ID)
     }
 
-    actual fun notify(messages: List<String>) {
+    actual suspend fun notify(messages: List<String>) {
         if (messages.isEmpty()) {
             clear()
             return
@@ -100,7 +100,7 @@ internal actual class NotificationManager : LibraryKoinComponent {
         )
     }
 
-    fun isNotificationPermissionGranted(context: Context): Boolean = when {
+    private fun isNotificationPermissionGranted(context: Context): Boolean = when {
         Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU -> {
             ContextCompat.checkSelfPermission(
                 context,

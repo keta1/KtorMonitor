@@ -12,6 +12,7 @@ import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import ro.cosminmihu.ktor.monitor.db.sqldelight.SelectCalls
 import ro.cosminmihu.ktor.monitor.domain.ConfigUseCase
 import ro.cosminmihu.ktor.monitor.domain.DeleteCallsUseCase
@@ -83,7 +84,9 @@ internal class ListViewModel(
     )
 
     fun deleteCalls() {
-        deleteCallsUseCase()
+        viewModelScope.launch {
+            deleteCallsUseCase()
+        }
     }
 
     fun setSearchQuery(query: String) {
