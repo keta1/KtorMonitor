@@ -42,7 +42,10 @@ public class KtorMonitorLoggingConfig {
 
     /**
      * Keep track of latest requests and responses into notification.
-     * *** Android only. By default it is enabled.
+     * By default:
+     * - android   - enabled. android.permission.POST_NOTIFICATIONS needs to be granted.
+     * - ios       - enabled. Notifications permission needs to be granted.
+     * - desktop   - not supported.
      */
     public var showNotification: Boolean = true
 

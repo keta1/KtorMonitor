@@ -51,7 +51,7 @@ HttpClient {
 
 - ```sanitizeHeader``` - sanitize sensitive headers to avoid their values appearing in the logs
 - ```filter``` - filter logs for calls matching a predicate.
-- ```showNotification``` - Keep track of latest requests and responses into notification. Default is **true**. Android and iOS only. **android.permission.POST_NOTIFICATIONS** needs to be granted.
+- ```showNotification``` - Keep track of latest requests and responses into notification. Default is **true**. Android and iOS only. Notifications permission needs to be granted.
 - ```retentionPeriod``` - The retention period for the logs. Default is **1h**.
 - ```maxContentLength``` - The maximum length of the content that will be logged. After this, body will be truncated. Default is **250_000**. To log the entire body use ```ContentLength.Full```.
 

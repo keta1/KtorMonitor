@@ -86,7 +86,7 @@ android {
     }
     signingConfigs {
         create("release") {
-            storeFile = File(project.rootDir, "extra/sample-ktor-monitor.jks")
+            storeFile = File(project.rootDir, "extra/sample/sample-ktor-monitor.jks")
             storePassword = "ktor-monitor-sample"
             keyAlias = "ktor-monitor-sample"
             keyPassword = "ktor-monitor-sample"
