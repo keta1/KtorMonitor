@@ -9,7 +9,6 @@ import io.ktor.client.request.put
 private const val httpbin = "https://httpbin.org"
 
 internal suspend fun makeCalls() {
-
     // HTTP Methods
     with(httpClient()) {
         runCatching { this.get(httpbin) }
@@ -60,5 +59,10 @@ internal suspend fun makeCalls() {
         runCatching { this.get("$httpbin/headers") }
         runCatching { this.get("$httpbin/ip") }
         runCatching { this.get("$httpbin/user-agent") }
+    }
+
+    // Javascript
+    with(httpClient()) {
+        runCatching { this.get("https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js") }
     }
 }
