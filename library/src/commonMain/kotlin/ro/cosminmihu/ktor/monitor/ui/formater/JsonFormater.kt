@@ -29,7 +29,6 @@ internal fun formatJson(json: ByteArray): AnnotatedString = buildAnnotatedString
                         withStyle(
                             style = SpanStyle(
                                 color = Color(0xFF2E86C1), // Blue for keys
-
                             )
                         ) {
                             append(part)
@@ -39,7 +38,6 @@ internal fun formatJson(json: ByteArray): AnnotatedString = buildAnnotatedString
                         withStyle(
                             style = SpanStyle(
                                 color = Color(0xFF8E44AD), // Purple for string values
-
                             )
                         ) {
                             append(part)

@@ -27,6 +27,9 @@ internal fun bodyCode(
         ContentType.APPLICATION_JAVASCRIPT,
             -> formatJavascript(body)
 
+        ContentType.APPLICATION_WWW_FORM_URLENCODED,
+            -> formatQueryString(body.decodeToString())
+
         else -> null
     }
 }
