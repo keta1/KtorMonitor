@@ -32,7 +32,7 @@ A configuration for the [KtorMonitorLogging](../-ktor-monitor-logging.html) plug
 | [isActive](is-active.html) | [common]<br>var [isActive](is-active.html): [Boolean](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html)<br>Enable or disable the logging of requests and responses. By default: |
 | [maxContentLength](max-content-length.html) | [common]<br>var [maxContentLength](max-content-length.html): [Int](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html)<br>The maximum length of the content that will be logged. After this, body will be truncated. By default it is [ContentLength.Default](../-content-length/-default.html). Use [ContentLength.Full](../-content-length/-full.html) to log the full content. |
 | [retentionPeriod](retention-period.html) | [common]<br>var [retentionPeriod](retention-period.html): [Duration](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.time/-duration/index.html)<br>The retention period for the logs. By default it is 1 hour. |
-| [showNotification](show-notification.html) | [common]<br>var [showNotification](show-notification.html): [Boolean](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html)<br>Keep track of latest requests and responses into notification. *** Android only. By default it is enabled. |
+| [showNotification](show-notification.html) | [common]<br>var [showNotification](show-notification.html): [Boolean](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html)<br>Keep track of latest requests and responses into notification. By default: |
 
 
 ## Functions

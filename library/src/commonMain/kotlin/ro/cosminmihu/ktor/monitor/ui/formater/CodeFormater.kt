@@ -17,10 +17,18 @@ internal fun bodyCode(
             -> formatXml(body)
 
         ContentType.APPLICATION_JSON,
+        ContentType.APPLICATION_VND_API_JSON,
             -> formatJson(body)
 
         ContentType.TEXT_CSS,
             -> formatCSS(body)
+
+        ContentType.TEXT_JAVASCRIPT,
+        ContentType.APPLICATION_JAVASCRIPT,
+            -> formatJavascript(body)
+
+        ContentType.APPLICATION_WWW_FORM_URLENCODED,
+            -> formatQueryString(body.decodeToString())
 
         else -> null
     }

@@ -17,7 +17,7 @@ internal fun formatXml(xml: ByteArray): AnnotatedString = buildAnnotatedString {
             when {
                 part.startsWith("<") && part.endsWith(">") -> {
                     // XML Tags: Style them with blue color
-                    withStyle(style = SpanStyle(color = Color.Blue)) {
+                    withStyle(style = SpanStyle(color = Color(0xFF2E86C1))) {
                         append(part)
                     }
                 }
