@@ -1,11 +1,12 @@
-package ro.cosminmihu.ktor.monitor.ui.main
+package ro.cosminmihu.ktor.monitor.ui.list
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.DisabledByDefault
+import androidx.compose.material.icons.filled.CheckBox
+import androidx.compose.material.icons.filled.ClearAll
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -16,11 +17,11 @@ import androidx.compose.ui.semantics.semantics
 import org.jetbrains.compose.resources.stringResource
 import ro.cosminmihu.ktor.monitor.ui.Dimens
 import ro.cosminmihu.ktor.monitor.ui.resources.Res
-import ro.cosminmihu.ktor.monitor.ui.resources.ktor_library_disabled
+import ro.cosminmihu.ktor.monitor.ui.resources.ktor_list_empty
 
 @Composable
-internal fun MainEmptyState(modifier: Modifier = Modifier) {
-    val string = stringResource(Res.string.ktor_library_disabled)
+internal fun ListEmptyState(modifier: Modifier = Modifier) {
+    val string = stringResource(Res.string.ktor_list_empty)
     Box(
         modifier = modifier,
         contentAlignment = Alignment.Center
@@ -30,7 +31,7 @@ internal fun MainEmptyState(modifier: Modifier = Modifier) {
             modifier = Modifier.semantics(true) { string },
         ) {
             Icon(
-                imageVector = Icons.Default.DisabledByDefault,
+                imageVector = Icons.Default.ClearAll,
                 contentDescription = null,
                 modifier = Modifier.size(Dimens.ExtraLarge)
             )

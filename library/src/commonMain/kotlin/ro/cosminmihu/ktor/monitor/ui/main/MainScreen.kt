@@ -16,7 +16,7 @@ internal fun MainScreen(
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     when {
-        uiState.isActive -> MainContent(modifier = modifier)
-        else -> MainEmptyState(modifier = modifier)
+        !uiState.isActive -> MainInactiveState(modifier = modifier)
+        else -> MainContent(modifier = modifier)
     }
 }

@@ -3,7 +3,6 @@ package ro.cosminmihu.ktor.monitor.ui.list
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -31,7 +30,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
-import kotlinx.datetime.Month
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -43,7 +41,6 @@ import ro.cosminmihu.ktor.monitor.ui.resources.ktor_clean
 import ro.cosminmihu.ktor.monitor.ui.resources.ktor_filter
 import ro.cosminmihu.ktor.monitor.ui.resources.ktor_ic_launcher
 import ro.cosminmihu.ktor.monitor.ui.resources.ktor_library_name
-import ro.cosminmihu.ktor.monitor.ui.resources.ktor_list_empty
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -134,12 +131,7 @@ internal fun ListScreen(
                 }
 
                 uiState.isEmpty -> {
-                    Box(
-                        contentAlignment = Alignment.Center,
-                        modifier = Modifier.fillMaxSize(),
-                    ) {
-                        Text(text = stringResource(Res.string.ktor_list_empty))
-                    }
+                    ListEmptyState(modifier = Modifier.fillMaxSize())
                 }
 
                 uiState.calls != null -> {
