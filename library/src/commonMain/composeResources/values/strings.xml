@@ -7,6 +7,7 @@
     <string name="ktor_clean">Clean</string>
     <string name="ktor_close">Close</string>
     <string name="ktor_back">Back</string>
+    <string name="ktor_more">More</string>
 
     <string name="ktor_summary">Summary</string>
     <string name="ktor_request">Request</string>
