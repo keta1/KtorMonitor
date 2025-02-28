@@ -24,7 +24,7 @@ mavenPublishing {
 
     signAllPublications()
 
-    coordinates(group.toString(), artifact.toString(), version.toString())
+    coordinates(group.toString(), artifact, version.toString())
 
     pom {
         name.set("Ktor Monitor")
@@ -162,6 +162,7 @@ kotlin {
             implementation(compose.materialIconsExtended)
             implementation(compose.material3AdaptiveNavigationSuite)
             implementation(compose.ui)
+            implementation(libs.compose.ui.backhandler)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
             implementation(libs.compose.adaptive)
