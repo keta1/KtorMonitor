@@ -151,6 +151,7 @@ kotlin {
             implementation(libs.ktor.client.okhttp)
             implementation(libs.sqldelight.android)
             implementation(libs.koin.android)
+            implementation(libs.coil.gif)
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)

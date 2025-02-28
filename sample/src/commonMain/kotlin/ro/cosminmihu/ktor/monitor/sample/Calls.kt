@@ -25,6 +25,7 @@ internal suspend fun makeCalls() {
         runCatching { this.get("$httpbin/image/jpeg") }
         runCatching { this.get("$httpbin/image/svg") }
         runCatching { this.get("$httpbin/image/webp") }
+        runCatching { this.get("https://dkemhji6i1k0x.cloudfront.net/000_clients/896535/page/896535al1Ykfdt.gif") }
     }
 
     // Response formats
