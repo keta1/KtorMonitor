@@ -165,6 +165,9 @@ kotlin {
             implementation(compose.ui)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
+            implementation(libs.compose.adaptive)
+            implementation(libs.compose.adaptive.layout)
+            implementation(libs.compose.adaptive.navigation)
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtime.compose)
             implementation(libs.ktor.client.core)
@@ -181,9 +184,6 @@ kotlin {
             implementation(libs.coil.compose)
             implementation(libs.coil.network.ktor)
             implementation(libs.kotlinx.atomicfu)
-            implementation("org.jetbrains.compose.material3.adaptive:adaptive:1.1.0-alpha02") // TODO import using compose.adaptive
-            implementation("org.jetbrains.compose.material3.adaptive:adaptive-layout:1.1.0-alpha02") // TODO compose.adaptive
-            implementation("org.jetbrains.compose.material3.adaptive:adaptive-navigation:1.1.0-alpha02") // TODO compose.adaptive
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
