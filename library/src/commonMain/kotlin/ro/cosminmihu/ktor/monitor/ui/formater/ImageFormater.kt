@@ -8,6 +8,6 @@ internal fun bodyImage(contentType: String?, body: ByteArray?) = when (contentTy
     ContentType.IMAGE_PNG -> body
     ContentType.IMAGE_JPEG -> body
     ContentType.IMAGE_WEBP -> body
-    ContentType.IMAGE_GIF -> body // TODO android
-    else -> null // TODO
+    ContentType.IMAGE_GIF -> body
+    else -> null
 }

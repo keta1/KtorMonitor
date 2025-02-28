@@ -13,7 +13,7 @@ internal fun bodyCode(
         ContentType.TEXT_HTML,
         ContentType.TEXT_XML,
         ContentType.APPLICATION_XML,
-        ContentType.IMAGE_SVG_XML,
+        ContentType.IMAGE_SVG,
             -> formatXml(body)
 
         ContentType.APPLICATION_JSON,
@@ -27,7 +27,7 @@ internal fun bodyCode(
         ContentType.APPLICATION_JAVASCRIPT,
             -> formatJavascript(body)
 
-        ContentType.APPLICATION_WWW_FORM_URLENCODED,
+        ContentType.APPLICATION_FORM_URLENCODED,
             -> formatQueryString(body.decodeToString())
 
         else -> null
