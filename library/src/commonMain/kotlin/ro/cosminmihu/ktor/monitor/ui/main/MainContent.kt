@@ -10,21 +10,30 @@ import androidx.compose.material3.adaptive.layout.AnimatedPane
 import androidx.compose.material3.adaptive.layout.ListDetailPaneScaffold
 import androidx.compose.material3.adaptive.layout.ListDetailPaneScaffoldRole
 import androidx.compose.material3.adaptive.layout.PaneExpansionAnchor
+import androidx.compose.material3.adaptive.layout.defaultDragHandleSemantics
 import androidx.compose.material3.adaptive.layout.rememberPaneExpansionState
 import androidx.compose.material3.adaptive.navigation.rememberListDetailPaneScaffoldNavigator
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.backhandler.BackHandler
 import kotlinx.coroutines.launch
 import ro.cosminmihu.ktor.monitor.ui.detail.DetailRoute
 import ro.cosminmihu.ktor.monitor.ui.list.ListRoute
 
-@OptIn(ExperimentalMaterial3AdaptiveApi::class)
+@OptIn(ExperimentalMaterial3AdaptiveApi::class, ExperimentalComposeUiApi::class)
 @Composable
 internal fun MainContent(modifier: Modifier = Modifier) {
     val coroutineScope = rememberCoroutineScope()
     val navigator = rememberListDetailPaneScaffoldNavigator<String?>()
+
+    BackHandler(navigator.canNavigateBack()) {
+        coroutineScope.launch {
+            navigator.navigateBack()
+        }
+    }
 
     Surface(modifier = modifier) {
         ListDetailPaneScaffold(
@@ -74,7 +83,8 @@ internal fun MainContent(modifier: Modifier = Modifier) {
                     modifier = Modifier.paneExpansionDraggable(
                         state = state,
                         minTouchTargetSize = LocalMinimumInteractiveComponentSize.current,
-                        interactionSource = interactionSource
+                        interactionSource = interactionSource,
+                        semanticsProperties = state.defaultDragHandleSemantics()
                     ),
                     interactionSource = interactionSource
                 )

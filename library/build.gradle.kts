@@ -24,7 +24,7 @@ mavenPublishing {
 
     signAllPublications()
 
-    coordinates(group.toString(), artifact.toString(), version.toString())
+    coordinates(group.toString(), artifact, version.toString())
 
     pom {
         name.set("Ktor Monitor")
@@ -167,6 +167,7 @@ kotlin {
             implementation(libs.compose.adaptive)
             implementation(libs.compose.adaptive.layout)
             implementation(libs.compose.adaptive.navigation)
+            implementation(libs.compose.ui.backhandler)
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtime.compose)
             implementation(libs.ktor.client.core)
