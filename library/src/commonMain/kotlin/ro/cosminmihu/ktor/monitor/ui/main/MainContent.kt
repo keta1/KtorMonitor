@@ -29,6 +29,12 @@ internal fun MainContent(modifier: Modifier = Modifier) {
     val coroutineScope = rememberCoroutineScope()
     val navigator = rememberListDetailPaneScaffoldNavigator<String?>()
 
+    BackHandler(navigator.canNavigateBack()) {
+        coroutineScope.launch {
+            navigator.navigateBack()
+        }
+    }
+
     Surface(modifier = modifier) {
         ListDetailPaneScaffold(
             modifier = Modifier.fillMaxSize(),
@@ -84,10 +90,5 @@ internal fun MainContent(modifier: Modifier = Modifier) {
                 )
             }
         )
-    }
-    BackHandler(navigator.canNavigateBack()) {
-        coroutineScope.launch {
-            navigator.navigateBack()
-        }
     }
 }
