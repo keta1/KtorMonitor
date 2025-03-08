@@ -57,7 +57,8 @@ kotlin {
             implementation(libs.ktor.client.logging)
             implementation(libs.ktor.client.content.negotiation)
             implementation(libs.ktor.serialization.kotlinx.json)
-            implementation(project(":library"))
+            implementation(project(":KtorMonitor-core"))
+            implementation(project(":KtorMonitor-ui"))
 //            implementation("ro.cosminmihu.ktor:ktor-monitor-logging:1.5.0")
         }
         desktopMain.dependencies {

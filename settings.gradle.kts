@@ -28,5 +28,6 @@ dependencyResolutionManagement {
     }
 }
 
-include(":library")
+include(":KtorMonitor-core")
+include(":KtorMonitor-ui")
 include(":sample")

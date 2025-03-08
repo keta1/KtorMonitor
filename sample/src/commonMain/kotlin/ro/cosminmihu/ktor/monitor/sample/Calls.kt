@@ -2,6 +2,8 @@ package ro.cosminmihu.ktor.monitor.sample
 
 import io.ktor.client.request.delete
 import io.ktor.client.request.get
+import io.ktor.client.request.head
+import io.ktor.client.request.options
 import io.ktor.client.request.patch
 import io.ktor.client.request.post
 import io.ktor.client.request.put
@@ -16,6 +18,8 @@ internal suspend fun makeCalls() {
         runCatching { this.patch(httpbin) }
         runCatching { this.post(httpbin) }
         runCatching { this.put(httpbin) }
+        runCatching { this.head(httpbin) }
+        runCatching { this.options(httpbin) }
     }
 
     // Images
