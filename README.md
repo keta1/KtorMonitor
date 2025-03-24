@@ -171,7 +171,7 @@ Feel free to send feedback or [file an issue](https://github.com/CosminMihuMDC/K
 
 ## 🙌 Acknowledgments
 
-[![Kotlin](https://img.shields.io/badge/2.1.10-white?logo=kotlin&logoColor=white&color=7F52FF)](http://kotlinlang.org)
+[![Kotlin](https://img.shields.io/badge/2.1.20-white?logo=kotlin&logoColor=white&color=7F52FF)](http://kotlinlang.org)
 [![Compose Multiplatform](https://img.shields.io/badge/1.8.0-white?logo=jetpackcompose&logoColor=white&color=4284F3)](https://www.jetbrains.com/lp/compose-multiplatform)
 [![Android](https://img.shields.io/badge/Android%2015-white?logo=android&logoColor=white&color=34A853)](https://developer.android.com/about/versions/15)
 [![Ktor](https://img.shields.io/badge/3.1.1-white?logo=ktor&logoColor=white&color=087CFA)](https://ktor.io)
