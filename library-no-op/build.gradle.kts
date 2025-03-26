@@ -67,6 +67,14 @@ mavenPublishing {
     }
 }
 
+apiValidation {
+    @OptIn(kotlinx.validation.ExperimentalBCVApi::class)
+    klib {
+        enabled = true
+        strictValidation = true
+    }
+}
+
 tasks {
     dokkaHtml {
         moduleName = module
@@ -136,13 +144,5 @@ android {
     }
     buildFeatures {
         buildConfig = true
-    }
-    sourceSets {
-        getByName("debug") {
-            manifest.srcFile("src/androidDebug/AndroidManifest.xml")
-        }
-        getByName("release") {
-            manifest.srcFile("src/androidRelease/AndroidManifest.xml")
-        }
     }
 }
