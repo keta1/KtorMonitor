@@ -8,7 +8,7 @@ import ro.cosminmihu.ktor.monitor.domain.model.Config
 
 internal class ConfigUseCase {
 
-    private val config = MutableStateFlow<Config>(Config.Disabled)
+    private val config = MutableStateFlow(Config.Disabled)
     internal val isActive = config.map { it.isActive }
 
     internal fun setConfig(config: Config) {

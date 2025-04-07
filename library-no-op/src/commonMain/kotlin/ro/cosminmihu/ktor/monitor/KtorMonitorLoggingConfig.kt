@@ -1,13 +1,11 @@
 package ro.cosminmihu.ktor.monitor
 
 import io.ktor.client.request.HttpRequestBuilder
-import io.ktor.utils.io.KtorDsl
 import kotlin.time.Duration
 
 /**
  * No-op implementation.
  */
-@KtorDsl
 public class KtorMonitorLoggingConfig {
 
     public fun filter(predicate: (HttpRequestBuilder) -> Boolean) {

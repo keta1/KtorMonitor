@@ -8,7 +8,6 @@ plugins {
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.maven.publish)
     alias(libs.plugins.binary.compatibility.validator)
-    alias(libs.plugins.dokka)
 }
 
 val module = "ktor-monitor"
@@ -72,26 +71,6 @@ apiValidation {
     klib {
         enabled = true
         strictValidation = true
-    }
-}
-
-tasks {
-    dokkaHtml {
-        moduleName = module
-        moduleVersion = project.version.toString()
-        outputDirectory = File(rootDir, "docs/html")
-    }
-
-    dokkaGfm {
-        moduleName = module
-        moduleVersion = project.version.toString()
-        outputDirectory = File(rootDir, "docs/gfm")
-    }
-
-    dokkaJekyll {
-        moduleName = module
-        moduleVersion = project.version.toString()
-        outputDirectory = File(rootDir, "docs/jekyll")
     }
 }
 
