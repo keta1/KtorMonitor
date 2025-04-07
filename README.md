@@ -33,6 +33,8 @@ kotlin {
 }
 ```
 
+In order to isolate KtorMonitor from release builds, use `ktor-monitor-logging-no-op` variant:
+
 ```kotlin
 kotlin {
     sourceSets {
@@ -67,7 +69,7 @@ HttpClient {
 
 ## 🧩 Integration
 
-Check out below how to interate Ktor Monitor for different platforms.
+Check out below how to integrate Ktor Monitor for different platforms.
 
 <details>
 <summary><b>Compose Multiplatform (all platforms)</b></summary>
