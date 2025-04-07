@@ -213,14 +213,6 @@ android {
     buildFeatures {
         buildConfig = true
     }
-    sourceSets {
-        getByName("debug") {
-            manifest.srcFile("src/androidDebug/AndroidManifest.xml")
-        }
-        getByName("release") {
-            manifest.srcFile("src/androidRelease/AndroidManifest.xml")
-        }
-    }
 }
 
 dependencies {

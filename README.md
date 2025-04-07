@@ -33,6 +33,16 @@ kotlin {
 }
 ```
 
+```kotlin
+kotlin {
+    sourceSets {
+        commonMain.dependencies {
+            implementation("ro.cosminmihu.ktor:ktor-monitor-logging-no-op:1.5.0")
+        }
+    }
+}
+```
+
 ### <img src="https://resources.jetbrains.com/storage/products/company/brand/logos/Ktor_icon.png" width="30"/> Install Ktor Client Plugin
 
 ```kotlin
