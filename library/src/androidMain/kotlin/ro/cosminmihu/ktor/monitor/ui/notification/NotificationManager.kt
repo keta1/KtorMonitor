@@ -25,7 +25,7 @@ internal actual class NotificationManager : LibraryKoinComponent {
 
     actual suspend fun clear() {
         val notificationManager = ContextCompat
-            .getSystemService<NotificationManager>(context, NotificationManager::class.java)
+            .getSystemService(context, NotificationManager::class.java)
             ?: return
         notificationManager.cancel(NOTIFICATION_ID)
     }
@@ -41,7 +41,7 @@ internal actual class NotificationManager : LibraryKoinComponent {
         }
 
         val notificationManager = ContextCompat
-            .getSystemService<NotificationManager>(context, NotificationManager::class.java)
+            .getSystemService(context, NotificationManager::class.java)
             ?: return
 
         createNotificationChannel(notificationManager)
