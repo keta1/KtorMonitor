@@ -71,6 +71,8 @@ mavenPublishing {
 }
 
 apiValidation {
+    ignoredPackages.add("ro.cosminmihu.ktor.monitor.db.sqldelight")
+
     @OptIn(kotlinx.validation.ExperimentalBCVApi::class)
     klib {
         enabled = true
